@@ -1,0 +1,194 @@
+<div *ngIf="toggle==1" class="w-full gap-3 flex mx-8 items-center text-eside-Neutral-1 justify-center bg-eside-light py-7">
+  <div (click)="changetoggle(2)" class="cursor-pointer text-eside-Neutral-1 font-bold">MODIFIER MES INFORMATIONS</div>
+  <img src="assets/svg's/edit.svg">
+</div>
+<div *ngIf="toggle==2" class="w-full gap-3 flex  mx-8 items-center text-eside-Neutral-1 justify-center bg-eside-light py-7">
+  <div (click)="changetoggle(1)" class="text-eside-Neutral-1 font-bold uppercase cursor-pointer ">Retours</div>
+  <img src="assets/svg's/backArrow.svg">
+</div>
+
+<div class="py-5 mx-8 grid text-eside-Neutral-1 grid-cols-1 lg:grid-cols-2 gap-6" *ngIf="toggle==1">
+  <div>
+    <div>
+      <h1 class="py-3 font-bold text-2xl">Photo de profil</h1>
+      <div class="flex">
+        <img class="h-20" src="assets/svg's/profile-pic.svg">
+      </div>
+      <h1 class="py-3 font-bold text-2xl">Mon Compte</h1>
+      <div class="">
+        <div class="flex justify-between border-t-2  py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Nom du compte</h1>
+          <input class="border-none w-auto text-right bg-eside-white" disabled value="mohamed_jaidane" type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Prénom</h1>
+          <input class="border-none w-auto text-right bg-eside-white" disabled value="Mohamed" type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Nom</h1>
+          <input class="border-none w-auto text-right bg-eside-white" disabled value="Jaidane" type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Bio</h1>
+          <textarea rows="2" class="border-none w-auto text-right bg-eside-white" disabled value="Jaidane" > lorem ipsum text test and test </textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <h1 class="py-3 font-bold text-2xl">Coordonnées</h1>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Mail</h1>
+          <input class="border-none w-auto text-right bg-eside-white" disabled value="jaidanemohammed@gmail.com "type="email"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2  py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Téléphone	</h1>
+          <input class="border-none w-auto text-right bg-eside-white" disabled value="24865022" type="tel"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2  py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Adresse</h1>
+          <input class="border-none w-auto text-right bg-eside-white" disabled value="rue farhat hached " type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Complément d'adresse</h1>
+          <input class="border-none w-auto text-right bg-eside-white" disabled value="ba7dha pharmacie nooman " type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Code postal	</h1>
+          <input class="border-none w-auto text-right bg-eside-white appearance-none decoration-0" disabled value="5012" type="number"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Ville</h1>
+          <input class="border-none w-auto text-right bg-eside-white" disabled value="Sahline" type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 border-b-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">L'état</h1>
+          <input class="border-none w-auto text-right bg-eside-white" disabled value="Monastir " type="text"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="py-5 mx-8 grid text-eside-Neutral-1 grid-cols-1 lg:grid-cols-2 gap-6" *ngIf="toggle==2">
+  <div>
+    <div>
+      <h1 class="py-3 font-bold text-2xl">Photo de profil</h1>
+      <div class="flex">
+        <img class="h-20" src="assets/svg's/profile-pic.svg">
+        <div class="relative">
+          <label title="Change your profile picture" for="button2" class="cursor-pointer flex items-center gap-4 px-6 py-4
+        group before:bg-gray-100 before:absolute before:inset-0 before:rounded-3xl
+        before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
+            <div class="w-max relative">
+              <img class="w-8" src="assets/svg's/edit.svg" alt="file upload icon">
+            </div>
+            <div class="relative">
+          <span class="block text-base font-semibold relative text-blue-900 group-hover:text-blue-500">
+              EDITER
+          </span>
+            </div>
+          </label>
+          <input hidden="" type="file" name="button2" id="button2">
+        </div>
+      </div>
+      <h1 class="py-3 font-bold text-2xl">Mon Compte</h1>
+      <div class="">
+        <div class="flex justify-between border-t-2  py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Nom du compte</h1>
+          <input class=" w-auto text-right bg-eside-white" value="mohamed_jaidane" type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Prénom</h1>
+          <input class=" w-auto text-right bg-eside-white" value="Mohamed" type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Nom</h1>
+          <input class=" w-auto text-right bg-eside-white" value="Jaidane" type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Bio</h1>
+          <textarea rows="2" class=" w-auto text-right bg-eside-white"  > lorem ipsum text test and test </textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <h1 class="py-3 font-bold text-2xl">Coordonnées</h1>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Mail</h1>
+          <input class="w-auto text-right bg-eside-white"  value="jaidanemohammed@gmail.com "type="email"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2  py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Téléphone	</h1>
+          <input class=" w-auto text-right bg-eside-white"  value="24865022" type="tel"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2  py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Adresse</h1>
+          <input class="w-auto text-right bg-eside-white"  value="rue farhat hached " type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Complément d'adresse</h1>
+          <input class=" w-auto text-right bg-eside-white"  value="ba7dha pharmacie nooman " type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Code postal	</h1>
+          <input class=" w-auto text-right bg-eside-white appearance-none decoration-0"  value="5012" type="number"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">Ville</h1>
+          <input class="w-auto text-right bg-eside-white"  value="Sahline" type="text"/>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex justify-between border-t-2 border-b-2 py-3 border-y-eside-Primary-1 border-opacity-10">
+          <h1 class="font-bold text-md">L'état</h1>
+          <input class=" w-auto text-right bg-eside-white"  value="Monastir " type="text"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-full flex pt-3 w-full gap-1">
+    <button class="py-2 px-7 w-full bg-eside-Accent-1 rounded-sm text-eside-white font-bold text-xl ">Modifier</button>
+    <button class="py-2 px-7 w-full bg-eside-Primary-1 rounded-sm text-eside-white font-bold text-xl " (click)="changetoggle(1)">Annuler</button>
+  </div>
+</div>
+

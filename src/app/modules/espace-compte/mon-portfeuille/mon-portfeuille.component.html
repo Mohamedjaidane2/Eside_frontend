@@ -1,0 +1,77 @@
+<div *ngIf="toggle==1" class="w-full gap-3 px-8 mx-8 items-center text-eside-Neutral-1 bg-eside-light py-7">
+  <div class=" flex justify-between">
+    <h1 class=" text-eside-Neutral-1 font-light text-lg">
+      Compte bancaire
+    </h1>
+    <div class=" cursor-pointer flex gap-3 font-semibold text-lg" (click)="changetoggle(2)">
+      Ajouter
+      <img class="h-6" src="assets/svg's/rounded-plus.svg">
+    </div>
+  </div>
+</div>
+<div *ngIf="toggle==2"
+     class="w-full gap-3 flex  mx-8 items-center text-eside-Neutral-1 justify-center bg-eside-light py-7">
+  <div (click)="changetoggle(1)" class="text-eside-Neutral-1 font-bold uppercase cursor-pointer ">Retours</div>
+  <img src="assets/svg's/backArrow.svg">
+</div>
+
+<div class="py-5 w-full ml-8 text-eside-Neutral-1" *ngIf="toggle==1">
+  <div class="flex w-full items-center justify-center bg-eside-bleu-light py-6">
+    <div class="flex-col items-center justify-center text-center space-y-6">
+      <h1 class="text-xl font-bold text-eside-Accent-1">Montant Disponible</h1>
+      <h1 class="text-6xl font-extrabold text-eside-Neutral-1">0,000 TND</h1>
+      <button class="py-2 w-auto px-5 bg-eside-Accent-1 rounded-md text-eside-white font-bold text-lg ">Récupérer mon argent</button>
+    </div>
+  </div>
+
+
+<div>
+  <div (click)="toggleCollapse(1)" class="flex justify-between cursor-pointer items-center">
+    <button  class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Comment fonctionne le portefeuille Eside ?</button>
+    <img class="h-5" src="assets/svg's/rounded-plus.svg">
+  </div>
+  <div [ngClass]="{'hidden': !isCollapsed1}" class="bg-gray-100 border border-gray-200 p-4 mt-4">
+    <p></p>
+    <ul class="list-disc pl-6">
+      <li>Peut recevoir l’argent des articles vendus</li>
+      <li>Peut payer des articles commandés sur Eside</li>
+      <li>Peut transférer ses recettes vers son compte bancaire.</li>
+    </ul>
+  </div>
+
+  <div (click)="toggleCollapse(2)" class="flex justify-between cursor-pointer items-center">
+    <button  class="bg-blue-500 text-white font-bold py-2 px-4 rounded">À quel moment l’argent de mes ventes est-il disponible dans mon portefeuille ?</button>
+    <img class="h-5" src="assets/svg's/rounded-plus.svg">
+  </div>
+  <div [ngClass]="{'hidden': !isCollapsed2}" class="bg-gray-100 border border-gray-200 p-4 mt-4">
+    <p></p>
+    <ul class="list-disc pl-6">
+      <li>Félicitations, vous avez vendu votre article ! L’argent de votre vente est disponible sur votre portefeuille Eside 72 heures après réception de l’article par votre acheteur.</li>
+    </ul>
+  </div>
+
+  <div (click)="toggleCollapse(3)"  class="flex justify-between  cursor-pointer items-center">
+    <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded">Comment transférer l'argent de mon portefeuille vers mon compte bancaire ?</button>
+    <img class="h-5" src="assets/svg's/rounded-plus.svg">
+  </div>
+  <div [ngClass]="{'hidden': !isCollapsed3}" class="bg-gray-100 border border-gray-200 p-4 mt-4">
+    <p></p>
+    <ul class="list-disc pl-6">
+      <li>Une fois l’argent de votre vente disponible sur votre portefeuille, vous pouvez le transférer directement sur votre compte bancaire. Pour cela, vous devez indiquer vos coordonnées bancaires en cliquant sur "Ajouter un compte bancaire", puis vous pouvez déclencher le virement en cliquant sur "Récupérer mon argent".</li>
+      <li>Vous recevrez votre paiement sous 5 jours ouvrés.</li>
+    </ul>
+  </div>
+
+</div>
+</div>
+
+<div class="py-5 mx-8 grid text-eside-Neutral-1 grid-cols-1 lg:grid-cols-2 gap-6" *ngIf="toggle==2">
+
+  <div class="col-span-full flex pt-3 w-full gap-1">
+    <button class="py-2 px-7 w-full bg-eside-Accent-1 rounded-sm text-eside-white font-bold text-xl ">Modifier</button>
+    <button class="py-2 px-7 w-full bg-eside-Primary-1 rounded-sm text-eside-white font-bold text-xl "
+            (click)="changetoggle(1)">Annuler
+    </button>
+  </div>
+
+</div>

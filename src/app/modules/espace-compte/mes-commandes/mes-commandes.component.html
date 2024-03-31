@@ -1,0 +1,36 @@
+<div class="gap-3 mx-8 flex items-center" >
+  <h3 class="text-gray-900 dark:text-white font-bold">Filter:</h3>
+
+  <ul class="items-center w-auto text-sm font-medium text-eside-Neutral-1 bg-white  gap-3 flex ">
+    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1 ">
+      <div class="flex items-center ">
+        <input id="En_cours" type="radio" value="" name="list-radio"
+               class="w-4 h-4 ">
+        <label for="En_cours"
+               class="w-auto py-2 ms-2 text-sm font-medium ">En cours</label>
+      </div>
+    </li>
+    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1 ">
+      <div class="flex items-center ">
+        <input id="Terminées" type="radio" value="" name="list-radio"
+               class="w-4 h-4 ">
+        <label for="Terminées"
+               class="w-auto py-2 ms-2 text-sm font-medium ">Terminées</label>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="relative mx-8 flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
+  <div class="py-5 gap-3 flex-auto">
+    <div class="tab-content tab-space">
+        <app-my-orders/>
+        <app-my-orders/>
+        <app-my-orders/>
+      </div>
+
+
+    </div>
+  </div>
+
+
+

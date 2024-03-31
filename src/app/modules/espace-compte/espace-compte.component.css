@@ -1,0 +1,8 @@
+.bg-image-dark{
+  background-image: url("/assets/svg's/eside-neutral1-right-arrow.svg");
+  height: 5px;
+  width: 5px;
+}
+.svg-container:hover svg path {
+  fill: white;
+}

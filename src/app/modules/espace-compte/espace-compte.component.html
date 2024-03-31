@@ -1,0 +1,59 @@
+<div class="pt-[150px] px-6 lg:px-28  w-full ">
+  <h1 class="text-eside-Neutral-1 text-[60px] font-extrabold uppercase">Mon Compte</h1>
+  <div class="border-b-4 border-b-eside-Accent-2 w-[5%] "></div>
+
+  <div class="grid grid-cols-12 py-9">
+    <div class="col-span-3 ">
+        <div class="grid grid-rows-8">
+            <a [routerLink]="['../mon-compte/mes-infos']" class="flex cursor-pointer items-center justify-between py-5 px-10 bg-eside-bleu-light font-semibold text-eside-Neutral-1
+            hover:bg-eside-Neutral-4 ">
+              <h1>Mes Informations </h1>
+              <img src="assets/svg's/eside-neutral1-right-arrow.svg" alt="eside-neutral1-right-arrow.svg">
+            </a>
+            <a [routerLink]="['../mon-compte/mes-favoris']"  class="flex cursor-pointer items-center justify-between py-5 px-10 bg-eside-bleu-light font-semibold text-eside-Neutral-1
+            hover:bg-eside-Neutral-4 ">
+              <h1>Mes favoris </h1>
+              <img src="assets/svg's/eside-neutral1-right-arrow.svg" alt="eside-neutral1-right-arrow.svg">
+            </a>
+            <a [routerLink]="['../mon-compte/mes-commandes']" class="flex cursor-pointer items-center justify-between py-5 px-10 bg-eside-bleu-light font-semibold text-eside-Neutral-1
+            hover:bg-eside-Neutral-4 ">
+              <h1>Mes commandes </h1>
+              <img src="assets/svg's/eside-neutral1-right-arrow.svg" alt="eside-neutral1-right-arrow.svg">
+            </a>
+            <a [routerLink]="['../mon-compte/mes-offres']" class="flex cursor-pointer items-center justify-between py-5 px-10 bg-eside-bleu-light font-semibold text-eside-Neutral-1
+            hover:bg-eside-Neutral-4 ">
+              <h1>Mes offres de réductions </h1>
+              <img src="assets/svg's/eside-neutral1-right-arrow.svg" alt="eside-neutral1-right-arrow.svg">
+            </a>
+            <a [routerLink]="['../mon-compte/mes-annonces']" class="flex cursor-pointer items-center justify-between py-5 px-10 bg-eside-bleu-light font-semibold text-eside-Neutral-1
+            hover:bg-eside-Neutral-4 ">
+              <h1>Mes annonces </h1>
+              <img src="assets/svg's/eside-neutral1-right-arrow.svg" alt="eside-neutral1-right-arrow.svg">
+            </a>
+            <a [routerLink]="['../mon-compte/mes-ventes']" class="flex cursor-pointer items-center justify-between py-5 px-10 bg-eside-bleu-light font-semibold text-eside-Neutral-1
+            hover:bg-eside-Neutral-4 ">
+              <h1>Mes ventes </h1>
+              <img src="assets/svg's/eside-neutral1-right-arrow.svg" alt="eside-neutral1-right-arrow.svg">
+            </a>
+            <a [routerLink]="['../mon-compte/mon-portfeuille']" class="flex cursor-pointer items-center justify-between py-5 px-10 bg-eside-bleu-light font-semibold text-eside-Neutral-1
+            hover:bg-eside-Neutral-4 ">
+              <h1>Mon portefeuille </h1>
+              <img src="assets/svg's/eside-neutral1-right-arrow.svg" alt="eside-neutral1-right-arrow.svg">
+            </a>
+            <a [routerLink]="['../mon-compte/mes-notification']" class="flex cursor-pointer items-center justify-between py-5 px-10 bg-eside-bleu-light font-semibold text-eside-Neutral-1
+            hover:bg-eside-Neutral-4 ">
+              <h1>Mon notifications </h1>
+              <img src="assets/svg's/eside-neutral1-right-arrow.svg" alt="eside-neutral1-right-arrow.svg">
+            </a>
+            <div class="flex cursor-pointer items-center justify-between py-5 px-10 bg-eside-bleu-light font-semibold text-eside-Neutral-1
+            hover:bg-eside-Neutral-4 ">
+              <h1>Se déconnecter </h1>
+              <img src="assets/svg's/eside-neutral1-right-arrow.svg" alt="eside-neutral1-right-arrow.svg">
+            </div>
+        </div>
+    </div>
+  <div class="col-span-9">
+    <router-outlet/>
+  </div>
+  </div>
+</div>

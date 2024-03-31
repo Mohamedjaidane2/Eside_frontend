@@ -1,0 +1,58 @@
+<div class="gap-3 mx-8 flex items-center" *ngIf="openTab==2">
+  <h3 class="text-gray-900 dark:text-white font-bold">Filter:</h3>
+
+  <ul class="items-center w-auto text-sm font-medium text-eside-Neutral-1 bg-white  gap-3 flex ">
+    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1 ">
+      <div class="flex items-center ">
+        <input id="En_cours" type="radio" value="" name="list-radio"
+               class="w-4 h-4 ">
+        <label for="En_cours"
+               class="w-auto py-2 ms-2 text-sm font-medium ">En cours</label>
+      </div>
+    </li>
+    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1 ">
+      <div class="flex items-center ">
+        <input id="Terminées" type="radio" value="" name="list-radio"
+               class="w-4 h-4 ">
+        <label for="Terminées"
+               class="w-auto py-2 ms-2 text-sm font-medium ">Terminées</label>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="flex flex-wrap">
+  <div class="w-full">
+    <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+      <li class="flex-auto text-center">
+        <a class="cursor-pointer text-xs font-bold uppercase px-3 py-3 border-b-2  block leading-normal" (click)="toggleTabs(1)" [ngClass]="{'text-eside-Neutral-1 opacity-30': openTab !== 1, 'border-b-4 text-eside-Neutral-1': openTab === 1}">
+          <i class="fas fa-cog text-base mr-1"></i> Réception
+        </a>
+      </li>
+      <li class="flex-auto text-center">
+        <a class=" cursor-pointer text-xs font-bold uppercase px-3 py-3 border-b-2  block leading-normal" (click)="toggleTabs(2)" [ngClass]="{'text-eside-Neutral-1 opacity-30': openTab !== 2, 'border-b-4 text-eside-Neutral-1': openTab === 2}">
+          <i class="fas fa-space-shuttle text-base mr-1"></i> Offres demandées
+        </a>
+      </li>
+    </ul>
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
+      <div class="px-4 py-5 flex-auto">
+        <div class="tab-content tab-space">
+          <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
+            <app-recived-discount-request/>
+            <app-recived-discount-request/>
+            <app-recived-discount-request/>
+          </div>
+          <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
+            <app-sended-discount-request/>
+            <app-sended-discount-request/>
+            <app-sended-discount-request/>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,95 @@
+<div class="w-full dark:border-gray-600 px-5">
+  <h1 class="font-semibold text-xl py-3">Couleur</h1>
+
+  <div class="flex flex-row flex-wrap gap-3">
+    <div class="flex items-center">
+      <label class="relative">
+        <input type="checkbox" [(ngModel)]="isChecked1" (change)="logChecked(isChecked1, 'black')" class="opacity-0 border-0 absolute">
+        <div class="rounded-md inline-block" [ngClass]="{'border-2': isChecked1, 'p-1': isChecked1}">
+          <img src="assets/svg's/colors/black.svg" alt="black" class="w-10 h-10 border border-gray-300 rounded-md transition-transform transform">
+        </div>
+      </label>
+    </div>
+
+    <div class="flex items-center">
+      <label class="relative">
+        <input type="checkbox" [(ngModel)]="isChecked2" (change)="logChecked(isChecked2, 'bleu')" class="opacity-0 border-0 absolute">
+        <div class="rounded-md inline-block" [ngClass]="{'border-2': isChecked2, 'p-1': isChecked2}">
+          <img src="assets/svg's/colors/bleu.svg" alt="bleu" class="w-10 h-10 border border-gray-300 rounded-md transition-transform transform">
+        </div>
+      </label>
+    </div>
+
+    <div class="flex items-center">
+      <label class="relative">
+        <input type="checkbox" [(ngModel)]="isChecked3" (change)="logChecked(isChecked3, 'gray')" class="opacity-0 border-0 absolute">
+        <div class="rounded-md inline-block" [ngClass]="{'border-2': isChecked3, 'p-1': isChecked3}">
+          <img src="assets/svg's/colors/gray.svg" alt="gray" class="w-10 h-10 border border-gray-300 rounded-md transition-transform transform">
+        </div>
+      </label>
+    </div>
+
+    <div class="flex items-center">
+      <label class="relative">
+        <input type="checkbox" [(ngModel)]="isChecked4" (change)="logChecked(isChecked4, 'green')" class="opacity-0 border-0 absolute">
+        <div class="rounded-md inline-block" [ngClass]="{'border-2': isChecked4, 'p-1': isChecked4}">
+          <img src="assets/svg's/colors/green.svg" alt="green" class="w-10 h-10 border border-gray-300 rounded-md transition-transform transform">
+        </div>
+      </label>
+    </div>
+
+    <div class="flex items-center">
+      <label class="relative">
+        <input type="checkbox" [(ngModel)]="isChecked5" (change)="logChecked(isChecked5, 'light-yellow')" class="opacity-0 border-0 absolute">
+        <div class="rounded-md inline-block" [ngClass]="{'border-2': isChecked5, 'p-1': isChecked5}">
+          <img src="assets/svg's/colors/light-yellow.svg" alt="light-yellow" class="w-10 h-10 border border-gray-300 rounded-md transition-transform transform">
+        </div>
+      </label>
+    </div>
+
+    <div class="flex items-center">
+      <label class="relative">
+        <input type="checkbox" [(ngModel)]="isChecked6" (change)="logChecked(isChecked6, 'orange')" class="opacity-0 border-0 absolute">
+        <div class="rounded-md inline-block" [ngClass]="{'border-2': isChecked6, 'p-1': isChecked6}">
+          <img src="assets/svg's/colors/orange.svg" alt="orange" class="w-10 h-10 border border-gray-300 rounded-md transition-transform transform">
+        </div>
+      </label>
+    </div>
+
+    <div class="flex items-center">
+      <label class="relative">
+        <input type="checkbox" [(ngModel)]="isChecked7" (change)="logChecked(isChecked7, 'peurple')" class="opacity-0 border-0 absolute">
+        <div class="rounded-md inline-block" [ngClass]="{'border-2': isChecked7, 'p-1': isChecked7}">
+          <img src="assets/svg's/colors/peurple.svg" alt="indigo" class="w-10 h-10 border border-gray-300 rounded-md transition-transform transform">
+        </div>
+      </label>
+    </div>
+
+    <div class="flex items-center">
+      <label class="relative">
+        <input type="checkbox" [(ngModel)]="isChecked8" (change)="logChecked(isChecked8, 'red')" class="opacity-0 border-0 absolute">
+        <div class="rounded-md inline-block" [ngClass]="{'border-2': isChecked8, 'p-1': isChecked8}">
+          <img src="assets/svg's/colors/red.svg" alt="red" class="w-10 h-10 border border-gray-300 rounded-md transition-transform transform">
+        </div>
+      </label>
+    </div>
+
+    <div class="flex items-center">
+      <label class="relative">
+        <input type="checkbox" [(ngModel)]="isChecked9" (change)="logChecked(isChecked9, 'white')" class="opacity-0 border-0 absolute">
+        <div class="rounded-md inline-block" [ngClass]="{'border-2': isChecked9, 'p-1': isChecked9}">
+          <img src="assets/svg's/colors/white.svg" alt="white" class="w-10 h-10 border border-gray-300 rounded-md transition-transform transform">
+        </div>
+      </label>
+    </div>
+
+    <div class="flex items-center">
+      <label class="relative">
+        <input type="checkbox" [(ngModel)]="isChecked10" (change)="logChecked(isChecked10, 'yellow')" class="opacity-0 border-0 absolute">
+        <div class="rounded-md inline-block" [ngClass]="{'border-2': isChecked10, 'p-1': isChecked10}">
+          <img src="assets/svg's/colors/yellow.svg" alt="yellow" class="w-10 h-10 border border-gray-300 rounded-md transition-transform transform">
+        </div>
+      </label>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="flex flex-wrap">
+  <div class="w-full">
+    <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+      <li class="flex-auto text-center">
+        <a class=" cursor-pointer text-xs font-bold uppercase px-3 py-3 border-b-2  block leading-normal" (click)="toggleTabs(1)" [ngClass]="{'text-eside-Neutral-1 opacity-30': openTab !== 1, 'border-b-4 text-eside-Neutral-1': openTab === 1}">
+          <i class="fas fa-space-shuttle text-base mr-1"></i> Description
+        </a>
+      </li>
+      <li class="flex-auto text-center">
+        <a class="cursor-pointer text-xs font-bold uppercase px-3 py-3 border-b-2  block leading-normal" (click)="toggleTabs(2)" [ngClass]="{'text-eside-Neutral-1 opacity-30': openTab !== 2, 'border-b-4 text-eside-Neutral-1': openTab === 2}">
+          <i class="fas fa-cog text-base mr-1"></i> Caracteristiques
+        </a>
+      </li>
+      <li class="flex-auto text-center">
+        <a class="cursor-pointer text-xs font-bold uppercase px-3 py-3 border-b-2   block leading-normal" (click)="toggleTabs(3)" [ngClass]="{'text-eside-Neutral-1  opacity-30 bg-white': openTab !== 3, 'border-b-4 text-eside-Neutral-1': openTab === 3}">
+          <i class="fas fa-briefcase text-base mr-1"></i> Livraison & retours
+        </a>
+      </li>
+      <li class="flex-auto text-center">
+        <a class="cursor-pointer text-xs font-bold uppercase px-3 py-3 border-b-2   block leading-normal" (click)="toggleTabs(4)" [ngClass]="{'text-eside-Neutral-1  opacity-30 bg-white': openTab !== 4, 'border-b-4 text-eside-Neutral-1': openTab === 4}">
+          <i class="fas fa-briefcase text-base mr-1"></i> A propos du vendeur
+        </a>
+      </li>
+    </ul>
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
+      <div class="px-4 py-5 flex-auto">
+        <div class="tab-content tab-space">
+          <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
+            <p>
+              Collaboratively administrate empowered markets via
+              plug-and-play networks. Dynamically procrastinate B2C users
+              after installed base benefits.
+              <br />
+              <br />
+              Dramatically visualize customer directed convergence
+              without revolutionary ROI.
+            </p>
+          </div>
+          <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
+            <p>
+              Completely synergize resource taxing relationships via
+              premier niche markets. Professionally cultivate one-to-one
+              customer service with robust ideas.
+              <br />
+              <br />
+              Dynamically innovate resource-leveling customer service for
+              state of the art customer service.
+            </p>
+          </div>
+          <div [ngClass]="{'hidden': openTab !== 3, 'block': openTab === 3}">
+            <p>
+              Efficiently unleash cross-media information without
+              cross-media value. Quickly maximize timely deliverables for
+              real-time schemas.
+              <br />
+              <br />
+              Dramatically maintain clicks-and-mortar solutions
+              without functional solutions.
+            </p>
+          </div>
+          <div [ngClass]="{'hidden': openTab !== 4, 'block': openTab === 4}">
+            <div class="grid w-full grid-cols-6">
+              <div class="col-span-4">
+                <div class="flex items-center space-x-3">
+                  <img src="assets/svg's/profile-pic.svg" class="h-12 cursor-pointer" alt="profile pic">
+                  <div>
+                    <h1 class="font-bold text-xl cursor-pointer">Camile.B</h1>
+                    <p class="font-light cursor-pointer" >Membre depuis 2023</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-2">
+                  <div class="items-end flex-grow ">
+                      <img src="assets/svg's/verified-phone.svg" class="pl-3" alt="phone verified">
+                      <p class=" cursor-pointer w-full underline text-center">voir plus d'annonces</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

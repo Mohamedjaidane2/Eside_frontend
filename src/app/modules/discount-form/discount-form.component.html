@@ -1,0 +1,25 @@
+<div class="pt-[150px]">
+  <div class="text-center w-full flex py-3 flex-col items-center justify-center">
+    <h1 class="text-7xl text-eside-Neutral-1 font-extrabold ">FAIRE UNE OFFRE</h1>
+    <p class="text-md text-eside-Neutral-2 font-light ">Proposez au vendeur un prix jusqu’à 50% inférieur au prix indiqué.</p>
+  </div>
+</div>
+<div class="text-center flex flex-col mb-8 items-center justify-center space-y-3">
+  <h1 class="text-lg">Prix initial de l'annonce :</h1>
+  <div class="border-2 border-eside-black text-3xl font-extrabold w-[300px] py-6">
+    99.000 TND
+  </div>
+  <h1 class="text-lg">Votre offre : :</h1>
+    <input type="number" [value]="value"  [min]="45.000" [max]="99.000" step="0.001" pattern="^\d+(\.\d{3})?$"
+           class="border-2 border-eside-black text-3xl text-center  decoration-none font-extrabold w-[300px] py-6"/>
+  <div class="flex justify-center items-center ">
+        <input class="mr-2 h-6 w-6" type="checkbox" id="demandeRemise" name="demandeRemise">
+        <span class="">J'autorise l'application d'une remise pour cette annonce.</span>
+  </div>
+  <button type="button" class="font-bold text-eside-white text-xl bg-eside-Accent-1 rounded-sm px-5 py-2.5 lg:text-xl lg:px-8 lg:py-3 dark:bg-eside-Accent-1 dark:hover:bg-eside-Accent-2 lg:py-2 lg:px-6">Confirmer</button>
+
+
+</div>
+
+
+

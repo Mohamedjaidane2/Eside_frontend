@@ -1,0 +1,13 @@
+.input-group {
+  position: relative;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.input-group-addon {
+  position: absolute;
+  right: 100px;
+  /* Adjust as needed */
+  pointer-events: none;
+}
