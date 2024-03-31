@@ -10,8 +10,14 @@ import {MesNotificationsComponent} from "./modules/espace-compte/mes-notificatio
 import {
   MesOffreDeReductionsComponent
 } from "./modules/espace-compte/mes-offre-de-reductions/mes-offre-de-reductions.component";
+import {ConnexionComponent} from "./modules/connexion/connexion.component";
 
 export const routes: Routes = [
+  {
+    path:"",
+    component:ConnexionComponent
+  }
+  ,
   {
     path:"mon-compte",
     component:EspaceCompteComponent,

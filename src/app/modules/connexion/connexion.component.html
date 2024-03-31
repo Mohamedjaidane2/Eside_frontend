@@ -1,1 +1,40 @@
-<p>connexion works!</p>
+<div class="pt-[130px]">
+  <div class="grid grid-cols-1 gap-3 lg:grid-cols-2">
+    <img class="object-cover h-full" src="assets/connexionbg-01.jpg">
+
+    <div class="pt-8 flex-col flex justify-center items-center space-y-4">
+      <h1 class="text-eside-Neutral-1 text-5xl font-extrabold">REJOIGNEZ-NOUS</h1>
+      <span class="text-center text-eside-Neutral-1 px-[25%] font-light">Vendez, achetez vos équipements outdoor et échangez avec des milliers d’autres membres de la communauté.</span>
+
+      <div class="flex w-full flex-wrap">
+        <div class="w-full">
+          <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+            <li class="flex-auto text-center">
+              <a class="cursor-pointer text-xs font-bold uppercase px-3 py-3 border-b-2 block leading-normal" (click)="toggleTabs(1)" [ngClass]="{'text-eside-Neutral-1 opacity-30': openTab !== 1, 'border-b-4 text-eside-Accent-1': openTab === 1}">
+                <i class="fas fa-cog text-base mr-1 uppercase"></i> Inscription
+              </a>
+            </li>
+            <li class="flex-auto text-center">
+              <a class="cursor-pointer text-xs font-bold uppercase px-3 py-3 border-b-2 block leading-normal" (click)="toggleTabs(2)" [ngClass]="{'text-eside-Neutral-1 opacity-30': openTab !== 2, 'border-b-4 text-eside-Accent-1': openTab === 2}">
+                <i class="fas fa-space-shuttle text-base mr-1 uppercase"></i> Connexion
+              </a>
+            </li>
+          </ul>
+          <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
+            <div class="px-4 py-5 flex-auto">
+              <div class="tab-content tab-space">
+                <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
+                  <app-inscription/>
+                </div>
+                <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
+                  <app-se-connecter/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
