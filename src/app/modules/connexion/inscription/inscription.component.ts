@@ -20,6 +20,7 @@ export class InscriptionComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  isLoading=false;
 
   constructor(private authService: AuthService) {
   }
@@ -28,16 +29,19 @@ export class InscriptionComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.userRegisterData)
+    this.isLoading=true;
+    //console.log(this.userRegisterData)
     this.authService.register(this.userRegisterData).subscribe({
       next: data => {
-        console.log("our data = "+data);
+        //console.log("our data = "+data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.isLoading=false;
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
+        this.isLoading=false;
       }
     });
   }
