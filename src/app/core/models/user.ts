@@ -8,12 +8,21 @@ export class User_Response {
   token!:string;
 }
 
+
 export class User_Register_Request {
   firstname!:string;
   lastname!:string;
   email!:string;
   password!:string;
   confirmedPassword!:string;
+}
+
+export class User_Register_Response {
+  token!:string;
+}
+
+export class User_Login_Response {
+  token!:string;
 }
 
 export class User_Login_Request {

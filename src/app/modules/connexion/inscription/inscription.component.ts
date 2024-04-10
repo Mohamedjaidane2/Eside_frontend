@@ -33,7 +33,7 @@ export class InscriptionComponent implements OnInit {
     //console.log(this.userRegisterData)
     this.authService.register(this.userRegisterData).subscribe({
       next: data => {
-        //console.log("our data = "+data);
+        console.log("our data = "+data.token);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.isLoading=false;
