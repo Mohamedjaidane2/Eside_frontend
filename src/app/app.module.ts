@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {isDevMode, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,14 +15,22 @@ import {UserGalleryComponent} from "./modules/user-gallery/user-gallery.componen
 import {PublierUneAnnonceComponent} from "./modules/publier-une-annonce/publier-une-annonce.component";
 import {SuivreCommandeComponent} from "./modules/suivre-commande/suivre-commande.component";
 import {EspaceCompteComponent} from "./modules/espace-compte/espace-compte.component";
-import { EspaceAdminComponent } from './modules/espace-admin/espace-admin.component';
 import {httpInterceptorProviders} from "./core/_helper/http.interceptor";
 import {HttpClientModule} from "@angular/common/http";
+import {provideState, provideStore, StoreModule} from "@ngrx/store";
+import {provideStoreDevtools, StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {authFeatureKey, authReducer} from "./core/store/reducers/Auth/reducer";
+import {EffectsModule, provideEffects} from "@ngrx/effects";
+import * as  authEffects from "./core/store/effects/Auth/effects";
+import { BackendErrorsMessagesComponent } from './shared/backend-errors-messages/backend-errors-messages.component';
+import {InscriptionComponent} from "./modules/connexion/inscription/inscription.component";
+import {FormsModule} from "@angular/forms";
+import {ConnexionComponent} from "./modules/connexion/connexion.component";
+import {SeConnecterComponent} from "./modules/connexion/se-connecter/se-connecter.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    EspaceAdminComponent,
   ],
   imports: [
     RouterOutlet,
@@ -37,13 +45,35 @@ import {HttpClientModule} from "@angular/common/http";
     DiscountFormComponent,
     PublierUneAnnonceComponent,
     SuivreCommandeComponent,
+    BackendErrorsMessagesComponent,
+    InscriptionComponent,
     EspaceCompteComponent,
+    ConnexionComponent,
+    SeConnecterComponent,
     RouterLink,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: !isDevMode(), // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+      trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
+      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+      connectInZone: true // If set to true, the connection is established within the Angular zone
+    }),
   ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, provideStore(), provideStoreDevtools({
+    maxAge: 25, // Retains last 25 states
+    logOnly: !isDevMode(), // Restrict extension to log-only mode
+    autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
+    traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+    connectInZone: true // If set to true, the connection is established within the Angular zone
+  }),
+    provideState(authFeatureKey, authReducer),
+    provideEffects(authEffects)
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

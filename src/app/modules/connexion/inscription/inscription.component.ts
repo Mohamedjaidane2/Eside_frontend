@@ -1,48 +1,66 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../../core/_services/auth.service";
-import {User_Register_Request} from "../../../core/models/user";
 import {FormsModule} from "@angular/forms";
-import {NgClass, NgIf} from "@angular/common";
+import {AsyncPipe, NgClass, NgIf} from "@angular/common";
+import {AppModule} from "../../../app.module";
+import {User_Register_Request} from "../../../core/models/user/user";
+import {combineLatest} from "rxjs";
+import {selectIsSubmitting, selectValidationErrors} from "../../../core/store/reducers/Auth/reducer";
+import {AuthService} from "../../../core/_services/auth.service";
+import {Store} from "@ngrx/store";
+import {AuthActions} from "../../../core/store/actions/Auth/actions";
+import {
+  BackendErrorsMessagesComponent
+} from "../../../shared/backend-errors-messages/backend-errors-messages.component";
 
 @Component({
   selector: 'app-inscription',
-  standalone: true,
+  standalone:true,
   imports: [
-    FormsModule,
     NgClass,
-    NgIf
+    NgIf,
+    AsyncPipe,
+    FormsModule,
+    BackendErrorsMessagesComponent,
   ],
   templateUrl: './inscription.component.html',
   styleUrl: './inscription.component.css'
 })
-export class InscriptionComponent implements OnInit {
-  userRegisterData = new User_Register_Request()
-  isSuccessful = false;
-  isSignUpFailed = false;
-  errorMessage = '';
-  isLoading=false;
+export class InscriptionComponent {
 
-  constructor(private authService: AuthService) {
+   userRegisterData = new User_Register_Request()
+  //isSuccessful = false;
+  //isSignUpFailed = false;
+  //errorMessage = '';
+  //isLoading=false;
+  data$ = combineLatest({
+    isSubmitting : this.store.select(selectIsSubmitting),
+    backendErrors : this.store.select(selectValidationErrors),
+    })
+
+  constructor(
+    private authService: AuthService,
+    private store: Store ){
   }
 
-  ngOnInit(): void {
-  }
 
   onSubmit(): void {
-    this.isLoading=true;
+    //this.isLoading=true;
     //console.log(this.userRegisterData)
-    this.authService.register(this.userRegisterData).subscribe({
-      next: data => {
-        console.log("our data = "+data.token);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-        this.isLoading=false;
-      },
-      error: err => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-        this.isLoading=false;
-      }
-    });
+    this.store.dispatch(AuthActions.register(this.userRegisterData))
+    //this.authService.register(this.userRegisterData).subscribe({
+      //next: data => {
+        //console.log("our data = "+data);
+        //this.isSuccessful = true;
+        //this.isSignUpFailed = false;
+        //this.isLoading=false;
+      //},
+      //error: err => {
+      //  this.errorMessage = err.error.message;
+      //  this.isSignUpFailed = true;
+      //  this.isLoading=false;
+      //}
+    //});
   }
+
+
 }
