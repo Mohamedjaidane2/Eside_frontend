@@ -1,12 +1,12 @@
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {inject} from "@angular/core";
 import {AuthService} from "../../../_services/auth.service";
-import {AuthActions} from "../../actions/Auth/actions";
+import {AuthActions} from "../../actions/Auth/auth.actions";
 import {catchError, map, of, switchMap, tap} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {StorageService} from "../../../_services/storage.service";
 import {Router} from "@angular/router";
-import {User_Response} from "../../../models/user/user";
+import {User_Response} from "../../../models/user";
 
 
 //REGISTER EFFECTS ----------------------------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ export const redirectAfterLoginEffect= createEffect((
   return actions$.pipe(
     ofType(AuthActions.loginSuccess),
     tap(()=>{
-      router.navigate(['/mon-compte/mes-infos']);
+      router.navigate(['/accueil']);
     })
   )
 }, {functional:true,dispatch:false})

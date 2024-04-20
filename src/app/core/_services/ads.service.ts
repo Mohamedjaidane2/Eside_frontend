@@ -9,8 +9,7 @@ import {
   User_Response
 } from "../models/user";
 import {environment} from "../../../environments/environment.development";
-
-const AUTH_API = 'http://localhost:8222/api/v1';
+import {AdvertisementDto} from "../models/advertisment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -29,7 +28,7 @@ const Authorization_Bearer = {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AdsService {
   constructor(private http: HttpClient) {}
 
   login(user_Login_Request:User_Login_Request): Observable<string> {
@@ -43,7 +42,8 @@ export class AuthService {
   checkAuth(): Observable<boolean> {
     return this.http.get<boolean>(environment.BASE_URL + '/auth/check-auth', Authorization_Bearer);
   }
-  getInfo(): Observable<User_Response> {
-    return this.http.get<User_Response>(environment.BASE_URL + '/auth/get/info', Authorization_Bearer);
+
+  getTop10ByCreationDate(accountId:string): Observable<[AdvertisementDto]> {
+    return this.http.get<[AdvertisementDto]>(environment.BASE_URL1 + 'api/advertisement/all/top/10/'+accountId, Authorization_Bearer );
   }
 }

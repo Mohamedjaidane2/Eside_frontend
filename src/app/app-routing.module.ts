@@ -12,13 +12,17 @@ import {MesNotificationsComponent} from "./modules/espace-compte/mes-notificatio
 import {
   MesOffreDeReductionsComponent
 } from "./modules/espace-compte/mes-offre-de-reductions/mes-offre-de-reductions.component";
+import {HomeComponent} from "./modules/home/home.component";
 
 const routes: Routes = [
   {
     path:"",
     component:ConnexionComponent
-  }
-  ,
+  },
+  {
+   path:"accueil",
+    component:HomeComponent
+  },
   {
     path:"mon-compte",
     component:EspaceCompteComponent,
@@ -64,4 +68,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

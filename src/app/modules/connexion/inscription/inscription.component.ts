@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {AsyncPipe, NgClass, NgIf} from "@angular/common";
 import {AppModule} from "../../../app.module";
-import {User_Register_Request} from "../../../core/models/user/user";
+import {User_Register_Request} from "../../../core/models/user";
 import {combineLatest} from "rxjs";
-import {selectIsSubmitting, selectValidationErrors} from "../../../core/store/reducers/Auth/reducer";
+import {selectIsSubmitting, selectValidationErrors} from "../../../core/store/reducers/Auth/auth.reducer";
 import {AuthService} from "../../../core/_services/auth.service";
 import {Store} from "@ngrx/store";
-import {AuthActions} from "../../../core/store/actions/Auth/actions";
+import {AuthActions} from "../../../core/store/actions/Auth/auth.actions";
 import {
   BackendErrorsMessagesComponent
 } from "../../../shared/backend-errors-messages/backend-errors-messages.component";

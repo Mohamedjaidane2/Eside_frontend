@@ -19,15 +19,16 @@ import {httpInterceptorProviders} from "./core/_helper/http.interceptor";
 import {HttpClientModule} from "@angular/common/http";
 import {provideState, provideStore, StoreModule} from "@ngrx/store";
 import {provideStoreDevtools, StoreDevtoolsModule} from "@ngrx/store-devtools";
-import {authFeatureKey, authReducer} from "./core/store/reducers/Auth/reducer";
+import {authFeatureKey, authReducer} from "./core/store/reducers/Auth/auth.reducer";
+import {adsFeatureKey, adsReducer} from "./core/store/reducers/Advertisment/ads.reducer";
 import {EffectsModule, provideEffects} from "@ngrx/effects";
-import * as  authEffects from "./core/store/effects/Auth/effects";
+import * as  authEffects from "./core/store/effects/Auth/auth.effects";
+import * as  adsEffects from "./core/store/effects/Advertisment/ads.effects";
 import { BackendErrorsMessagesComponent } from './shared/backend-errors-messages/backend-errors-messages.component';
 import {InscriptionComponent} from "./modules/connexion/inscription/inscription.component";
 import {FormsModule} from "@angular/forms";
 import {ConnexionComponent} from "./modules/connexion/connexion.component";
 import {SeConnecterComponent} from "./modules/connexion/se-connecter/se-connecter.component";
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,8 @@ import {SeConnecterComponent} from "./modules/connexion/se-connecter/se-connecte
     connectInZone: true // If set to true, the connection is established within the Angular zone
   }),
     provideState(authFeatureKey, authReducer),
-    provideEffects(authEffects)
+    provideState(adsFeatureKey, adsReducer),
+    provideEffects(authEffects,adsEffects)
   ],
   bootstrap: [AppComponent]
 })

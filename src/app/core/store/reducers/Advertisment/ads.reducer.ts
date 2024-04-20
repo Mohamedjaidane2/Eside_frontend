@@ -1,32 +1,32 @@
 import {createFeature, createReducer, on} from "@ngrx/store";
-import {AuthStateInterface} from "../../statesInterfaces/Auth/authState.interface";
-import {AuthActions} from "../../actions/Auth/actions";
-const initialState:AuthStateInterface={
+import {AuthActions} from "../../actions/Auth/auth.actions";
+import {AdsStateInterface} from "../../statesInterfaces/Advertisment/adsState.interface";
+import {AdsActions} from "../../actions/Advertisment/ads.actions";
+
+const initialState:AdsStateInterface={
   isSubmitting:false,
-  isLoading : false,
-  userToken:undefined,
   validationErrors:null,
-  currentUser:null,
-  isAuthenticiated:false,
+  recentAds : null
 }
 
-const authFeature = createFeature({
-  name:"auth",
+const adsFeature = createFeature({
+  name:"ads",
   reducer:createReducer(
     initialState,
+
 //---------------------------------------------------------Register reducers---------------------------------------------------------
 
-    on(AuthActions.register,(state)=>({
+    on(AdsActions.recentAds,(state)=>({
       ...state,
       isSubmitting: true,
       validationErrors: null,
     })),
-    on(AuthActions.registerSuccess,(state,action)=>({
+    on(AdsActions.recentAdsSuccess,(state,action)=>({
       ...state,
       isSubmitting: true,
-      userToken: action.token,
+      recentAds: action.ads
     })),
-    on(AuthActions.registerFailure,(state,action)=>({
+    on(AdsActions.recentAdsFailure,(state,action)=>({
       ...state,
       isSubmitting: false,
       validationErrors: action.errors,
@@ -94,12 +94,9 @@ const authFeature = createFeature({
 })
 
 export const {
-  name: authFeatureKey,
-  reducer: authReducer,
-  selectIsSubmitting ,
-  selectIsLoading,
+  name: adsFeatureKey,
+  reducer: adsReducer,
   selectValidationErrors,
-  selectCurrentUser,
-  selectIsAuthenticiated,
-  selectUserToken
-} = authFeature
+  selectRecentAds,
+  selectIsSubmitting ,
+} = adsFeature

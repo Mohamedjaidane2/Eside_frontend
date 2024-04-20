@@ -1,5 +1,5 @@
 import {createActionGroup, emptyProps, props} from "@ngrx/store";
-import {User_Login_Request, User_Register_Request, User_Response} from "../../../models/user/user";
+import {User_Login_Request, User_Register_Request, User_Response} from "../../../models/user";
 import {BackendErrorInterface} from "../../../../shared/types/backendError.interface";
 
 export const AuthActions= createActionGroup({

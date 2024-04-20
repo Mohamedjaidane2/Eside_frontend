@@ -1,4 +1,4 @@
-import {User_Response} from "../../../models/user/user";
+import {User_Response} from "../../../models/user";
 import {BackendErrorInterface} from "../../../../shared/types/backendError.interface";
 
 export interface AuthStateInterface {

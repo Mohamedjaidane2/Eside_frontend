@@ -11,7 +11,7 @@ import {InscriptionComponent} from "./inscription/inscription.component";
 import {AuthService} from "../../core/_services/auth.service";
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {AuthActions} from "../../core/store/actions/Auth/actions";
+import {AuthActions} from "../../core/store/actions/Auth/auth.actions";
 
 @Component({
   selector: 'app-connexion',
