@@ -9,12 +9,12 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-      'light-right-arrow': "url('/assets/svg's/eside-neutral1-right-arrow.svg')",
-      'dark-right-arrow': "url('/assets/svg's/eside-neutral1-right-arrow.svg')",
-  },variants: {
+        'light-right-arrow': "url('/assets/svg's/eside-neutral1-right-arrow.svg')",
+        'dark-right-arrow': "url('/assets/svg's/eside-neutral1-right-arrow.svg')",
+      },variants: {
         fill: ['hover', 'focus'], // this line does the trick
       },
-},
+    },
     colors: {
       'eside-Primary-1': '#092A49',
       'eside-Primary-2': '#3A688C',

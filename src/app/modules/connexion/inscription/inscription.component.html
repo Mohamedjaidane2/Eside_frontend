@@ -1,32 +1,119 @@
+<ng-container *ngIf="data$ | async as data">
 
-<form>
-  <div class="grid gap-6 mb-6 md:grid-cols-2">
-    <div>
-      <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
-      <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+  <form #form="ngForm" (ngSubmit)="form.valid && onSubmit()" novalidate >
+    <mc-backend-errors-messages [backendErrors]="data.backendErrors" *ngIf="data.backendErrors"></mc-backend-errors-messages>
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
+      <div>
+        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prénom</label>
+        <input
+          id="first_name"
+          type="text"
+          placeholder="John"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          name="firstName"
+          [(ngModel)]="userRegisterData.firstname"
+          required
+          minlength="3"
+          maxlength="20"
+          [ngClass]="{ 'bg-eside-Semantic-red bg-opacity-10': form.submitted && firstname.errors }"
+          #firstname="ngModel"
+        />
+        <div *ngIf="form.submitted && firstname.errors" class="text-eside-Semantic-red">
+          <div *ngIf=" firstname.errors?.['required']">Le prénom est obligatoire</div>
+          <div *ngIf="firstname.errors?.['minlength']">
+            Le prénom doit comporter au moins 6 caractères.
+          </div>
+          <div *ngIf="firstname.errors?.['maxlength']">
+            Le prénom doit comporter au maximum 20 caractères.
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
+        <input
+          type="text"
+          id="last_name"
+          placeholder="Doe"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          name="lastName"
+          [(ngModel)]="userRegisterData.lastname"
+          required
+          minlength="3"
+          maxlength="20"
+          [ngClass]="{ 'bg-eside-Semantic-red bg-opacity-10': form.submitted && lastname.errors }"
+          #lastname="ngModel"
+        />
+        <div *ngIf="form.submitted && lastname.errors" class="text-eside-Semantic-red">
+          <div *ngIf=" lastname.errors?.['required']">Le nom est obligatoire</div>
+          <div *ngIf="lastname.errors?.['minlength']">
+            Le nom doit comporter au moins 6 caractères.
+          </div>
+          <div *ngIf="lastname.errors?.['maxlength']">
+            Le nom doit comporter au maximum 20 caractères.
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-      <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-      <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required />
+    <div class="mb-6">
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
+      <input type="email"
+             id="email"
+             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+             placeholder="john.doe@company.com"
+             name="email"
+             [(ngModel)]="userRegisterData.email"
+             required
+             [ngClass]="{ 'bg-eside-Semantic-red bg-opacity-10': form.submitted && email.errors }"
+             email
+             #email="ngModel"
+      />
+      <div *ngIf="form.submitted && email.errors" class="text-eside-Semantic-red">
+        <div *ngIf=" email.errors?.['required']">L'email est obligatoire.</div>
+        <div *ngIf="email.errors?.['email']">
+          L'email doit etre valide.
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="mb-6">
-    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
-    <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required />
-  </div>
-  <div class="mb-6">
-    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
-  </div>
-  <div class="mb-6">
-    <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-    <input type="password" id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required />
-  </div>
-  <div class="flex items-start mb-6">
-    <div class="flex items-center h-5">
-      <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
+    <div class="mb-6">
+      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de passe</label>
+      <input type="password"
+             id="password"
+             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+             placeholder="•••••••••"
+             name="password"
+             [(ngModel)]="userRegisterData.password"
+             required
+             minlength="6"
+             [ngClass]="{ 'bg-eside-Semantic-red bg-opacity-10': form.submitted && password.errors }"
+             #password="ngModel"
+      />
+      <div *ngIf="form.submitted && password.errors" class="text-eside-Semantic-red">
+        <div *ngIf=" password.errors?.['required']">Le mot de passe est obligatoire.</div>
+        <div *ngIf="password.errors?.['minlength']">
+          Le mot de passe doit comporter au moins 6 caractères.
+        </div>
+      </div>
     </div>
-    <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
-  </div>
-  <button type="submit" class="text-eside-white font-bold py-4 bg-eside-Accent-1 w-full rounded-b-md">S'INSCRIRE</button>
-</form>
+    <div class="mb-6">
+      <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmer le mot de passe</label>
+      <input type="password"
+             id="confirm_password"
+             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+             placeholder="•••••••••"
+             name="confirmedPassword"
+             [(ngModel)]="userRegisterData.confirmedPassword"
+             required
+             minlength="6"
+             [ngClass]="{ 'bg-eside-Semantic-red bg-opacity-10': form.submitted && confirmedPassword.errors }"
+             #confirmedPassword="ngModel"
+      />
+      <div *ngIf="form.submitted && confirmedPassword.errors" class="text-eside-Semantic-red">
+        <div *ngIf=" confirmedPassword.errors?.['required']">Le mot de passe est obligatoire.</div>
+        <div *ngIf="password.value!==confirmedPassword">
+          Veuillez confirmer le mot de passe !
+        </div>
+      </div>
+    </div>
+    <button [disabled]="data.isSubmitting" type="submit" class="text-eside-white font-bold py-4 bg-eside-Accent-1 w-full rounded-b-md">S'INSCRIRE</button>
+  </form>
+</ng-container>

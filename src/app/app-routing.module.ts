@@ -1,4 +1,6 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import {ConnexionComponent} from "./modules/connexion/connexion.component";
 import {EspaceCompteComponent} from "./modules/espace-compte/espace-compte.component";
 import {MesInformationComponent} from "./modules/espace-compte/mes-information/mes-information.component";
 import {MesFavorisComponent} from "./modules/espace-compte/mes-favoris/mes-favoris.component";
@@ -10,14 +12,17 @@ import {MesNotificationsComponent} from "./modules/espace-compte/mes-notificatio
 import {
   MesOffreDeReductionsComponent
 } from "./modules/espace-compte/mes-offre-de-reductions/mes-offre-de-reductions.component";
-import {ConnexionComponent} from "./modules/connexion/connexion.component";
+import {HomeComponent} from "./modules/home/home.component";
 
-export const routes: Routes = [
+const routes: Routes = [
   {
     path:"",
     component:ConnexionComponent
-  }
-  ,
+  },
+  {
+   path:"accueil",
+    component:HomeComponent
+  },
   {
     path:"mon-compte",
     component:EspaceCompteComponent,
@@ -57,3 +62,10 @@ export const routes: Routes = [
     ]
   },
 ];
+
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}

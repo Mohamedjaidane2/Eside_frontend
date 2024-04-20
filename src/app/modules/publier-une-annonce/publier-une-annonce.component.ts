@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {AuthService} from "../../core/_services/auth.service";
+import {Router} from "@angular/router";
+import {Store} from "@ngrx/store";
+import {AuthActions} from "../../core/store/actions/Auth/auth.actions";
 
 @Component({
   selector: 'app-publier-une-annonce',
@@ -13,7 +17,16 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './publier-une-annonce.component.html',
   styleUrl: './publier-une-annonce.component.css'
 })
-export class PublierUneAnnonceComponent {
+export class PublierUneAnnonceComponent implements OnInit{
+  title = 'Eside-frontend';
+  constructor(private authService: AuthService, private router: Router, private store: Store) {
+  }
+
+  ngOnInit(): void {
+
+    //this.store.dispatch(AuthActions.checkAuth())
+    //this.store.dispatch(AuthActions.getUserInfo())
+  }
   step1 =false;
   step2 =false;
   openTab = 1;
