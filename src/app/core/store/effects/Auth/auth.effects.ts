@@ -142,8 +142,8 @@ export const getUserInfoEffect= createEffect((
 ) => {
   return actions$.pipe(
     ofType(AuthActions.getUserInfo),
-    switchMap(()=>{
-      return authService.getInfo().pipe(
+    switchMap((input)=>{
+      return authService.getInfo(input.token).pipe(
         map((user:User_Response)=>{
           storgeService.saveUser(user);
           return AuthActions.getUserInfoSuccess({user})

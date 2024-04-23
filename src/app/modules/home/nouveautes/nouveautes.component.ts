@@ -6,8 +6,6 @@ import {AdsService} from "../../../core/_services/ads.service";
 import {User_Login_Request} from "../../../core/models/user";
 import {combineLatest} from "rxjs";
 import {
-  selectIsLoading,
-  selectIsSubmitting,
   selectValidationErrors
 } from "../../../core/store/reducers/Auth/auth.reducer";
 import {selectRecentAds} from "../../../core/store/reducers/Advertisment/ads.reducer";
@@ -15,6 +13,10 @@ import {AuthActions} from "../../../core/store/actions/Auth/auth.actions";
 import {AdsActions} from "../../../core/store/actions/Advertisment/ads.actions";
 import {StorageService} from "../../../core/_services/storage.service";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {AdvertisementDto} from "../../../core/models/advertisment";
+import {CategoryStateInterface} from "../../../core/store/statesInterfaces/Advertisment/categoryState.interface";
+import {AdsStateInterface} from "../../../core/store/statesInterfaces/Advertisment/adsState.interface";
+import {selectListCategories} from "../../../core/store/reducers/Advertisment/category.reducer";
 
 @Component({
   selector: 'app-nouveautes',
@@ -29,23 +31,23 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
   styleUrl: './nouveautes.component.css'
 })
 export class NouveautesComponent implements OnInit {
-  userLoginData = new User_Login_Request()
+  recentads!:AdvertisementDto[]|null
+
   data$ = combineLatest({
-    isSubmitting : this.store.select(selectIsSubmitting),
-    IsLoading: this.store.select(selectIsLoading),
     recentAds : this.store.select(selectRecentAds),
     backendErrors : this.store.select(selectValidationErrors),
   })
 
+
   constructor(
     private adsService: AdsService,
-    private storageService:StorageService,
-    private store: Store) {
+    private store: Store<{store:AdsStateInterface}>) {
+    this.store.select(selectRecentAds).subscribe(List => this.recentads = List);
   }
 
-  userAccountId:string=this.storageService.getUser().accountId
+
   ngOnInit(): void {
-    this.store.dispatch(AdsActions.recentAds({accountId:this.userAccountId}))
+
   }
 
 }

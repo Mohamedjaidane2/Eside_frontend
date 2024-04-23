@@ -6,7 +6,8 @@ import {AdsActions} from "../../actions/Advertisment/ads.actions";
 const initialState:AdsStateInterface={
   isSubmitting:false,
   validationErrors:null,
-  recentAds : null
+  recentAds : null,
+  feedAds : null,
 }
 
 const adsFeature = createFeature({
@@ -14,80 +15,34 @@ const adsFeature = createFeature({
   reducer:createReducer(
     initialState,
 
-//---------------------------------------------------------Register reducers---------------------------------------------------------
+//---------------------------------------------------------recent ads reducers---------------------------------------------------------
 
     on(AdsActions.recentAds,(state)=>({
       ...state,
-      isSubmitting: true,
       validationErrors: null,
     })),
     on(AdsActions.recentAdsSuccess,(state,action)=>({
       ...state,
-      isSubmitting: true,
       recentAds: action.ads
     })),
     on(AdsActions.recentAdsFailure,(state,action)=>({
       ...state,
-      isSubmitting: false,
       validationErrors: action.errors,
     })),
 
-
-//---------------------------------------------------------Login reducers---------------------------------------------------------
-
-
-    on(AuthActions.login,(state)=>({
+ on(AdsActions.getAds,(state)=>({
       ...state,
-      isSubmitting: true,
       validationErrors: null,
     })),
-    on(AuthActions.loginSuccess,(state,action)=>({
+    on(AdsActions.getAdsSuccess,(state,action)=>({
       ...state,
-      isSubmitting: true,
-      userToken: action.token
+      feedAds: action.response
     })),
-    on(AuthActions.loginFailure,(state,action)=>({
+    on(AdsActions.getAdsFailure,(state,action)=>({
       ...state,
-      isSubmitting: false,
-      validationErrors: action.errors
+      validationErrors: action.errors,
     })),
 
-
-//---------------------------------------------------------CheckAuth reducers---------------------------------------------------------
-
-
-    on(AuthActions.checkAuth,(state)=>({
-      ...state,
-      isLoading: true
-    })),
-    on(AuthActions.checkAuthSuccess,(state,action)=>({
-      ...state,
-      isLoading: false,
-      isAuthenticiated: action.isAuth,
-    })),
-    on(AuthActions.checkAuthFailure,(state)=>({
-      ...state,
-      isLoading: false,
-      isAuthenticiated: false
-    })),
-
-
-//---------------------------------------------------------Get user Info reducers---------------------------------------------------------
-
-
-    on(AuthActions.getUserInfo,(state)=>({
-      ...state,
-      isLoading: true,
-    })),
-    on(AuthActions.getUserInfoSuccess,(state,action)=>({
-      ...state,
-      isLoading: false,
-      currentUser: action.user,
-    })),
-    on(AuthActions.getUserInfoFailure,(state)=>({
-      ...state,
-      isLoading: false,
-    })),
 
   )
 
@@ -96,7 +51,6 @@ const adsFeature = createFeature({
 export const {
   name: adsFeatureKey,
   reducer: adsReducer,
-  selectValidationErrors,
   selectRecentAds,
-  selectIsSubmitting ,
+  selectFeedAds,
 } = adsFeature

@@ -29,3 +29,24 @@ export const recentAdsEffect= createEffect((
     })
   )
 }, {functional:true})
+export const getAdsEffect= createEffect((
+  actions$ = inject(Actions),
+  adsService = inject(AdsService),
+) => {
+  return actions$.pipe(
+    ofType(AdsActions.getAds),
+    switchMap((input)=>{
+      return adsService.getAllAdsByAccountId(input.accountId,input.params).pipe(
+        map((data)=>{
+          return AdsActions.getAdsSuccess({response:data})
+        }),
+        catchError((errorResponse:HttpErrorResponse)=>{
+          return of(
+            AdsActions.getAdsFailure({
+              errors:errorResponse.error
+            }))
+        })
+      )
+    })
+  )
+}, {functional:true})

@@ -1,21 +1,63 @@
-<div class="w-full h-12 flex items-center bg-eside-Primary-2">
-
+<div class="w-full h-12 flex items-center bg-eside-Primary-2 relative">
+  <!-- Buttons for sorting -->
+  <div *ngIf="!sortAsc && !sortDesc" class="absolute right-10 cursor-pointer">
+    <div class="flex">
+      <img (click)="sortProductsAsc()" src="assets/svg's/trier.svg" alt="sort"/>
+      <span class="text-eside-white font-semibold"></span>
+    </div>
+  </div>
+  <div *ngIf="sortAsc && !sortDesc" class="absolute right-10 cursor-pointer">
+    <div class="flex">
+      <img (click)="sortProductsDesc()"  src="assets/svg's/trier.svg" alt="sort"/>
+      <span class="text-eside-white font-semibold">ASC</span>
+    </div>
+  </div>
+  <div *ngIf="!sortAsc && sortDesc" class="absolute right-10 cursor-pointer">
+    <div class="flex">
+      <img (click)="initilizesort()" src="assets/svg's/trier.svg" alt="sort"/>
+      <span class="text-eside-white font-semibold">DESC</span>
+    </div>
+  </div>
 </div>
 <div class="w-full h-full">
+  <label for="filter">Filter By Name/Category: </label>
+  <!-- Use [(ngModel)] for two-way data binding -->
+  <input id="filter" type="text" [(ngModel)]="filterValue" (input)="filterBy()">
+  <!--<button (click)="showGroup()">Show Group</button>-->
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
-    <app-product-card/>
-    <app-product-card/>
-    <app-product-card/>
-    <app-product-card/>
-    <app-product-card/>
-    <app-product-card/>
-    <app-product-card/>
-    <app-product-card/>
-    <app-product-card/>
-    <app-product-card/>
-    <app-product-card/>
-    <app-product-card/>
-
+    <div class="pt-8" *ngFor="let ad of filteredAds | paginate: { id: 'foo',
+                                                      itemsPerPage: pageSize,
+                                                      currentPage: page,
+                                                      totalItems: count }">
+      <!-- Assuming you have a component for displaying advertisement card -->
+      <app-product-card [ad]="ad"></app-product-card>
+    </div>
+    <!--
+    <div class="category" *ngFor="let item of categories">
+      <h2>{{item.category}}</h2>
+      <div class="category" *ngFor="let ad of item.advertisment| paginate: { id: 'foo',
+                                                      itemsPerPage: pageSize,
+                                                      currentPage: page,
+                                                      totalItems: count }">
+      <app-product-card [ad]="ad"></app-product-card>
+    </div>
+    </div>
+  -->
+  </div>
+  <div class="w-full">
+  <pagination-controls class="pagination-spreads"
+                       previousLabel="Prev" nextLabel="Next"
+    (pageChange)="handlePageChange($event)"
+  ></pagination-controls>
+    </div>
+  </div>
+  <!--<pagination-controls></pagination-controls> -->
+  <div class="mt-3">
+    Items per Page:
+    <select (change)="handlePageSizeChange($event)">
+      <option *ngFor="let size of pageSizes" [ngValue]="size">
+        {{ size }}
+      </option>
+    </select>
   </div>
 
-</div>

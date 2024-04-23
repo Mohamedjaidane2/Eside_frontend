@@ -9,6 +9,7 @@ export class AdvertisementDto {
    oldPrice!:number;
    advertisementSoldStatusEnum !: AdvertisementSoldStatusEnum ;
    advertisementStatusEnum!:AdvertisementStatusEnum ;
+   ownerProfileName!:string;
    creationDate !:Date;
    updateDate!: Date;
    userAccountId!:number;
@@ -29,5 +30,12 @@ export class AdvertisementUpdateDto {
   title!:string;
   description!:string;
   price!:number;
+
+}
+export class AdvertismentPaginationResponse{
+  totalItems!:number;
+  advertisments!:AdvertisementDto[];
+  totalPages!:number;
+  currentPage!:number;
 
 }

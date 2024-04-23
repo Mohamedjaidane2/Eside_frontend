@@ -25,5 +25,14 @@
       </div>
     </div>
   </div>
-  <app-category-bar/>
+  <div class="flex justify-between bg-eside-Neutral-4 items-center px-6 sm:px-28 py-2 w-full">
+    <div class="overflow-x-auto">
+      <ul class="flex gap-3 text-eside-Primary-1 text-sm">
+        <li class="cursor-pointer font-light" *ngFor="let cat of categories">
+          <div class="cursor-pointer font-light hover:font-bold">{{cat.name}}</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </div>

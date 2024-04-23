@@ -43,7 +43,12 @@ export class AuthService {
   checkAuth(): Observable<boolean> {
     return this.http.get<boolean>(environment.BASE_URL + '/auth/check-auth', Authorization_Bearer);
   }
-  getInfo(): Observable<User_Response> {
-    return this.http.get<User_Response>(environment.BASE_URL + '/auth/get/info', Authorization_Bearer);
+  getInfo(token:string): Observable<User_Response> {
+    return this.http.get<User_Response>(environment.BASE_URL + '/auth/get/info',
+      {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    });
   }
 }

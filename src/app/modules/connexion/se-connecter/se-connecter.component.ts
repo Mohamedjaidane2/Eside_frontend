@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {AuthActions} from "../../../core/store/actions/Auth/auth.actions";
 import {combineLatest} from "rxjs";
-import {selectIsLoading, selectIsSubmitting, selectValidationErrors} from "../../../core/store/reducers/Auth/auth.reducer";
+import {selectValidationErrors} from "../../../core/store/reducers/Auth/auth.reducer";
 import {
   BackendErrorsMessagesComponent
 } from "../../../shared/backend-errors-messages/backend-errors-messages.component";
@@ -29,8 +29,6 @@ import {
 export class SeConnecterComponent implements OnInit {
   userLoginData = new User_Login_Request()
   data$ = combineLatest({
-    isSubmitting : this.store.select(selectIsSubmitting),
-    IsLoading: this.store.select(selectIsLoading),
     backendErrors : this.store.select(selectValidationErrors),
   })
   constructor(
@@ -42,7 +40,7 @@ export class SeConnecterComponent implements OnInit {
 
   }
 
-  onSubmit(): void {
-    this.store.dispatch(AuthActions.login(this.userLoginData))
+  async onSubmit() {
+    await this.store.dispatch(AuthActions.login(this.userLoginData));
   }
 }

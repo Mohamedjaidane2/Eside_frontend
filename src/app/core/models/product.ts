@@ -3,9 +3,9 @@ import {ColorEnum, ProductStatusEnum} from "./GlobalEnums";
 export class ProductDto {
   id!:number;
   imageIds!:[number];
-  ProductStatus!:ProductStatusEnum;
+  productStatus!:ProductStatusEnum;
   categoryName!:string
-  SubcategoryName!:string
+  subcategoryName!:string
   color!:ColorEnum
   features!:string
   creationDate!:string
@@ -13,7 +13,7 @@ export class ProductDto {
 
 export class ProductNewDto {
   images!:[number];
-  ProductStatus!:ProductStatusEnum;
+  productStatus!:ProductStatusEnum;
   categoryId!:number
   SubcategoryId!:number
   color!:ColorEnum
@@ -22,9 +22,9 @@ export class ProductNewDto {
 
 export class ProductUpdateDto {
   images!:[number];
-  ProductStatus!:ProductStatusEnum;
+  productStatus!:ProductStatusEnum;
   categoryId!:number
-  SubcategoryId!:number
+  subcategoryId!:number
   color!:ColorEnum
   features!:string
 }

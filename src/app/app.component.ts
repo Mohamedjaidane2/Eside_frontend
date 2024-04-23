@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.store.dispatch(AuthActions.checkAuth())
-    this.store.dispatch(AuthActions.getUserInfo())
   }
 
 }

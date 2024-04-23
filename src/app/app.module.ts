@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {DiscountFormComponent} from "./modules/discount-form/discount-form.component";
-import {CategoryBarComponent} from "./shared/category-bar/category-bar.component";
 import {HomeComponent} from "./modules/home/home.component";
 import {ProductsFeedDisplayComponent} from "./modules/products-feed-display/products-feed-display.component";
 import {FooterComponent} from "./shared/footer/footer.component";
@@ -24,11 +23,13 @@ import {adsFeatureKey, adsReducer} from "./core/store/reducers/Advertisment/ads.
 import {EffectsModule, provideEffects} from "@ngrx/effects";
 import * as  authEffects from "./core/store/effects/Auth/auth.effects";
 import * as  adsEffects from "./core/store/effects/Advertisment/ads.effects";
+import * as  categoryEffects from "./core/store/effects/Advertisment/category.effects";
 import { BackendErrorsMessagesComponent } from './shared/backend-errors-messages/backend-errors-messages.component';
 import {InscriptionComponent} from "./modules/connexion/inscription/inscription.component";
-import {FormsModule} from "@angular/forms";
 import {ConnexionComponent} from "./modules/connexion/connexion.component";
 import {SeConnecterComponent} from "./modules/connexion/se-connecter/se-connecter.component";
+import {categoryFeatureKey, categoryReducer} from "./core/store/reducers/Advertisment/category.reducer";
+import {NgxPaginationModule} from "ngx-pagination";
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,7 @@ import {SeConnecterComponent} from "./modules/connexion/se-connecter/se-connecte
     RouterOutlet,
     NavbarComponent,
     DiscountFormComponent,
-    CategoryBarComponent,
+    NgxPaginationModule,
     HomeComponent,
     ProductsFeedDisplayComponent,
     FooterComponent,
@@ -74,7 +75,8 @@ import {SeConnecterComponent} from "./modules/connexion/se-connecter/se-connecte
   }),
     provideState(authFeatureKey, authReducer),
     provideState(adsFeatureKey, adsReducer),
-    provideEffects(authEffects,adsEffects)
+    provideState(categoryFeatureKey, categoryReducer),
+    provideEffects(authEffects,adsEffects,categoryEffects)
   ],
   bootstrap: [AppComponent]
 })

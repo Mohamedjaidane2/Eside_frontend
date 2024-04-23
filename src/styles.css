@@ -5,3 +5,19 @@
 body {
   font-family: 'Rubik', sans-serif;
 }
+/* red background at the number*/
+.pagination-spreads::ng-deep li {
+  background-color: red;
+}
+
+/* I hide the previus when I am at number 1. with ::before */
+.pagination-spreads::ng-deep ul > li.disabled {
+  display: none !important;
+}
+
+/* deactivated numbers will be grayed out */
+.pagination-spreads::ng-deep ul > li:not(.active) > a {
+  background-color: rgb(142, 142, 142) !important;
+  border-color: black !important;
+  color: #fff;
+}

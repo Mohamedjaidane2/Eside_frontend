@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map, Observable} from 'rxjs';
-
 import {environment} from "../../../environments/environment.development";
-import {AdvertisementDto} from "../models/advertisment";
+import {CategoryDto, CategoryNewDto} from "../models/category";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,15 +21,13 @@ const Authorization_Bearer = {
 @Injectable({
   providedIn: 'root',
 })
-export class AdsService {
+export class CategoryService {
   constructor(private http: HttpClient) {}
-  getTop10ByCreationDate(accountId:string): Observable<AdvertisementDto[]> {
-    return this.http.get<AdvertisementDto[]>(environment.BASE_URL1 + 'api/advertisement/all/top/10/'+accountId, Authorization_Bearer );
-  }
-  //GET
-  // /api/advertisement/all/recent/{accountId}
-  getAllAdsByAccountId(accountId:string,params: any):Observable<any>{
-    return this.http.get<any>(environment.BASE_URL1 + 'api/advertisement/all/recent/'+accountId,{ params } );
-  }
 
+  create(categoryNewDto:CategoryNewDto): Observable<any> {
+    return this.http.post<CategoryNewDto>(environment.BASE_URL1 + 'api/categories/create', categoryNewDto, httpOptions).pipe(map(response=>response.name));
+  }
+  getall(): Observable<[CategoryDto]> {
+    return this.http.get<[CategoryDto]>(environment.BASE_URL1 + 'api/categories/all', Authorization_Bearer );
+  }
 }

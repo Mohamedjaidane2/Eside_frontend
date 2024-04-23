@@ -4,7 +4,7 @@ import {AsyncPipe, NgClass, NgIf} from "@angular/common";
 import {AppModule} from "../../../app.module";
 import {User_Register_Request} from "../../../core/models/user";
 import {combineLatest} from "rxjs";
-import {selectIsSubmitting, selectValidationErrors} from "../../../core/store/reducers/Auth/auth.reducer";
+import {selectValidationErrors} from "../../../core/store/reducers/Auth/auth.reducer";
 import {AuthService} from "../../../core/_services/auth.service";
 import {Store} from "@ngrx/store";
 import {AuthActions} from "../../../core/store/actions/Auth/auth.actions";
@@ -33,7 +33,6 @@ export class InscriptionComponent {
   //errorMessage = '';
   //isLoading=false;
   data$ = combineLatest({
-    isSubmitting : this.store.select(selectIsSubmitting),
     backendErrors : this.store.select(selectValidationErrors),
     })
 

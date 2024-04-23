@@ -14,7 +14,7 @@ export const AuthActions= createActionGroup({
     CheckAuth : emptyProps(),
     'CheckAuth Success' : props<{isAuth:boolean}>(),
     'CheckAuth Failure' : props<{errors:BackendErrorInterface}>(),
-    GetUserInfo : emptyProps(),
+    GetUserInfo : props <{ token: string }>(),
     'GetUserInfo Success' : props<{user:User_Response}>(),
     'GetUserInfo Failure' : props<{errors:BackendErrorInterface}>(),
   }

@@ -13,6 +13,8 @@ import {
   MesOffreDeReductionsComponent
 } from "./modules/espace-compte/mes-offre-de-reductions/mes-offre-de-reductions.component";
 import {HomeComponent} from "./modules/home/home.component";
+import {ProductsFeedDisplayComponent} from "./modules/products-feed-display/products-feed-display.component";
+import {PublierUneAnnonceComponent} from "./modules/publier-une-annonce/publier-une-annonce.component";
 
 const routes: Routes = [
   {
@@ -22,6 +24,14 @@ const routes: Routes = [
   {
    path:"accueil",
     component:HomeComponent
+  },
+  {
+   path:"liste-produit",
+    component:ProductsFeedDisplayComponent
+  },
+  {
+   path:"publier-annonce",
+    component:PublierUneAnnonceComponent
   },
   {
     path:"mon-compte",
