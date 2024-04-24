@@ -28,7 +28,7 @@ export class SubCategoryService {
   create(subcategoryNewDto:SubCategoryNewDto): Observable<any> {
     return this.http.post<SubCategoryNewDto>(environment.BASE_URL1 + 'api/subcategories/create', subcategoryNewDto, httpOptions).pipe(map(response=>response.name));
   }
-  getall(): Observable<[SubCategoryDto]> {
-    return this.http.get<[SubCategoryDto]>(environment.BASE_URL1 + 'api/subcategories/all', Authorization_Bearer );
+  getall(): Observable<SubCategoryDto[]> {
+    return this.http.get<SubCategoryDto[]>(environment.BASE_URL1 + 'api/subcategories/all', Authorization_Bearer );
   }
 }

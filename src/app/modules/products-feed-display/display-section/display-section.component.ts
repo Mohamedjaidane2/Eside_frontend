@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProductCardComponent} from "../../../shared/product-card/product-card.component";
 import {AdvertisementDto} from "../../../core/models/advertisment";
 import {AdsService} from "../../../core/_services/ads.service";
@@ -11,6 +11,8 @@ import {StorageService} from "../../../core/_services/storage.service";
 import {FormsModule} from "@angular/forms";
 import {groupeByCategoryInterface} from "../../../shared/types/groupeByCategory.interface";
 import {NgxPaginationModule} from "ngx-pagination";
+import {filter} from "rxjs";
+import {FilterInterface} from "../../../shared/types/filter.interface";
 
 @Component({
   selector: 'app-display-section',
@@ -26,6 +28,7 @@ import {NgxPaginationModule} from "ngx-pagination";
   styleUrl: './display-section.component.css'
 })
 export class DisplaySectionComponent implements OnInit {
+  @Input() public filter!: FilterInterface ;
   feedAds!: AdvertisementDto[] | null
   filterValue: string = ''; // Property to hold the filter value
   filteredAds: AdvertisementDto[] = []; // Filtered ads to display
@@ -33,11 +36,23 @@ export class DisplaySectionComponent implements OnInit {
   categories: groupeByCategoryInterface[] = [];
   page = 1;
   count = 0;
-  pageSize = 10;
+  pageSize = 2;
   sortAsc=false;
   sortDesc=false;
-  pageSizes = [5, 10];
+  pageSizes = [1,5, 10];
   currentIndex = -1;
+
+  extractFilterValues(filters: FilterInterface): string[] {
+    let filterValuesArray: string[] = [];
+
+    filters.filter.forEach(filter => {
+      filterValuesArray = filterValuesArray.concat(filter.filterValues);
+    });
+
+    console.log("filterValuesArray"+filterValuesArray);
+    return filterValuesArray;
+  }
+
 
   constructor(
     private adsService: AdsService,
@@ -159,4 +174,5 @@ retrieveTutorials(): void {
   }
 
 
+  protected readonly console = console;
 }

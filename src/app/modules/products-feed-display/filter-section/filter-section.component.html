@@ -5,9 +5,12 @@
   </div>
 </div>
 <div class="w-full py-5 bg-eside-light h-auto relative">
-  <app-state-section class="mb-4" />
-  <app-gender-section class="mb-4" />
-  <app-marque-section class="mb-4" />
+  <app-state-section (etatCheckedValuesEvent)="addStateFilter($event)" class="mb-4" />
+  <app-categorie-section (categoryCheckedValuesEvent)="addCategorieFilter($event)"  class="mb-4" />
+  <app-subCategory-section (subCategoryCheckedValuesEvent)="addSubCategorieFilter($event)" class="mb-4" />
   <app-price-section class="mb-4" />
-  <app-color-section class="mb-4" />
+  <app-color-section (colorsCheckedValuesEvent)="addColorsFilter($event)"  class="mb-4" />
+  <label for="item-input">Add an item:</label>
+  <input type="text" id="item-input" #newItem>
+  <button type="button" (click)="addNewItem($event)">Add to parent's list</button>
 </div>

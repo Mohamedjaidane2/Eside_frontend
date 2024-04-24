@@ -1,24 +1,19 @@
-<div class="w-full dark:border-gray-600 px-5">
-  <h1 class="font-semibold text-xl py-3">État</h1>
-
-  <!-- Checkbox container -->
-  <div class="flex flex-wrap gap-3 pt-3">
-    <!-- Checkbox 1 -->
-    <div class="border border-[1.5px] border-gray-900 p-2 rounded-md flex items-center">
-      <input id="laravel-checkbox-list1" name="state1" type="checkbox" value="" class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-900 rounded mr-2">
-      <label for="laravel-checkbox-list1" class="text-sm font-medium text-gray-900 dark:text-gray-300">State 1</label>
-    </div>
-
-    <!-- Checkbox 2 -->
-    <div class="border border-[1.5px] border-gray-900 p-2 rounded-md flex items-center">
-      <input id="laravel-checkbox-list2" name="state2"  type="checkbox" value="" class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-900 rounded mr-2">
-      <label for="laravel-checkbox-list2" class="text-sm font-medium text-gray-900 dark:text-gray-300">State 2</label>
-    </div>
-
-    <!-- Checkbox 3 -->
-    <div class="border border-[1.5px] border-gray-900 p-2 rounded-md flex items-center">
-      <input id="laravel-checkbox-list3" name="state3" type="checkbox" value="" class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-900 rounded mr-2">
-      <label for="laravel-checkbox-list3"   class="text-sm font-medium text-gray-900 dark:text-gray-300">State 3</label>
+  <div class="w-full dark:border-gray-600 px-5">
+    <h1 class="font-semibold text-xl py-3">État</h1>
+    <div class="flex flex-wrap gap-3">
+      <div class="flex items-center w-full sm:w-auto" *ngFor="let state of etatData">
+        <div class="border border-[1.5px] border-gray-900 p-2 rounded-md flex items-center">
+          <input
+            name="{{state}}"
+            id="{{state}}"
+            type="checkbox"
+            [ngModel]="isChecked(state)"
+            (ngModelChange)="updateCheckedValues($event, state)"
+            class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-900 rounded mr-2"
+          >
+          <label for="{{state}}" class="text-sm font-medium text-gray-900 dark:text-gray-300">{{state}}</label>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
