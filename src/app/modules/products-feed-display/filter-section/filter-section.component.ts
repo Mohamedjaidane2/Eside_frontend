@@ -20,19 +20,15 @@ import {FilterInterface} from "../../../shared/types/filter.interface";
   styleUrl: './filter-section.component.css'
 })
 export class FilterSectionComponent {
-  @Output() newItemEvent = new EventEmitter<FilterInterface>();
-  filter: FilterInterface = {
-    filter: [
-      { filtername: '', filterValues: [] }
-    ]
-  };
+  @Output() newItemEvent = new EventEmitter<FilterInterface[]>();
+  filter: FilterInterface[] = []
 
   addCategorieFilter(data: any) {
-    this.filter.filter.push(data);
+    this.filter.push(data);
     this.newItemEvent.emit(this.filter);
   }
   addColorsFilter(data:any){
-    this.filter.filter.push(data);
+    this.filter.push(data);
     this.newItemEvent.emit(this.filter);
   }
 
@@ -41,12 +37,12 @@ export class FilterSectionComponent {
   }
 
   addSubCategorieFilter(data:any) {
-    this.filter.filter.push(data);
+    this.filter.push(data);
     this.newItemEvent.emit(this.filter);
   }
 
   addStateFilter(data:any) {
-    this.filter.filter.push(data);
+    this.filter.push(data);
     this.newItemEvent.emit(this.filter);
   }
 }

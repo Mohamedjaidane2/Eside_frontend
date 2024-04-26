@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { ColorEnum } from "../../../../core/models/GlobalEnums";
 import {NgClass, NgForOf} from "@angular/common";
+import {FilterInterface} from "../../../../shared/types/filter.interface";
 
 @Component({
   selector: 'app-color-section',
@@ -15,31 +16,23 @@ import {NgClass, NgForOf} from "@angular/common";
   styleUrls: ['./color-section.component.css'] // Changed styleUrl to styleUrls
 })
 export class ColorSectionComponent implements OnInit {
-  checkedValues = {
-    filtername: "colors",
-    filterValues: [] as string[]
-  };
+  checkedValues:FilterInterface = {columnName:"color",columnValue:[]};
 
   @Output() colorsCheckedValuesEvent = new EventEmitter<typeof this.checkedValues>();
-  constructor() {
-    this.checkedValues = {
-      filtername: "colors",
-      filterValues: [] as string[]
-    };
-  }
+  constructor() {}
 
   colorsData: string[] = Object.values(ColorEnum).filter(value => typeof value === 'string');
   isChecked(colorName: string): boolean {
-    return this.checkedValues.filterValues.includes(colorName);
+    return this.checkedValues.columnValue.includes(colorName);
   }
   updateCheckedValues(checked: boolean, colorName: string) {
     if (checked) {
-      this.checkedValues.filterValues.push(colorName);
+      this.checkedValues.columnValue.push(colorName);
       //this.categoryCheckedValuesEvent.emit(this.checkedValues);
     } else {
-      const index = this.checkedValues.filterValues.indexOf(colorName);
+      const index = this.checkedValues.columnValue.indexOf(colorName);
       if (index !== -1) {
-        this.checkedValues.filterValues.splice(index, 1);
+        this.checkedValues.columnValue.splice(index, 1);
         //this.categoryCheckedValuesEvent.emit(this.checkedValues);
       }
     }

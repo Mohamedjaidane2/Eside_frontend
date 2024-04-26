@@ -21,10 +21,8 @@ import {FilterInterface} from "../../../../shared/types/filter.interface";
 })
 export class CategorySectionComponent implements OnInit {
   categorieList!: CategoryDto[];
-  checkedValues = {
-    filtername: "categories",
-    filterValues: [] as string[]
-  };
+  checkedValues:FilterInterface = {columnName:"category",columnValue:[]};
+
   @Output() categoryCheckedValuesEvent = new EventEmitter<typeof this.checkedValues>();
 
   constructor(
@@ -32,11 +30,6 @@ export class CategorySectionComponent implements OnInit {
     private storageService: StorageService,
     private store: Store<{ store: CategoryStateInterface }>
   ) {
-    this.checkedValues = {
-      filtername: "categories",
-      filterValues: [] as string[]
-    };
-
     this.store.select(selectListCategories).subscribe(res => {
       this.categorieList = res!;
     });
@@ -50,17 +43,17 @@ export class CategorySectionComponent implements OnInit {
     });
   }
   isChecked(categoryName: string): boolean {
-    return this.checkedValues.filterValues.includes(categoryName);
+    return this.checkedValues.columnValue.includes(categoryName);
   }
 
   updateCheckedValues(checked: boolean, categoryName: string) {
     if (checked) {
-      this.checkedValues.filterValues.push(categoryName);
+      this.checkedValues.columnValue.push(categoryName);
       //this.categoryCheckedValuesEvent.emit(this.checkedValues);
     } else {
-      const index = this.checkedValues.filterValues.indexOf(categoryName);
+      const index = this.checkedValues.columnValue.indexOf(categoryName);
       if (index !== -1) {
-        this.checkedValues.filterValues.splice(index, 1);
+        this.checkedValues.columnValue.splice(index, 1);
         //this.categoryCheckedValuesEvent.emit(this.checkedValues);
       }
     }

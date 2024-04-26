@@ -1,8 +1,5 @@
-export interface FilterInterface{
-  filter:[
+export interface FilterInterface
     {
-      filtername:string,
-      filterValues:string[]
+      columnName:string,
+      columnValue:string[]
     }
-  ]
-}

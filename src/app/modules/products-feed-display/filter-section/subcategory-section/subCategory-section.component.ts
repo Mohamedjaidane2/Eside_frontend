@@ -9,6 +9,7 @@ import {SubCategoryDto} from "../../../../core/models/subCategory";
 import {SubCategoryService} from "../../../../core/_services/subcategory.service";
 import {NgForOf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FilterInterface} from "../../../../shared/types/filter.interface";
 
 @Component({
   selector: 'app-subCategory-section',
@@ -23,20 +24,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 })
 export class SubCategorySectionComponent implements OnInit {
   subcategorieList!: SubCategoryDto[];
-  checkedValues = {
-    filtername: "Subcategories",
-    filterValues: [] as string[]
-  };
+  checkedValues:FilterInterface = {columnName:"subCategory",columnValue:[]};
 @Output() subCategoryCheckedValuesEvent = new EventEmitter<typeof this.checkedValues>();
 
   constructor(
     private SubCategorieService: SubCategoryService,
     private storageService: StorageService,
 ) {
-    this.checkedValues = {
-      filtername: "categories",
-      filterValues: [] as string[]
-    };
     this.SubCategorieService.getall().subscribe(value=>{this.subcategorieList=value})
   }
 
@@ -49,17 +43,17 @@ export class SubCategorySectionComponent implements OnInit {
 
 }
   isChecked(subCategoryName: string): boolean {
-    return this.checkedValues.filterValues.includes(subCategoryName);
+    return this.checkedValues.columnValue.includes(subCategoryName);
   }
 
   updateCheckedValues(checked: boolean, subCategoryName: string) {
     if (checked) {
-      this.checkedValues.filterValues.push(subCategoryName);
+      this.checkedValues.columnValue.push(subCategoryName);
       //this.categoryCheckedValuesEvent.emit(this.checkedValues);
     } else {
-      const index = this.checkedValues.filterValues.indexOf(subCategoryName);
+      const index = this.checkedValues.columnValue.indexOf(subCategoryName);
       if (index !== -1) {
-        this.checkedValues.filterValues.splice(index, 1);
+        this.checkedValues.columnValue.splice(index, 1);
         //this.categoryCheckedValuesEvent.emit(this.checkedValues);
       }
     }

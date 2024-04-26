@@ -20,8 +20,8 @@ import {FilterInterface} from "../../shared/types/filter.interface";
 })
 export class ProductsFeedDisplayComponent implements OnInit{
   drawerOpen = true;
-  filter!:FilterInterface
-  addItem(filter: FilterInterface) {
+  filter!:FilterInterface[]
+  addItem(filter: FilterInterface[]) {
     this.filter=filter
   }
   toggleDrawer() {
