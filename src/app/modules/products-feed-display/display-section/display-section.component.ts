@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProductCardComponent} from "../../../shared/product-card/product-card.component";
 import {AdvertisementDto} from "../../../core/models/advertisment";
 import {AdsService} from "../../../core/_services/ads.service";
@@ -11,6 +11,8 @@ import {StorageService} from "../../../core/_services/storage.service";
 import {FormsModule} from "@angular/forms";
 import {groupeByCategoryInterface} from "../../../shared/types/groupeByCategory.interface";
 import {NgxPaginationModule} from "ngx-pagination";
+import {filter} from "rxjs";
+import {FilterInterface} from "../../../shared/types/filter.interface";
 
 @Component({
   selector: 'app-display-section',
@@ -26,137 +28,122 @@ import {NgxPaginationModule} from "ngx-pagination";
   styleUrl: './display-section.component.css'
 })
 export class DisplaySectionComponent implements OnInit {
-  feedAds!: AdvertisementDto[] | null
-  filterValue: string = ''; // Property to hold the filter value
-  filteredAds: AdvertisementDto[] = []; // Filtered ads to display
-  userAccountId:string=this.storageService.getUser().accountId
-  categories: groupeByCategoryInterface[] = [];
+  @Input() public filter!: FilterInterface[];
+  feedAds: AdvertisementDto[] = [];
+  filteredAds: AdvertisementDto[] = [];
+  filterValue: string = '';
   page = 1;
   count = 0;
-  pageSize = 10;
-  sortAsc=false;
-  sortDesc=false;
-  pageSizes = [5, 10];
+  pageSize = 8;
+  sortAsc = false;
+  sortDesc = false;
+  pageSizes = [ 8 , 12];
   currentIndex = -1;
 
   constructor(
     private adsService: AdsService,
-    private storageService:StorageService,
-    //private store: Store<{ store: AdsStateInterface }>) {
-    //this.store.select(selectFeedAds).subscribe(res => {
-      //this.feedAds = res!.advertisments;
-      // Initialize filteredAds with feedAds
-      //this.filteredAds = this.feedAds || [];
-    //}
-    ){}
+    private storageService: StorageService
+  ) {}
 
   ngOnInit(): void {
-    this.retrieveTutorials();
-    //const params = this.getRequestParams(this.page, this.pageSize);
-    //this.store.dispatch(AdsActions.getAds({accountId:this.userAccountId,params:params}))
+    console.log("ng on init");
+    this.retrieveAds();
+    console.log("ng on init finish");
   }
 
-
-retrieveTutorials(): void {
-  const params = this.getRequestParams( this.page, this.pageSize);
-  //this.store.dispatch(AdsActions.getAds({accountId:this.userAccountId,params:params}))
-  //this.store.select(selectFeedAds).subscribe(response => {
-  //  this.feedAds = response!.advertisments;
-  //  this.count=response!.totalItems;
-    // Initialize filteredAds with feedAds
-   // this.filteredAds = this.feedAds || [];
-  //});
-  this.adsService.getAllAdsByAccountId(this.userAccountId,params).subscribe(response => {
-    this.feedAds = response!.advertisments;
-    this.count=response!.totalItems;
-    // Initialize filteredAds with feedAds
-    this.filteredAds = this.feedAds || [];
-  });
-}
-  initilizesort() {
-    this.sortAsc=false
-    this.sortDesc=false
+  retrieveAds(): void {
+    console.log("Retrieving ads...");
+    console.log("our data from input = to "+this.filter)
+    const params = this.getRequestParams(this.page, this.pageSize);
+    if (!this.filter) {
+      this.filter = [];
+    }
+    if (this.filter) {
+      console.log("Filter:", this.filter);
+      console.log("Params:", params);
+      this.adsService.search(this.filterObjectsWithEmptyArrays(this.filter), params).subscribe(response => {
+        console.log("API response:", response);
+        this.feedAds = response?.advertisments || [];
+        this.count = response?.totalItems || 0;
+        this.filteredAds = this.feedAds || [];
+      }, error => {
+        console.error("Error retrieving ads:", error);
+      });
+    } else {
+      console.warn("No filter provided.");
+    }
   }
-  public sortProductsDesc(): void {
-    this.sortAsc=false
-    this.sortDesc=true
+
+  initilizeSort(): void {
+    this.sortAsc = false;
+    this.sortDesc = false;
+  }
+
+  sortProductsDesc(): void {
+    this.sortAsc = false;
+    this.sortDesc = true;
     if (this.filteredAds) {
-      // Check if feedAds is not null
       this.filteredAds = [...this.filteredAds].sort((a, b) => a.price - b.price);
-      //console.info("this.feedAds Des = " + this.feedAds);
     }
   }
 
-  public sortProductsAsc() {
-    this.sortAsc=true
-    this.sortDesc=false
+  sortProductsAsc(): void {
+    this.sortAsc = true;
+    this.sortDesc = false;
     if (this.filteredAds) {
-      // Check if feedAds is not null
       this.filteredAds = [...this.filteredAds].sort((a, b) => b.price - a.price);
-      //console.info("this.feedAds ASC = " + this.feedAds);
     }
   }
 
-  filterBy() {
+  filterBy(): void {
     if (this.feedAds) {
-      // Convert filter value to lowercase for case-insensitive comparison
       const filterValue = this.filterValue.toLowerCase().trim();
       if (filterValue) {
-        // Filter ads based on title and category, ignoring case
-        this.filteredAds = this.feedAds.filter(ads =>
-          ads.title.toLowerCase().startsWith(filterValue)
-          //ads.product.categoryName.toLowerCase().startsWith(filterValue) ||
-          //ads.product.subcategoryName.toLowerCase().startsWith(filterValue)
-        );
+        this.filteredAds = this.feedAds.filter(ads => ads.title.toLowerCase().startsWith(filterValue));
       } else {
-        // If input is empty, show all ads
         this.filteredAds = this.feedAds;
       }
     }
   }
 
-  showGroup() {
-    //First, group the products by category
-    const group = this.filteredAds.reduce((acc: any, curr) => {
-      let key = curr.product.categoryName;
-      if (!acc[key]) {
-        acc[key] = [];
-      }
-      acc[key].push(curr);
-      return acc;
-    }, {});
-
-    //Get the categories and product related.
-    this.categories = Object.keys(group ).map(key => ({
-      category: key,
-      advertisment: group[key]
-    }));
-//console.log('categories = '+this.categories[1].advertisment)
-  }
-
   handlePageChange(event: number): void {
     this.page = event;
-    this.retrieveTutorials();
+    this.retrieveAds();
   }
 
   handlePageSizeChange(event: any): void {
     this.pageSize = event.target.value;
     this.page = 1;
-    this.retrieveTutorials();
+    this.retrieveAds();
   }
-  getRequestParams( page: number, pageSize: number): any {
-    let params: any = {};
 
+  getRequestParams(page: number, pageSize: number): any {
+    let params: any = {};
     if (page) {
       params[`page`] = page - 1;
     }
-
     if (pageSize) {
       params[`size`] = pageSize;
     }
-
     return params;
   }
 
+  filterObjectsWithEmptyArrays(arr: any[]): any[] {
+    return arr.filter(obj => Array.isArray(obj.columnValue) && obj.columnValue.length > 0);
+  }
+
+  extractFilterValues(filters: FilterInterface[]): string[] {
+    if (!filters || !filters) {
+      return [];
+    }
+
+    let filterValuesArray: string[] = [];
+
+    filters.forEach(filter => {
+      filterValuesArray = filterValuesArray.concat(filter.columnValue);
+    });
+
+    return filterValuesArray;
+  }
 
 }

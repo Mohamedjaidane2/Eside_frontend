@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "../../shared/navbar/navbar.component";
 import {HeroComponent} from "./hero/hero.component";
 import {NouveautesComponent} from "./nouveautes/nouveautes.component";
@@ -33,13 +33,10 @@ import {StorageService} from "../../core/_services/storage.service";
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
-  constructor(private router: Router,private store: Store,private storageService:StorageService) {}
-  userAccountId:string=this.storageService.getUser().accountId
+export class HomeComponent implements OnInit,AfterContentInit{
   token :string | null = localStorage.getItem("token");
-  private pageReloaded = false;
-  ngOnInit(): void {
-    window.scrollTo()
+  userAccountId:string=this.storageService.getUser().accountId
+  constructor(private router: Router,private store: Store,private storageService:StorageService) {
     const isLoggedIn = this.storageService.isLoggedIn();
     if (!isLoggedIn) {
       // Token not available, handle the situation (e.g., redirect to login)
@@ -47,14 +44,33 @@ export class HomeComponent implements OnInit{
       this.router.navigate(['/']); // Adjust route as per your application
       return;
     }
+
+
+  }
+  private pageReloaded = false;
+  ngOnInit(): void {
+    console.log("ng on init")
+
     this.store.dispatch(AuthActions.getUserInfo({token:this.token!}))
-    this.store.dispatch(AdsActions.recentAds({accountId:this.userAccountId}))
-    if(!this.userAccountId){
-      this.reloadPage();
-    }
+      //this.store.dispatch(AuthActions.getUserInfo({token:this.token!}))
+
   }
 
+  ngDoCheck():void{
+    console.log("ng do change")
+     //this.store.dispatch(AdsActions.recentAds({accountId:this.userAccountId}))
 
+
+  }
+
+  ngAfterContentInit() {
+   // this.store.dispatch(AdsActions.recentAds({accountId:this.userAccountId}))
+
+      this.store.dispatch(AdsActions.recentAds({accountId:this.userAccountId}))
+    console.log("ngAfterContentInit");
+    // if(!this.userAccountId){
+    // }
+  }
 
   reloadPage(): void {
     window.location.reload();

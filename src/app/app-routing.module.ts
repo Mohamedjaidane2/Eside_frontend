@@ -18,11 +18,11 @@ import {PublierUneAnnonceComponent} from "./modules/publier-une-annonce/publier-
 
 const routes: Routes = [
   {
-    path:"",
+    path:"connexion",
     component:ConnexionComponent
   },
   {
-   path:"accueil",
+   path:"",
     component:HomeComponent
   },
   {

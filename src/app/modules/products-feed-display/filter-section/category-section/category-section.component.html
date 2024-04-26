@@ -1,0 +1,19 @@
+<div class="w-full dark:border-gray-600 px-5">
+  <h1 class="font-semibold text-xl py-3">Categorie</h1>
+  <div class="flex flex-wrap gap-3">
+    <div class="flex items-center w-full sm:w-auto" *ngFor="let cat of categorieList">
+      <div class="border border-[1.5px] border-gray-900 p-2 rounded-md flex items-center">
+        <input
+          name="{{cat.name}}"
+          id="{{cat.id}}"
+          type="checkbox"
+          [ngModel]="isChecked(cat.name)"
+          (ngModelChange)="updateCheckedValues($event, cat.name)"
+          class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-900 rounded mr-2"
+        >
+        <label for="{{cat.id}}" class="text-sm font-medium text-gray-900 dark:text-gray-300">{{cat.name}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+

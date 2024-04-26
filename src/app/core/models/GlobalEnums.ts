@@ -12,26 +12,16 @@ export enum  AdvertisementStatusEnum{
 
 }
 export enum  ColorEnum{
-  RED="RED",
-  BLUE="BLUE",
-  GREEN="GREEN",
-  YELLOW="YELLOW",
-  ORANGE="ORANGE",
-  PURPLE="PURPLE",
-  PINK="PINK",
-  BROWN="BROWN",
-  BLACK="BLACK",
-  WHITE="WHITE",
-  GRAY="GRAY",
-  SILVER="SILVER",
-  GOLD="GOLD",
-  NAVY="NAVY",
-  TEAL="TEAL",
-  MAROON="MAROON",
-  OLIVE="OLIVE",
-  LIME="LIME",
-  AQUA="AQUA",
-  FUCHSIA="FUCHSIA"
+  RED="red",
+  BLUE="bleu",
+  GREEN="green",
+  YELLOW="yellow",
+  LIGHT_YELLOW="light-yellow",
+  ORANGE="orange",
+  PURPLE="peurple",
+  BLACK="black",
+  WHITE="white",
+  GRAY="gray",
 
 }
 export enum  ProductStatusEnum{

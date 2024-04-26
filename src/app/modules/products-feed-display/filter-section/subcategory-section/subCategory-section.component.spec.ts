@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MarqueSectionComponent } from './marque-section.component';
+import { SubCategorySectionComponent } from './subCategory-section.component';
 
 describe('MarqueSectionComponent', () => {
-  let component: MarqueSectionComponent;
-  let fixture: ComponentFixture<MarqueSectionComponent>;
+  let component: SubCategorySectionComponent;
+  let fixture: ComponentFixture<SubCategorySectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MarqueSectionComponent]
+      imports: [SubCategorySectionComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(MarqueSectionComponent);
+
+    fixture = TestBed.createComponent(SubCategorySectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
