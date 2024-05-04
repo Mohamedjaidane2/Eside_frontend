@@ -2,11 +2,12 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {inject} from "@angular/core";
 import {AuthService} from "../../../_services/auth.service";
 import {AuthActions} from "../../actions/Auth/auth.actions";
-import {catchError, map, of, switchMap, tap} from "rxjs";
+import {catchError, filter, map, of, pairwise, switchMap, tap} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {StorageService} from "../../../_services/storage.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from "@angular/router";
 import {User_Response} from "../../../models/user";
+import {Location} from '@angular/common';
 
 
 //REGISTER EFFECTS ----------------------------------------------------------------------------------------------------------------
@@ -36,12 +37,14 @@ export const registerEffect= createEffect((
 }, {functional:true})
 export const redirectAfterRegisterEffects= createEffect((
   actions$ = inject(Actions),
+  location=inject(Location) ,
   router = inject(Router),
 ) => {
   return actions$.pipe(
     ofType(AuthActions.registerSuccess),
     tap(()=>{
-      router.navigate(['/mon-compte/mes-infos']);
+      location.back();
+      //router.navigate(['/mon-compte/mes-infos']);
     })
   )
 }, {functional:true,dispatch:false})
@@ -56,7 +59,8 @@ export const LoginEffect= createEffect((
   authService = inject(AuthService),
   storgeService = inject(StorageService),
 ) => {
-  return actions$.pipe(
+ return actions$.pipe(
+
     ofType(AuthActions.login),
     switchMap((userLoginRequest)=>{
       return authService.login(userLoginRequest).pipe(
@@ -74,20 +78,27 @@ export const LoginEffect= createEffect((
     })
   )
 }, {functional:true})
-export const redirectAfterLoginEffect= createEffect((
-  actions$ = inject(Actions),
-  router = inject(Router),
-) => {
-  return actions$.pipe(
-    ofType(AuthActions.loginSuccess),
-    tap(()=>{
-      router.navigate(['/accueil']);
-    })
-  )
-}, {functional:true,dispatch:false})
+export const redirectAfterLoginEffect = createEffect(
+  () => {
 
+    const router = inject(Router);
+    const location=inject(Location) ;
+    const route = inject(ActivatedRoute);
+    const actions$ = inject(Actions);
+    let returnUrl: string ; // Default fallback to home
+    returnUrl = route.snapshot.queryParams['returnUrl'] || '/';
+    console.log("return url "+ returnUrl)
 
-
+    return actions$.pipe(
+      ofType(AuthActions.loginSuccess),
+      tap(() => {
+        location.back();
+        // router.navigateByUrl(returnUrl); // Navigate to the previous URL after login success
+      })
+    );
+  },
+  {functional:true, dispatch: false }
+);
 //CHECK AUTH EFFECTS ----------------------------------------------------------------------------------------------------------------
 
 
@@ -124,8 +135,8 @@ export const redirectAfterCheckAuthEffect= createEffect((
   return actions$.pipe(
     ofType(AuthActions.checkAuthFailure),
     tap(()=>{
-      router.navigate(['/']);
-      storgeService.delete_user_token()
+      router.navigate(['/connexion']);
+      //storgeService.delete_user_token()
     })
   )
 }, {functional:true,dispatch:false})

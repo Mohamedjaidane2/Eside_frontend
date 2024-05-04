@@ -30,54 +30,59 @@ import {ConnexionComponent} from "./modules/connexion/connexion.component";
 import {SeConnecterComponent} from "./modules/connexion/se-connecter/se-connecter.component";
 import {categoryFeatureKey, categoryReducer} from "./core/store/reducers/Advertisment/category.reducer";
 import {NgxPaginationModule} from "ngx-pagination";
+import {NgxImageCompressService} from 'ngx-image-compress';
+import { ImagesViewModalComponent } from './shared/images-view-modal/images-view-modal.component';
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    RouterOutlet,
-    NavbarComponent,
-    DiscountFormComponent,
-    NgxPaginationModule,
-    HomeComponent,
-    ProductsFeedDisplayComponent,
-    FooterComponent,
-    ProductDetailsComponent,
-    UserGalleryComponent,
-    DiscountFormComponent,
-    PublierUneAnnonceComponent,
-    SuivreCommandeComponent,
-    BackendErrorsMessagesComponent,
-    InscriptionComponent,
-    EspaceCompteComponent,
-    ConnexionComponent,
-    SeConnecterComponent,
-    RouterLink,
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: !isDevMode(), // Restrict extension to log-only mode
-      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-      trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
-      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
-      connectInZone: true // If set to true, the connection is established within the Angular zone
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        RouterOutlet,
+        NavbarComponent,
+        DiscountFormComponent,
+        NgxPaginationModule,
+        HomeComponent,
+        ProductsFeedDisplayComponent,
+        FooterComponent,
+        ProductDetailsComponent,
+        UserGalleryComponent,
+        DiscountFormComponent,
+        PublierUneAnnonceComponent,
+        SuivreCommandeComponent,
+      ImagesViewModalComponent,
+        BackendErrorsMessagesComponent,
+        InscriptionComponent,
+        EspaceCompteComponent,
+        ConnexionComponent,
+        SeConnecterComponent,
+        RouterLink,
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        StoreDevtoolsModule.instrument({
+            maxAge: 25, // Retains last 25 states
+            logOnly: !isDevMode(), // Restrict extension to log-only mode
+            autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+            trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
+            traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+            connectInZone: true // If set to true, the connection is established within the Angular zone
+        }),
+    ],
+    providers: [httpInterceptorProviders, provideStore(),NgxImageCompressService, provideStoreDevtools({
+        maxAge: 25, // Retains last 25 states
+        logOnly: !isDevMode(), // Restrict extension to log-only mode
+        autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+        trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
+        traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+        connectInZone: true // If set to true, the connection is established within the Angular zone
     }),
-  ],
-  providers: [httpInterceptorProviders, provideStore(), provideStoreDevtools({
-    maxAge: 25, // Retains last 25 states
-    logOnly: !isDevMode(), // Restrict extension to log-only mode
-    autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-    trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
-    traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
-    connectInZone: true // If set to true, the connection is established within the Angular zone
-  }),
-    provideState(authFeatureKey, authReducer),
-    provideState(adsFeatureKey, adsReducer),
-    provideState(categoryFeatureKey, categoryReducer),
-    provideEffects(authEffects,adsEffects,categoryEffects)
-  ],
-  bootstrap: [AppComponent]
+        provideState(authFeatureKey, authReducer),
+        provideState(adsFeatureKey, adsReducer),
+        provideState(categoryFeatureKey, categoryReducer),
+        provideEffects(authEffects, adsEffects, categoryEffects)
+    ],
+    exports: [
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

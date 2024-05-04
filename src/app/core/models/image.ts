@@ -7,6 +7,10 @@ export class ImageDto{
   path!:string;
   product!:ProductDto;
 }
+export class ImageResponseDto{
+  name!:string;
+
+}
 export class ImageNewDto{
   name!:string;
   type!:string;

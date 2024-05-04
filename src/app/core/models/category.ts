@@ -1,7 +1,10 @@
+import {SubCategoryDto} from "./subCategory";
+
 export class CategoryDto {
   id!:number;
   name!:string;
   description!:string;
+  subCategoryDtoList!:SubCategoryDto[]
   creationDate!:Date;
 }
 

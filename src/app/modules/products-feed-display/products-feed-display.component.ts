@@ -29,5 +29,6 @@ export class ProductsFeedDisplayComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
   }
 }

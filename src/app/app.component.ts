@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "./core/_services/auth.service";
-import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {AuthActions} from "./core/store/actions/Auth/auth.actions";
 
 @Component({
   selector: 'app-root',
@@ -15,6 +13,7 @@ export class AppComponent implements OnInit {
     private store: Store) {
   }
   ngOnInit(): void {
+    window.scrollTo({ top: 0 });
    // this.store.dispatch(AuthActions.checkAuth())
   }
 

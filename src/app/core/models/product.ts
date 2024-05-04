@@ -2,7 +2,7 @@ import {ColorEnum, ProductStatusEnum} from "./GlobalEnums";
 
 export class ProductDto {
   id!:number;
-  imageIds!:[number];
+  imagePaths!:string[];
   productStatus!:ProductStatusEnum;
   categoryName!:string
   subcategoryName!:string
@@ -12,10 +12,10 @@ export class ProductDto {
 }
 
 export class ProductNewDto {
-  images!:[number];
+  images!:string[];
   productStatus!:ProductStatusEnum;
   categoryId!:number
-  SubcategoryId!:number
+  subcategoryId!:number
   color!:ColorEnum
   features!:string
 }

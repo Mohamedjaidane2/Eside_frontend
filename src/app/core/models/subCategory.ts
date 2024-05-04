@@ -5,8 +5,7 @@ export class SubCategoryDto{
   id!:number;
   name!:string;
   description!:string;
-  Products!:[ProductDto];
-  Category!:CategoryDto;
+  //Category!:CategoryDto;
   creationDate!:Date;
 }
 export class SubCategoryNewDto{

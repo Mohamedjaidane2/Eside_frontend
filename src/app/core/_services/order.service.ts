@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {environment} from "../../../environments/environment.development";
 import {CategoryDto, CategoryNewDto} from "../models/category";
-import {ProductDto, ProductNewDto} from "../models/product";
+import {OrderNewDto} from "../models/order";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,13 +22,10 @@ const Authorization_Bearer = {
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
+export class OrderService {
   constructor(private http: HttpClient) {}
 
-  create(produitNewDto:ProductNewDto): Observable<number> {
-    return this.http.post<ProductDto>(environment.BASE_URL1 + 'api/product/create', produitNewDto, httpOptions).pipe(map(response=>response.id));
-  }
-  getall(): Observable<[CategoryDto]> {
-    return this.http.get<[CategoryDto]>(environment.BASE_URL1 + 'api/categories/all', Authorization_Bearer );
+  create(accountId : string , advertisementId:string): Observable<any> {
+    return this.http.post<any>(environment.BASE_URL1 + "api/order/create/"+accountId+"/"+advertisementId, httpOptions);
   }
 }

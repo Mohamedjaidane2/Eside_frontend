@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map, Observable} from 'rxjs';
+
 import {environment} from "../../../environments/environment.development";
-import {CategoryDto, CategoryNewDto} from "../models/category";
+import {AdvertisementDto, AdvertisementNewDto} from "../models/advertisment";
+import {FilterInterface} from "../../shared/types/filter.interface";
 import {ProductDto, ProductNewDto} from "../models/product";
+import {AccountDto} from "../models/account";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,13 +25,11 @@ const Authorization_Bearer = {
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
+export class AccountService {
   constructor(private http: HttpClient) {}
 
-  create(produitNewDto:ProductNewDto): Observable<number> {
-    return this.http.post<ProductDto>(environment.BASE_URL1 + 'api/product/create', produitNewDto, httpOptions).pipe(map(response=>response.id));
+  getAccountId(accountId:number):Observable<AccountDto>{
+    return this.http.get<AccountDto>(environment.BASE_URL1 + 'api/account/get/'+accountId );
   }
-  getall(): Observable<[CategoryDto]> {
-    return this.http.get<[CategoryDto]>(environment.BASE_URL1 + 'api/categories/all', Authorization_Bearer );
-  }
+
 }

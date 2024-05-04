@@ -26,26 +26,10 @@
       <div class="px-4 py-5 flex-auto">
         <div class="tab-content tab-space">
           <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
-            <p>
-              Collaboratively administrate empowered markets via
-              plug-and-play networks. Dynamically procrastinate B2C users
-              after installed base benefits.
-              <br />
-              <br />
-              Dramatically visualize customer directed convergence
-              without revolutionary ROI.
-            </p>
+            {{details?.description!}}
           </div>
           <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
-            <p>
-              Completely synergize resource taxing relationships via
-              premier niche markets. Professionally cultivate one-to-one
-              customer service with robust ideas.
-              <br />
-              <br />
-              Dynamically innovate resource-leveling customer service for
-              state of the art customer service.
-            </p>
+           {{details?.product!.features!}}
           </div>
           <div [ngClass]="{'hidden': openTab !== 3, 'block': openTab === 3}">
             <p>
@@ -61,11 +45,11 @@
           <div [ngClass]="{'hidden': openTab !== 4, 'block': openTab === 4}">
             <div class="grid w-full grid-cols-6">
               <div class="col-span-4">
-                <div class="flex items-center space-x-3">
+                <div class="flex items-center space-x-3" [routerLink]="['/profile',owner?.id!]">
                   <img src="assets/svg's/profile-pic.svg" class="h-12 cursor-pointer" alt="profile pic">
                   <div>
-                    <h1 class="font-bold text-xl cursor-pointer">Camile.B</h1>
-                    <p class="font-light cursor-pointer" >Membre depuis 2023</p>
+                    <h1 class="font-bold text-xl cursor-pointer">{{details?.ownerProfileName}}</h1>
+                    <p class="font-light cursor-pointer" >Membre depuis {{details?.creationDate! | date: 'yyyy' }}</p>
                   </div>
                 </div>
               </div>

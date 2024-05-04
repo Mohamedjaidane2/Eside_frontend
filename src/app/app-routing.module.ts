@@ -15,6 +15,8 @@ import {
 import {HomeComponent} from "./modules/home/home.component";
 import {ProductsFeedDisplayComponent} from "./modules/products-feed-display/products-feed-display.component";
 import {PublierUneAnnonceComponent} from "./modules/publier-une-annonce/publier-une-annonce.component";
+import {ProductDetailsComponent} from "./modules/product-details/product-details.component";
+import {UserGalleryComponent} from "./modules/user-gallery/user-gallery.component";
 
 const routes: Routes = [
   {
@@ -32,6 +34,14 @@ const routes: Routes = [
   {
    path:"publier-annonce",
     component:PublierUneAnnonceComponent
+  },
+  {
+    path:"details-produit/:id",
+    component:ProductDetailsComponent
+  },
+  {
+    path:"profile/:id",
+    component:UserGalleryComponent
   },
   {
     path:"mon-compte",

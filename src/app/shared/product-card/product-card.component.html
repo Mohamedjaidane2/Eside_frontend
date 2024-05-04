@@ -1,22 +1,23 @@
 <ng-container>
-<div class="group flex w-full max-w-xs flex-col overflow-hidden rounded-lg bg-white shadow-md">
+<div class="group flex w-full  flex-col overflow-hidden rounded-lg bg-white shadow-md">
 <div class="relative">
-  <img src="assets/product_test-01.png"/>
-  <div class="tag h-2/4 relative bg-gradient-to-t from-eside-black via-eside-black-opacity-35 to-eside-Neutral-1-opacity-0">
+  <img class="object-cover w-full h-[300px] cursor-pointer" (click)="scrolltop()" [routerLink]="['/details-produit',ad?.id]" [src]="ad?.product!.imagePaths[0]" />
+  <div [routerLink]="['/profile',ad?.userAccountId!]" class="tag h-2/4 relative bg-gradient-to-t from-eside-black via-eside-black-opacity-35 to-eside-Neutral-1-opacity-0">
       <div class="profile px-3 flex gap-3 justify-center items-center text-eside-white font-semibold">
-        <img class="w-10 cursor-pointer" src="assets/svg's/profile-pic.svg"/>
-        <h1 class="cursor-pointer">{{ad.ownerProfileName!}}</h1>
+        <img  class="w-10 cursor-pointer" src="assets/svg's/profile-pic.svg"/>
+        <h1 class="cursor-pointer">{{ad?.ownerProfileName!}}</h1>
       </div>
   </div>
 </div>
   <div class=" p-3">
     <div class="flex justify-between">
-      <h1 class="font-semibold cursor-pointer">{{ad.title!}}</h1>
+      <a class="font-semibold cursor-pointer" (click)="scrolltop()" [routerLink]="['/details-produit',ad?.id!]">{{ad?.title!}}</a>
       <img class="cursor-pointer" src="assets/svg's/heart.svg"/>
     </div>
-    <p class="text-sm font-light line-clamp-1">{{ad.description!}}</p>
-    <p class="text-sm font-light line-clamp-1">{{ad.product.productStatus!}}</p>
-    <p class="text-md font-semibold">{{ad.price!}} TND </p>
+    <p class="text-sm font-light line-clamp-1">{{ad?.description!}}</p>
+    <p class="text-sm font-light line-clamp-1">{{ad?.product!.productStatus!}}</p>
+    <p class="text-md font-semibold">{{ad?.price!}} TND </p>
   </div>
 </div>
 </ng-container>
+

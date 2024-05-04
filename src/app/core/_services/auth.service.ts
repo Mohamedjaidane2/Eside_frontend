@@ -31,7 +31,6 @@ const Authorization_Bearer = {
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-
   login(user_Login_Request:User_Login_Request): Observable<string> {
     return this.http.post<User_Login_Response>(environment.BASE_URL + '/auth/login', user_Login_Request, httpOptions).pipe(map(response=>response.token));
   }
@@ -41,7 +40,11 @@ export class AuthService {
   }
 
   checkAuth(): Observable<boolean> {
-    return this.http.get<boolean>(environment.BASE_URL + '/auth/check-auth', Authorization_Bearer);
+    return this.http.get<boolean>(environment.BASE_URL + '/auth/check-auth', {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      })
+    });
   }
   getInfo(token:string): Observable<User_Response> {
     return this.http.get<User_Response>(environment.BASE_URL + '/auth/get/info',
@@ -51,4 +54,5 @@ export class AuthService {
       })
     });
   }
+
 }
