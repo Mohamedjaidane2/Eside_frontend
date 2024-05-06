@@ -4,6 +4,7 @@ import {map, Observable} from 'rxjs';
 import {environment} from "../../../environments/environment.development";
 import {CategoryDto, CategoryNewDto} from "../models/category";
 import {OrderDto, OrderNewDto} from "../models/order";
+import {DiscountRequestNewDto} from "../models/discountRequest";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,10 +23,10 @@ const Authorization_Bearer = {
 @Injectable({
   providedIn: 'root',
 })
-export class OrderService {
+export class DiscountRequestService {
   constructor(private http: HttpClient) {}
 
-  create(accountId : string , advertisementId:string): Observable<OrderDto> {
-    return this.http.post<OrderDto>(environment.BASE_URL1 + "api/order/create/"+accountId+"/"+advertisementId, httpOptions);
+  create(data : DiscountRequestNewDto): Observable<any> {
+    return this.http.post<any>(environment.BASE_URL1 + "api/discount-request/send",data, httpOptions);
   }
 }

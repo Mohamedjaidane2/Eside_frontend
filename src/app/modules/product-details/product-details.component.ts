@@ -6,7 +6,7 @@ import {SimilarAdsComponent} from "./similar-ads/similar-ads.component";
 import {SendFeedbackFieldComponent} from "../../shared/send-feedback-field/send-feedback-field.component";
 import {AdsService} from "../../core/_services/ads.service";
 import {StorageService} from "../../core/_services/storage.service";
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router, RouterLink} from "@angular/router";
 import {AdvertisementDto} from "../../core/models/advertisment";
 import {DatePipe, NgIf} from "@angular/common";
 import {AppModule} from "../../app.module";
@@ -36,7 +36,8 @@ import {HttpResponse} from "@angular/common/http";
     DatePipe,
     NgIf,
     BackendErrorsMessagesComponent,
-    ImagesViewModalComponent
+    ImagesViewModalComponent,
+    RouterLink
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
@@ -47,6 +48,7 @@ export class ProductDetailsComponent implements OnInit {
   previewImage = false;
   showMask = false;
   message:string=""
+  SuccsessMessage = "";
   currentLightImage = '';
   currentIndex = 0;
   controls = true;
@@ -129,6 +131,9 @@ export class ProductDetailsComponent implements OnInit {
     if(token!==null){
       this.store.dispatch(AuthActions.getUserInfo({token:token}))
     }
+    this.message="";
+    this.SuccsessMessage = "";
+
     this.orderConfirmationDialogue=true;
   }
   closeOrderConfirmation() {
@@ -139,9 +144,7 @@ export class ProductDetailsComponent implements OnInit {
     this.orderService.create(this.storageService.getUser()?.id!.toString(), this.id!).subscribe({
       next: (value: any) => {
         console.log(`response`, value);
-        if (value instanceof HttpResponse) {
-          this.message = value.body.message;
-        }
+        this.SuccsessMessage = "votre demande a eteais envoyer avec succeé";
       },
       error: (err: any) => {
         console.log('eroor', err);

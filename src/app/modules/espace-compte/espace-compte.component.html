@@ -1,5 +1,5 @@
 <div class="pt-[150px] px-6 lg:px-28  w-full ">
-  <h1 class="text-eside-Neutral-1 text-[60px] font-extrabold uppercase">Mon Compte</h1>
+  <h1 class="text-eside-Neutral-1 text-[60px] font-extrabold uppercase">{{spaceName}}</h1>
   <div class="border-b-4 border-b-eside-Accent-2 w-[5%] "></div>
 
   <div class="grid grid-cols-12 py-9">
@@ -53,7 +53,7 @@
         </div>
     </div>
   <div class="col-span-9">
-    <router-outlet/>
+    <router-outlet (activate)="setSpaceName($event)"/>
   </div>
   </div>
 </div>

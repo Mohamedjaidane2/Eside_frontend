@@ -39,3 +39,10 @@ export enum OrderStatusEnum {
   PAYMENT_RECEIVED="PAYMENT_RECEIVED",
   CANCELLED="CANCELLED",
 }
+
+export enum DiscountRequestStatus {
+  WAITING = "WAITING",
+  ACCEPTED="ACCEPTED",
+  DECLINED="DECLINED",
+  COUNTERED="COUNTERED"
+}

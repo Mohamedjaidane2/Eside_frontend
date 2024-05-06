@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 import {MyOrdersComponent} from "./my-orders/my-orders.component";
 
@@ -13,7 +13,14 @@ import {MyOrdersComponent} from "./my-orders/my-orders.component";
   templateUrl: './mes-commandes.component.html',
   styleUrl: './mes-commandes.component.css'
 })
-export class MesCommandesComponent {
+export class MesCommandesComponent implements OnInit{
+  @Output() title = new EventEmitter<string>();
+  //@Output() title = new EventEmitter<(result: string) => void>();
+  ngOnInit(): void {
+    this.title.emit("Mes Commandes");
+    //this.isChecked = Array(this.colorsData.length).fill(false);
+  }
+
 en_cours =false
 termineé=false;
 changestateEnCours(){

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgClass, NgIf} from "@angular/common";
 
 @Component({
@@ -11,9 +11,15 @@ import {NgClass, NgIf} from "@angular/common";
   templateUrl: './mon-portfeuille.component.html',
   styleUrl: './mon-portfeuille.component.css'
 })
-export class MonPortfeuilleComponent {
+export class MonPortfeuilleComponent implements OnInit {
+  @Output() title = new EventEmitter<string>();
 
-  protected readonly open = open;
+  //@Output() title = new EventEmitter<(result: string) => void>();
+  ngOnInit(): void {
+    this.title.emit("Mon portefeuille");
+    //this.isChecked = Array(this.colorsData.length).fill(false);
+  }
+protected readonly open = open;
   toggle: number = 1;
 
   changetoggle(number : number){

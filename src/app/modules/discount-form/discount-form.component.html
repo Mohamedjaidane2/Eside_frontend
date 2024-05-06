@@ -1,3 +1,4 @@
+<form #form="ngForm" (ngSubmit)="form.valid && onSubmit()" novalidate >
 <div class="pt-[150px]">
   <div class="text-center w-full flex py-3 flex-col items-center justify-center">
     <h1 class="text-7xl text-eside-Neutral-1 font-extrabold ">FAIRE UNE OFFRE</h1>
@@ -7,19 +8,72 @@
 <div class="text-center flex flex-col mb-8 items-center justify-center space-y-3">
   <h1 class="text-lg">Prix initial de l'annonce :</h1>
   <div class="border-2 border-eside-black text-3xl font-extrabold w-[300px] py-6">
-    99.000 TND
+    {{advertisment?.price}} TND
   </div>
-  <h1 class="text-lg">Votre offre : :</h1>
-    <input type="number" [value]="value"  [min]="45.000" [max]="99.000" step="0.001" pattern="^\d+(\.\d{3})?$"
-           class="border-2 border-eside-black text-3xl text-center  decoration-none font-extrabold w-[300px] py-6"/>
+  <h1 class="text-lg">Votre offre :</h1>
+    <input type="number"
+           id="requestedAmount"
+           name="requestedAmount"
+           [(ngModel)]="discountRequest.requestedAmount"
+           [value]="advertisment?.price"
+           [min]="advertisment?.price!/2"
+           [max]="advertisment?.price!"
+           step="0.001"
+           pattern="^\d+(\.\d{3})?$"
+           class="border-2 border-eside-black text-3xl text-center decoration-none font-extrabold w-[300px] py-6"
+    />
   <div class="flex justify-center items-center ">
-        <input class="mr-2 h-6 w-6" type="checkbox" id="demandeRemise" name="demandeRemise">
-        <span class="">J'autorise l'application d'une remise pour cette annonce.</span>
+        <input (click)="confirm()" class="mr-2 h-6 w-6" type="checkbox" id="demandeRemise" name="demandeRemise">
+        <span class=""> J'autorise l'application d'une remise pour cette annonce. </span>
   </div>
-  <button type="button" class="font-bold text-eside-white text-xl bg-eside-Accent-1 rounded-sm px-5 py-2.5 lg:text-xl lg:px-8 lg:py-3 dark:bg-eside-Accent-1 dark:hover:bg-eside-Accent-2 lg:py-2 lg:px-6">Confirmer</button>
-
-
+  <button [ngClass]="{'bg-opacity-50 disabled': !confirmation, 'block': confirmation}" type="button"
+          (click)="showOrderConfirmation()"
+          class="font-bold text-eside-white text-xl bg-eside-Accent-1 rounded-sm px-5 py-2.5 lg:text-xl lg:px-8 lg:py-3
+          dark:bg-eside-Accent-1 dark:hover:bg-eside-Accent-2 lg:py-2 lg:px-6">Confirmer</button>
 </div>
 
 
 
+<!-- Confirmation Dialog -->
+<div *ngIf="discountConfirmationDialogue" class="fixed left-0 top-0 bg-eside-black bg-opacity-50
+      w-screen h-screen justify-center items-center
+      flex transition-opacity duration-500" >
+  <div class="bg-eside-white rounded shadow-md
+        w-[40%] flex gap-5 flex-col overflow-hidden ">
+    <!-- Dialog Header -->
+    <div class="flex p-8 pb-0 gap-5">
+      <div class="bg-eside-Accent-2-opacity-30 min-w-[50px] h-[50px] flex items-center justify-center rounded-full text-eside-Accent-1 ">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+        </svg>
+      </div>
+      <div class="flex-grow">
+        <h1 class="font-bold text-lg mb-2 text-eside-Neutral-1">Confirmer la Demande de Commande</h1>
+        <p class="text-eside-Neutral-3">En cliquant sur le bouton ci-dessous,
+          votre demande de commande sera envoyée. Nous attendrons la confirmation du vendeur.</p>
+      </div>
+    </div>
+    <div class="" *ngIf="SuccsessMessage">
+      <div class="bg-eside-Semantic-green bg-opacity-10 border-l-4 border-l-eside-Semantic-green text-eside-Semantic-green p-4 py-4" role="alert">
+        <p>{{ SuccsessMessage }}</p>
+      </div>
+    </div>
+    <div class="" *ngIf="message">
+      <div class="bg-eside-Semantic-red bg-opacity-10 border-l-4 border-l-eside-Semantic-red text-eside-Semantic-red p-4 py-4" role="alert">
+        <p>{{ message }}</p>
+      </div>
+    </div>
+    <!-- Dialog Actions -->
+    <div class="p-3 px-6 flex gap-4 justify-end">
+      <button (click)="closeOrderConfirmation()" class="bg-eside-white border-[1px]
+              border-eside-Primary-1 rounded px-4 py-3 font-semibold
+              text-eside-Neutral-1 cursor-pointer hover:bg-eside-white-hover"
+      >Anuuler</button>
+      <button type="submit" class="bg-eside-Accent-1 rounded px-4 py-3 font-semibold
+              text-eside-white cursor-pointer hover:bg-eside-Accent-1-hover"
+      >Confirmer</button>
+    </div>
+  </div>
+</div>
+
+</form>

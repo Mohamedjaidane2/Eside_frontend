@@ -1,9 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router, RouterLink, RouterOutlet} from "@angular/router";
-import {StorageService} from "../../core/_services/storage.service";
 import {AuthService} from "../../core/_services/auth.service";
 import {Store} from "@ngrx/store";
-import {AuthActions} from "../../core/store/actions/Auth/auth.actions";
 
 @Component({
   selector: 'app-espace-compte',
@@ -16,14 +14,23 @@ import {AuthActions} from "../../core/store/actions/Auth/auth.actions";
   styleUrl: './espace-compte.component.css'
 })
 export class EspaceCompteComponent implements OnInit{
-  title = 'Eside-frontend';
-  constructor(private authService: AuthService, private router: Router, private store: Store) {
-  }
 
+  spaceName:string="Mon compte"
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private store: Store,
+    private cdr : ChangeDetectorRef,
+  ) {
+  }
+  setSpaceName(data: any) {
+    data.title.subscribe((res:any)=>{
+      this.spaceName=res
+      this.cdr.detectChanges();
+    })
+  }
   ngOnInit(): void {
 
-    //this.store.dispatch(AuthActions.checkAuth())
-    //this.store.dispatch(AuthActions.getUserInfo())
   }
 
   logout(){

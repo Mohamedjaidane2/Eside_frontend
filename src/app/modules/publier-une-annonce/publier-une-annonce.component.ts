@@ -134,12 +134,12 @@ export class PublierUneAnnonceComponent implements OnInit {
     const selectedFiles = event.target.files;
 
     if (selectedFiles) {
-      if (selectedFiles.length < 3) {
-        this.message = 'Minimum 3 images required.';
+      if (selectedFiles.length < 1) {
+        //this.message = 'Minimum  images required.';
         return;
       }
-      if (selectedFiles.length > 6) {
-        this.message = 'Maximum 6 images allowed.';
+      if (selectedFiles.length > 1) {
+        //this.message = 'Maximum 6 images allowed.';
         return;
       }
       for (let i = 0; i < selectedFiles.length; i++) {
@@ -278,7 +278,8 @@ export class PublierUneAnnonceComponent implements OnInit {
     this.adsService.create(this.advertismentNewDto).subscribe({
       next: (value: ImageResponseDto) => {
         this.SuccsessMessage = "Votre demande à étais envoyer avec succeé ! merci d'attendre la confirmation dans 24 h maximum ! ";
-      },
+        this.changeStateStep1()
+        },
       error: (err: any) => {
         this.message = err.error && err.error.message ? err.error.message : 'Something Wrong!';
       },
