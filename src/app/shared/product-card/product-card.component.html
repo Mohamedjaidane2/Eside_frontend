@@ -12,7 +12,8 @@
   <div class=" p-3">
     <div class="flex justify-between">
       <a class="font-semibold cursor-pointer" (click)="scrolltop()" [routerLink]="['/details-produit',ad?.id!]">{{ad?.title!}}</a>
-      <img class="cursor-pointer" src="assets/svg's/heart.svg"/>
+      <img *ngIf="!favoriteSelected" class="cursor-pointer" (click)="addToFavorite()" src="assets/svg's/heart.svg"/>
+      <img *ngIf="favoriteSelected" class="cursor-pointer" (click)="removeFromFavorite()" src="assets/svg's/heart-selected.svg"/>
     </div>
     <p class="text-sm font-light line-clamp-1">{{ad?.description!}}</p>
     <p class="text-sm font-light line-clamp-1">{{ad?.product!.productStatus!}}</p>

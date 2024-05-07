@@ -61,4 +61,7 @@ export class AdsService {
   getGallery(id:string):Observable<AdvertisementDto[]> {
   return this.http.get<AdvertisementDto[]>(environment.BASE_URL1 + 'api/advertisement/gellery/'+id, Authorization_Bearer );
 }
+getfavorites(id:string):Observable<AdvertisementDto[]> {
+  return this.http.get<AdvertisementDto[]>(environment.BASE_URL1 + 'api/advertisement/favorites/'+id, Authorization_Bearer );
+}
 }
