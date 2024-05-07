@@ -24,7 +24,7 @@ import {AdsService} from "../../../core/_services/ads.service";
 })
 export class MesFavorisComponent implements OnInit {
   @Output() title = new EventEmitter<string>();
-  id:number=this.storageService.getUser().id;
+  id:string=this.storageService.getUser().accountId;
   favorieList !: AdvertisementDto[]
 
   //@Output() title = new EventEmitter<(result: string) => void>();
@@ -38,7 +38,7 @@ export class MesFavorisComponent implements OnInit {
   }
   ngOnInit(): void {
     this.title.emit("Mes Favoris");
-    this.adsService.getfavorites(this.id.toString()).subscribe(list => {
+    this.adsService.getfavorites(this.id).subscribe(list => {
       this.favorieList=list;
     })
   }

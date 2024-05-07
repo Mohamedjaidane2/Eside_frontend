@@ -31,7 +31,7 @@ import {info} from "autoprefixer";
 })
 export class MesInformationComponent implements OnInit{
   @Output() title = new EventEmitter<string>();
-  id:number=this.storageService.getUser().id;
+  id:string=this.storageService.getUser().accountId;
   email:string=this.storageService.getUser().email;
   info !:InformationDto;
   account !: AccountDto;
@@ -95,9 +95,6 @@ export class MesInformationComponent implements OnInit{
 
   protected readonly parseInt = parseInt;
 
-  onSubmittest() {
-    console.log(this.informationUpdateDto)
-  }
   //IMAGES
 
   selectFiles(event: any): void {

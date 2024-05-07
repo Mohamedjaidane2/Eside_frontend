@@ -104,7 +104,7 @@ export class DiscountFormComponent implements OnInit{
     this.toOrder();
   }
   toOrder(){
-    this.orderService.create(this.storageService.getUser()?.id!.toString(), this.id!).subscribe({
+    this.orderService.create(this.storageService.getUser()?.accountId!.toString(), this.id!).subscribe({
       next: (value: OrderDto) => {
         console.log(`response`, value);
         this.discountRequest.orderId=value.orderId;

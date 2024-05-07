@@ -23,7 +23,7 @@ import {NewFavoriteDto} from "../../core/models/favorites";
 export class ProductCardComponent implements OnInit{
   @Input() public ad!: AdvertisementDto ;
   favoriteSelected =false
-  id:number=this.storageService.getUser().id;
+  id:string=this.storageService.getUser().accountId;
   favoriteNewDto =new NewFavoriteDto;
 
   constructor(
@@ -34,7 +34,7 @@ export class ProductCardComponent implements OnInit{
   ) {
   }
   ngOnInit(): void {
-    this.favoriteNewDto.accountId=this.id
+    this.favoriteNewDto.accountId=parseInt(this.id);
     this.favoriteNewDto.advertismentId=this.ad.id
     this.favoritesService.isSelected(this.favoriteNewDto).subscribe(isSelected => {
     this.favoriteSelected=isSelected;

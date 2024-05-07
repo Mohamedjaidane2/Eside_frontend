@@ -2,6 +2,8 @@ import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angul
 import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import {AuthService} from "../../core/_services/auth.service";
 import {Store} from "@ngrx/store";
+import {CategoryStateInterface} from "../../core/store/statesInterfaces/Advertisment/categoryState.interface";
+import {AuthActions} from "../../core/store/actions/Auth/auth.actions";
 
 @Component({
   selector: 'app-espace-compte',
@@ -19,8 +21,8 @@ export class EspaceCompteComponent implements OnInit{
   constructor(
     private authService: AuthService,
     private router: Router,
-    private store: Store,
     private cdr : ChangeDetectorRef,
+    private store: Store<{ store: CategoryStateInterface }>,
   ) {
   }
   setSpaceName(data: any) {
@@ -30,7 +32,11 @@ export class EspaceCompteComponent implements OnInit{
     })
   }
   ngOnInit(): void {
-
+    this.store.dispatch(AuthActions.checkAuth())
+    let token = localStorage.getItem("token");
+    if(token!==null){
+      this.store.dispatch(AuthActions.getUserInfo({token:token}))
+    }
   }
 
   logout(){

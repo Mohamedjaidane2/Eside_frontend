@@ -4,6 +4,7 @@ import {map, Observable} from 'rxjs';
 import {environment} from "../../../environments/environment.development";
 import {CategoryDto, CategoryNewDto} from "../models/category";
 import {OrderDto, OrderNewDto} from "../models/order";
+import {AdvertisementDto} from "../models/advertisment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,5 +28,8 @@ export class OrderService {
 
   create(accountId : string , advertisementId:string): Observable<OrderDto> {
     return this.http.post<OrderDto>(environment.BASE_URL1 + "api/order/create/"+accountId+"/"+advertisementId, httpOptions);
+  }
+  getMyOrder(id:string):Observable<OrderDto[]> {
+    return this.http.get<OrderDto[]>(environment.BASE_URL1 + 'api/order/'+id, Authorization_Bearer );
   }
 }

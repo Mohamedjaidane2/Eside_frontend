@@ -43,7 +43,7 @@ export class PublierUneAnnonceComponent implements OnInit {
   currentFile?: File;
   message = '';
   SuccsessMessage = "";
-  preview = '';
+  //preview = '';
   //post data
   productNewDto = new ProductNewDto();
   advertismentNewDto = new AdvertisementNewDto();

@@ -1,36 +1,66 @@
-<div class="gap-3 mx-8 flex items-center" >
+<div class="gap-3 mx-8 flex items-center">
   <h3 class="text-gray-900 dark:text-white font-bold">Filter:</h3>
 
-  <ul class="items-center w-auto text-sm font-medium text-eside-Neutral-1 bg-white  gap-3 flex ">
-    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1 ">
-      <div class="flex items-center ">
-        <input id="En_cours" type="radio" value="" name="list-radio"
-               class="w-4 h-4 ">
-        <label for="En_cours"
-               class="w-auto py-2 ms-2 text-sm font-medium ">En cours</label>
+  <ul class="items-center  text-sm font-medium text-eside-Neutral-1 bg-white gap-3 flex">
+    <li class="w-full  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="En_attente_confirmation" type="radio" value="AWAITING_CONFIRMATION" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+          <img src="assets/order-status/En-attente-de-confirmation.svg" class="w-full">
       </div>
     </li>
-    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1 ">
-      <div class="flex items-center ">
-        <input id="Terminées" type="radio" value="" name="list-radio"
-               class="w-4 h-4 ">
-        <label for="Terminées"
-               class="w-auto py-2 ms-2 text-sm font-medium ">Terminées</label>
+    <li class="w-full  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="En_attente_traitement" type="radio" value="AWAITING_PROCESSING" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="assets/order-status/En-attente-de-traitement.svg" class="w-full">
+
       </div>
     </li>
+    <li class="w-full  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="En_transit" type="radio" value="IN_TRANSIT" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="assets/order-status/En-cours-de-livraison.svg" class="w-full">
+      </div>
+    </li>
+    <li class="w-full  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="Livre" type="radio" value="DELIVERED" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="assets/order-status/livré.svg" class="w-full">
+      </div>
+    </li>
+    <li class="w-full  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="Paiement_recu" type="radio" value="PAYMENT_RECEIVED" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="assets/order-status/Paiement-effectué.svg" class="w-full">
+      </div>
+    </li>
+    <!--
+    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex items-center">
+        <input id="Annule" type="radio" value="ANNULÉ" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <label for="Annule" class="w-auto py-2 ms-2 text-sm font-medium">Annul&eacute;</label>
+      </div>
+    </li>
+    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex items-center">
+        <input id="En_cours_negociation" type="radio" value="EN_COURS_DE_NÉGOCIATION" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <label for="En_cours_negociation" class="w-auto py-2 ms-2 text-sm font-medium">En cours de négociation</label>
+      </div>
+    </li>
+    -->
   </ul>
 </div>
+
 <div class="relative mx-8 flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
   <div class="py-5 gap-3 flex-auto">
     <div class="tab-content tab-space">
-        <app-my-orders/>
-        <app-my-orders/>
-        <app-my-orders/>
-      </div>
-
-
+      <app-my-orders [order]="order" *ngFor="let order of filtredOrders"></app-my-orders>
     </div>
   </div>
-
-
-
+</div>
