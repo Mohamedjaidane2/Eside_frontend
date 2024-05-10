@@ -1,0 +1,94 @@
+.tag {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 10;
+  padding: 4px;
+}
+.profile {
+  position: absolute;
+  left: 0px;
+  bottom: 50%;
+  z-index: 100;
+}
+.lightbox{
+  z-index: 300;
+  padding-top:200px ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+
+}
+.count{
+  z-index: 300;
+  padding-top:200px ;
+  position: absolute;
+  top: 0;
+  left:0;
+  width: 7%;
+  height: 10%;
+  color: #ffffff;
+  opacity: 0.7;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+}
+.close-btn{
+  z-index: 300;
+  padding-top:200px ;
+  position: absolute;
+  top:0;
+  right: 0;
+  color: #fff;
+  background:0 0;
+  border :0 ;
+  cursor: pointer;
+  width: 7%;
+  height: 10%;
+}
+.btn-lightbox-carousel{
+  z-index: 300;
+  padding-top:200px ;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8%;
+  height: 8%;
+  color: #fff;
+  text-align: center;
+  background:0 0;
+  cursor: pointer;
+
+}
+.btn-prev{
+  left: 0;
+}
+.btn-next{
+  right: 0;
+}
+.icon-lightbox-carousel{
+  color: #fff;
+  opacity: 0.5;
+  transition: all 0.15s ease;
+
+}
+.icon-lightbox-carousel:hover{
+  opacity: 0.9;
+}
+.icon-lightbox-carousel:active{
+  opacity: 0.5;
+}
+.lightbox-img img{
+  width: 100%;
+}
+

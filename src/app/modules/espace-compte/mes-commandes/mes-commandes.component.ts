@@ -34,7 +34,6 @@ export class MesCommandesComponent implements OnInit{
     this.orderService.getMyOrder(this.id.toString()).subscribe(value => {
       this.orderList=value
       this.filtredOrders=value
-
     })
     //this.isChecked = Array(this.colorsData.length).fill(false);
   }
@@ -47,14 +46,6 @@ export class MesCommandesComponent implements OnInit{
   ) {
   }
 
-  EN_ATTENTE_DE_CONFIRMATION =false
-  EN_ATTENTE_DE_TRAITEMENT =false
-  EN_TRANSIT =false
-  LIVRÉ =false
-  PAIEMENT_REÇU =false
-  //ANNULÉ =false
-  //EN_COURS_DE_NÉGOCIATION =false
-
   changeState(event: any) {
     const selectedStatus = event.target.value as OrderStatusEnum;
     console.log(`Selected status: ${selectedStatus}`);
@@ -66,10 +57,8 @@ export class MesCommandesComponent implements OnInit{
       this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.AWAITING_PROCESSING);
     } else if (selectedStatus === OrderStatusEnum.IN_TRANSIT) {
       this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.IN_TRANSIT);
-    } else if (selectedStatus === OrderStatusEnum.DELIVERED) {
-      this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.DELIVERED);
-    } else if (selectedStatus === OrderStatusEnum.PAYMENT_RECEIVED) {
-      this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.PAYMENT_RECEIVED);
+    } else if (selectedStatus === OrderStatusEnum.DELIVERED || OrderStatusEnum.PAYMENT_RECEIVED) {
+      this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.DELIVERED || OrderStatusEnum.PAYMENT_RECEIVED);
     }
     // Add conditions for other statuses if needed
   }
@@ -80,4 +69,11 @@ export class MesCommandesComponent implements OnInit{
     this.openTab = $tabNumber;
   }
 
+  resetFilter(): void {
+    const radios = document.querySelectorAll('input[type="radio"][name="list-radio"]');
+    radios.forEach(radio => {
+      (radio as HTMLInputElement).checked = false;
+    });
+    this.filtredOrders=this.orderList
+  }
 }

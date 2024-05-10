@@ -35,7 +35,7 @@ export class ProductCardComponent implements OnInit{
   }
   ngOnInit(): void {
     this.favoriteNewDto.accountId=parseInt(this.id);
-    this.favoriteNewDto.advertismentId=this.ad.id
+    this.favoriteNewDto.advertismentId=this.ad?.id!
     this.favoritesService.isSelected(this.favoriteNewDto).subscribe(isSelected => {
     this.favoriteSelected=isSelected;
     })

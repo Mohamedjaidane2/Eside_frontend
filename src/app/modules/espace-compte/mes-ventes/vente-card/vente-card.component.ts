@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DiscountRequestDto, DiscountRequestUpdateCounterDto} from "../../../../core/models/discountRequest";
+import {NgIf} from "@angular/common";
+import {OrderDto} from "../../../../core/models/order";
 import {AdvertisementDto} from "../../../../core/models/advertisment";
 import {AccountDto} from "../../../../core/models/account";
 import {InformationDto} from "../../../../core/models/information";
-import {Router} from "@angular/router";
-import {FavoritesService} from "../../../../core/_services/favorites.service";
+import {Router, RouterLink} from "@angular/router";
 import {AdsService} from "../../../../core/_services/ads.service";
 import {AccountService} from "../../../../core/_services/account.service";
 import {InformationService} from "../../../../core/_services/information.service";
@@ -13,23 +13,20 @@ import {StorageService} from "../../../../core/_services/storage.service";
 import {Store} from "@ngrx/store";
 import {CategoryStateInterface} from "../../../../core/store/statesInterfaces/Advertisment/categoryState.interface";
 import {switchMap} from "rxjs";
-import {NgIf} from "@angular/common";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {DiscountRequestService} from "../../../../core/_services/discount.request.service";
+import {OrderStatusEnum} from "../../../../core/models/GlobalEnums";
 
 @Component({
-  selector: 'app-sended-discount-request',
+  selector: 'app-vente-card',
   standalone: true,
   imports: [
     NgIf,
-    FormsModule,
-    ReactiveFormsModule
+    RouterLink
   ],
-  templateUrl: './sended-discount-request.component.html',
-  styleUrl: './sended-discount-request.component.css'
+  templateUrl: './vente-card.component.html',
+  styleUrl: './vente-card.component.css'
 })
-export class SendedDiscountRequestComponent implements OnInit{
-  @Input() discountRequest!: DiscountRequestDto
+export class VenteCardComponent  implements OnInit{
+  @Input() order!:OrderDto
   advertisement !: AdvertisementDto;
   owner!:AccountDto;
   info!:InformationDto
@@ -37,30 +34,28 @@ export class SendedDiscountRequestComponent implements OnInit{
   message=""
   acceptConfirmationDialogue = false
   refuseConfirmationDialogue = false
-  conterConfirmationDialogue = false
-  countredFromData = new DiscountRequestUpdateCounterDto();
   constructor(
     private router: Router,
-    private favoritesService: FavoritesService,
     private adsService: AdsService,
+    private account: AdsService,
     private accountService: AccountService,
     private infoService: InformationService,
-    private discountService: DiscountRequestService,
     private orderService: OrderService,
     private storageService:StorageService,
     private store: Store<{ store: CategoryStateInterface }>,
   ) {
   }
   ngOnInit(): void {
-    //console.log("from recived"+this.discountRequest)
-    this.loadDiscountRequest()
+    this.loadfRecivedOrders()
   }
-  loadDiscountRequest(): void {
-    if (!this.discountRequest?.advertismentId!) return;
-    this.adsService.getById(this.discountRequest?.advertismentId!.toString()).pipe(
+
+
+  loadfRecivedOrders(): void {
+    if (!this.order?.advertisementId!) return;
+    this.adsService.getById(this.order?.advertisementId!.toString()).pipe(
       switchMap(advertisment => {
         this.advertisement = advertisment;
-        return this.accountService.getAccountId(this.discountRequest?.reciverId!);
+        return this.accountService.getAccountId(parseInt(this.order?.senderId!));
       })
     ).subscribe(owner => {
       this.owner = owner;
@@ -75,18 +70,16 @@ export class SendedDiscountRequestComponent implements OnInit{
     this.SuccsessMessage = "";
     this.acceptConfirmationDialogue=true
     this.refuseConfirmationDialogue=false;
-    this.conterConfirmationDialogue=false;
   }
   closeAcceptConfirmation() {
     this.message="";
     this.SuccsessMessage = "";
     this.acceptConfirmationDialogue=false;
     this.refuseConfirmationDialogue=false;
-    this.conterConfirmationDialogue=false;
   }
 
   Accept(){
-    this.discountService.acceptDiscount(this.discountRequest.id).subscribe({
+    this.orderService.confirmOrder(this.order?.orderId.toString()).subscribe({
       next: (value: any) => {
         this.SuccsessMessage = "Opération réussie !";
         //console.log(`response`, value);
@@ -105,7 +98,6 @@ export class SendedDiscountRequestComponent implements OnInit{
     this.SuccsessMessage = "";
     this.acceptConfirmationDialogue=false
     this.refuseConfirmationDialogue=true;
-    this.conterConfirmationDialogue=false;
   }
   closeRefuseConfirmation() {
 
@@ -113,11 +105,10 @@ export class SendedDiscountRequestComponent implements OnInit{
     this.SuccsessMessage = "";
     this.acceptConfirmationDialogue=false
     this.refuseConfirmationDialogue=false;
-    this.conterConfirmationDialogue=false;
   }
 
   Refuse(){
-    this.discountService.declineDiscount(this.discountRequest.id).subscribe({
+    this.orderService.declineOrder(this.order?.orderId.toString()).subscribe({
       next: (value: any) => {
         this.SuccsessMessage = "Opération réussie !";
         //console.log(`response`, value);
@@ -128,27 +119,9 @@ export class SendedDiscountRequestComponent implements OnInit{
       }
     })
   }
-  //------------------------------------   Counter  ---------------------------------------------------------
-  showCounterConfirmation() {
 
-    this.message="";
-    this.SuccsessMessage = "";
-    this.acceptConfirmationDialogue=false
-    this.refuseConfirmationDialogue=false;
-    this.conterConfirmationDialogue=true;
-  }
-  closeCounterConfirmation() {
-    this.message="";
-    this.SuccsessMessage = "";
-    this.acceptConfirmationDialogue=false
-    this.refuseConfirmationDialogue=false;
-    this.conterConfirmationDialogue=false;
-  }
 
-  isContred() {
-    return this.discountRequest?.discountRequestStatus === 'COUNTERED';
-  }
-  isAccepted() {
-    return this.discountRequest?.discountRequestStatus === 'ACCEPTED';
+  isWaitingStatus() {
+    return this.order?.orderStatus === 'AWAITING_CONFIRMATION';
   }
 }

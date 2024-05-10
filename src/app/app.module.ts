@@ -32,11 +32,13 @@ import {categoryFeatureKey, categoryReducer} from "./core/store/reducers/Adverti
 import {NgxPaginationModule} from "ngx-pagination";
 import {NgxImageCompressService} from 'ngx-image-compress';
 import { ImagesViewModalComponent } from './shared/images-view-modal/images-view-modal.component';
+import { VenteCardComponent } from './modules/espace-compte/mes-ventes/vente-card/vente-card.component';
 @NgModule({
     declarations: [
         AppComponent,
     ],
     imports: [
+        VenteCardComponent,
         RouterOutlet,
         NavbarComponent,
         DiscountFormComponent,

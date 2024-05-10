@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {OrderDto} from "../../../../core/models/order";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {FavoritesService} from "../../../../core/_services/favorites.service";
 import {OrderService} from "../../../../core/_services/order.service";
 import {StorageService} from "../../../../core/_services/storage.service";
@@ -19,7 +19,8 @@ import {NgIf} from "@angular/common";
   selector: 'app-my-orders',
   standalone: true,
   imports: [
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './my-orders.component.html',
   styleUrl: './my-orders.component.css'
@@ -57,4 +58,9 @@ export class MyOrdersComponent implements OnInit{
       })
     });
   }
+
+  isPaymentDone (){
+    return this.order?.orderStatus === 'PAYMENT_RECEIVED';
+  }
 }
+

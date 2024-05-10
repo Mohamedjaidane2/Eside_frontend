@@ -1,47 +1,19 @@
-<div class="grid grid-cols-6 gap-3 p-6">
-  <!-- Product Image -->
-  <img *ngIf="advertisement?.product?.imagePaths && advertisement.product.imagePaths[0]"
-       [src]="advertisement.product.imagePaths[0]"
-       alt="product"
-       class="rounded-md h-40 w-40 object-cover">
-
-  <!-- Owner Info and Discount Message -->
+<div class=" py-3 flex gap-3">
+  <img *ngIf="advertisement?.product?.imagePaths && advertisement.product.imagePaths[0]" [src]="advertisement.product.imagePaths[0]" alt="product" class="rounded-md h-40 w-40  object-cover">
   <div class="col-span-4 items-center flex">
     <div>
       <div class="flex gap-3 items-center">
-        <!-- Profile Picture -->
-        <img *ngIf="info?.profilePicture"
-             [src]="info.profilePicture"
-             class="h-10 w-10 rounded-full"
-             alt="profile-pic">
-        <!-- Account Name -->
+        <img *ngIf="info?.profilePicture" [src]="info.profilePicture" class="h-10 w-10 rounded-full" alt="profile-pic">
         <h1 class="text-xl font-bold">{{owner?.accountName}}</h1>
-
+        <p class="cursor-pointer text-eside-black text-sm font-bold underline" [routerLink]="['/suivre-commande',order?.orderId!]">Suivre la commande</p>
       </div>
-
-      <!-- Discount Message -->
-      <p class="py-3 text-sm">
-        Cher utilisateur, vous avez envoyé une offre de réduction à
-        <span class="font-bold">{{info?.accountName!}}</span> :
-        <span class="font-bold">{{discountRequest?.requestedAmount!}} DT</span>
-        au lieu de
-        <span class="font-bold">{{advertisement?.price!}} DT</span> !
-        Bon shopping !
-      </p>
-
-      <!-- Discount Status -->
-      <div class="space-y-4">
-        <div class="flex gap-3 items-center">
-          <div *ngIf="isAccepted() && discountRequest?.counterDiscountAmount">
-            <img src="assets/discount-status/COUNTERED.svg"/>
-          </div>
-          <p>--></p>
-          <img src="assets/discount-status/{{discountRequest?.discountRequestStatus}}.svg"/>
+      <h1 class="py-3 text-sm">Cher utilisateur, Vous avez effectué une commande pour cette annonce de <span class="font-bold"> {{owner?.accountName}} </span>vous pouvez aussi consulter l'etat du d'avancement de votre commande. Bon shopping !</h1>
+      <div *ngIf="isWaitingStatus()" class="flex gap-4">
+        <button class="py-1 font-bold text-eside-white text-lg bg-eside-Accent-1 px-7 rounded-sm" (click)="showAcceptConfirmation()">Accepter</button>
+        <button class="py-1 font-bold text-eside-white text-lg bg-eside-Primary-2 px-7 rounded-sm" (click)="showRefuseConfirmation()">Refuser</button>
         </div>
-          <div *ngIf="discountRequest?.counterDiscountAmount && isContred()" class="flex gap-4">
-            <button class="py-1 font-bold text-eside-white text-lg bg-eside-Accent-1 px-7 rounded-sm" (click)="showAcceptConfirmation()">Accepter</button>
-            <button class="py-1 font-bold text-eside-white text-lg bg-eside-Primary-2 px-7 rounded-sm" (click)="showRefuseConfirmation()">Refuser</button>
-            </div>
+      <div *ngIf="!isWaitingStatus()" class="flex gap-4">
+        <img src="assets/order-status/{{order?.orderStatus}}.svg"/>
       </div>
     </div>
   </div>

@@ -5,8 +5,8 @@ export class OrderDto {
   orderDate!:Date;
   orderStatus!:OrderStatusEnum;
   advertisementId!:string
-  accountId!:string
-
+  senderId!:string
+  reciverId!:string
 }
 
 export class OrderNewDto {

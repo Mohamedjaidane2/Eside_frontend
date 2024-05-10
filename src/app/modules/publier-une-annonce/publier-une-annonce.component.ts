@@ -134,11 +134,11 @@ export class PublierUneAnnonceComponent implements OnInit {
     const selectedFiles = event.target.files;
 
     if (selectedFiles) {
-      if (selectedFiles.length < 1) {
+      if (selectedFiles.length < 3) {
         //this.message = 'Minimum  images required.';
         return;
       }
-      if (selectedFiles.length > 1) {
+      if (selectedFiles.length > 6) {
         //this.message = 'Maximum 6 images allowed.';
         return;
       }

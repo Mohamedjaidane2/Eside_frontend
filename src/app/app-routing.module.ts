@@ -18,6 +18,7 @@ import {PublierUneAnnonceComponent} from "./modules/publier-une-annonce/publier-
 import {ProductDetailsComponent} from "./modules/product-details/product-details.component";
 import {UserGalleryComponent} from "./modules/user-gallery/user-gallery.component";
 import {DiscountFormComponent} from "./modules/discount-form/discount-form.component";
+import {SuivreCommandeComponent} from "./modules/suivre-commande/suivre-commande.component";
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path:"offre-reduction/:id",
     component:DiscountFormComponent
+  },
+  {
+    path:"suivre-commande/:id",
+    component:SuivreCommandeComponent
   },
   {
     path:"mon-compte",

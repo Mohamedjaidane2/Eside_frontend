@@ -7,6 +7,9 @@ export class DiscountRequestDto {
   discountRequestStatus!:DiscountRequestStatus;
   counterDiscountAmount!:number;
   requestDate!:Date;
+  advertismentId!:number
+  senderId!:number;
+  reciverId!:number
 }
 
 export class DiscountRequestNewDto {

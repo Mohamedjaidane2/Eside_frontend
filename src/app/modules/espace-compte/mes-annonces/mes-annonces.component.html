@@ -1,13 +1,37 @@
-<h1 class="py-3 mx-8 font-bold text-2xl">Mes annonces</h1>
-<div class=" grid mx-8 gap-3 grid-cols-5">
-<app-product-card/>
-<app-product-card/>
-<app-product-card/>
-<app-product-card/>
-<app-product-card/>
-<app-product-card/>
-<app-product-card/>
-<app-product-card/>
-<app-product-card/>
-<app-product-card/>
+<div class="gap-3 mx-8 pb-4 flex items-center">
+  <h3 class="text-gray-900 dark:text-white font-bold pt-1">Filter:</h3>
+
+  <ul class="items-center text-sm font-medium text-eside-Neutral-1 bg-white gap-3 flex flex-wrap">
+    <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="NO_VALUE" type="radio" value="NO_VALUE" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="assets/ads-status/NO_VALUE.svg" class="w-full">
+
+      </div>
+    </li>
+    <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="ACCEPTED" type="radio" value="ACCEPTED" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="assets/ads-status/ACCEPTED.svg" class="w-full">
+      </div>
+    </li>
+    <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="REFUSED" type="radio" value="REFUSED" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="assets/ads-status/REFUSED.svg" class="w-full">
+      </div>
+    </li>
+    <li class="flex mx-6 py-3 justify-start w-[200px] items-end  text-gray-900 dark:text-white font-light">
+      <button class="text-sm text-eside-black underline" (click)="resetFilter()">Réinitialiser le filter</button>
+    </li>
+  </ul>
+</div>
+
+<div class=" py-8 mx-8 grid  gap-3 grid-cols-4">
+  <div class="" *ngFor="let ad of filtredAds">
+    <app-product-card [ad]="ad" />
+  </div>
 </div>

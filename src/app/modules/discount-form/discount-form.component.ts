@@ -38,6 +38,7 @@ export class DiscountFormComponent implements OnInit{
   discountRequest = new DiscountRequestNewDto();
   discountConfirmationDialogue=false;
 
+
   constructor(
     private accountService: AccountService,
     private discountService: DiscountRequestService,

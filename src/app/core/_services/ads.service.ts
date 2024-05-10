@@ -42,6 +42,9 @@ export class AdsService {
   getAllAdsByAccountId(accountId:string,params: any):Observable<any>{
     return this.http.get<any>(environment.BASE_URL1 + 'api/advertisement/all/recent/'+accountId,{ params } );
   }
+  getAdsByAccountId(accountId:string):Observable<AdvertisementDto[]>{
+    return this.http.get<AdvertisementDto[]>(environment.BASE_URL1 + 'api/advertisement/account/'+accountId, Authorization_Bearer );
+  }
   getAll():Observable<any>{
     return this.http.get<any>(environment.BASE_URL1 + 'api/advertisement/all');
   }

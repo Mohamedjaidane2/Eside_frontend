@@ -1,40 +1,52 @@
-<div class="gap-3 mx-8 flex items-center">
-  <h3 class="text-gray-900 dark:text-white font-bold">Filter:</h3>
+<div class="gap-3 w-full mx-8 flex items-start">
+  <h3 class="text-gray-900 dark:text-white font-bold pt-1">Filter:</h3>
 
-  <ul class="items-center w-auto text-sm font-medium text-eside-Neutral-1 bg-white  gap-3 flex ">
-    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1 ">
-      <div class="flex items-center ">
-        <input id="À valider" type="radio" value="" name="list-radio"
-               class="w-4 h-4 ">
-        <label for="À valider"
-               class="w-auto py-2 ms-2 text-sm font-medium ">À valider
-        </label>
+  <ul class="items-center text-sm font-medium w-full text-eside-Neutral-1 bg-white gap-3 flex flex-wrap ">
+    <li class="w-[200px] px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="En_attente_confirmation" type="radio" value="AWAITING_CONFIRMATION" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="../../../../assets/order-status/AWAITING_CONFIRMATION.svg" class="w-full">
       </div>
     </li>
-    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1 ">
-      <div class="flex items-center ">
-        <input id="En cours" type="radio" value="" name="list-radio"
-               class="w-4 h-4 ">
-        <label for="En cours"
-               class="w-full py-2 ms-2 text-sm font-medium ">En cours</label>
+    <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="En_attente_traitement" type="radio" value="AWAITING_PROCESSING" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="../../../../assets/order-status/AWAITING_PROCESSING.svg" class="w-full">
+
       </div>
     </li>
-    <li class="w-full border-2 px-2 rounded-sm border-eside-Neutral-1 ">
-      <div class="flex items-center ">
-        <input id="Finalisées" type="radio" value="" name="list-radio"
-               class="w-4 h-4 ">
-        <label for="Finalisées"
-               class="w-auto py-2 ms-2 text-sm font-medium ">Finalisées</label>
+    <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="En_transit" type="radio" value="IN_TRANSIT" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="../../../../assets/order-status/IN_TRANSIT.svg" class="w-full">
       </div>
+    </li>
+    <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="Livre" type="radio" value="DELIVERED" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="../../../../assets/order-status/DELIVERED.svg" class="w-full">
+      </div>
+    </li>
+    <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="Paiement_recu" type="radio" value="PAYMENT_RECEIVED" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="../../../../assets/order-status/PAYMENT_RECEIVED.svg" class="w-full">
+      </div>
+    </li>
+    <li class="flex justify-start w-full items-end mx-8 py-4 text-gray-900 dark:text-white font-light">
+      <button class="text-sm text-eside-black underline" (click)="resetFilter()">Réinitialiser le filter</button>
     </li>
   </ul>
 </div>
 <div class="relative mx-8 flex flex-col min-w-0 break-words bg-white w-full mb-6 rounded">
   <div class=" py-5 gap-3 flex-auto">
     <div class="tab-content tab-space">
-      <app-my-orders/>
-      <app-my-orders/>
-      <app-my-orders/>
+      <app-vente-card [order]="order" *ngFor="let order of filtredOrders"></app-vente-card>
     </div>
   </div>
 </div>
