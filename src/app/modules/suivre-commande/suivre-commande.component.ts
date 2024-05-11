@@ -55,6 +55,11 @@ export class SuivreCommandeComponent implements OnInit {
   totalImageCount = 0;
   previewImage = false;
   showMask = false;
+  SuccsessMessage= ""
+  message= ""
+  acceptConfirmationDialogue = false
+  refuseConfirmationDialogue = false
+  conterConfirmationDialogue = false
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -139,6 +144,35 @@ export class SuivreCommandeComponent implements OnInit {
     this.currentIndex = (this.currentIndex - 1 + this.totalImageCount) % this.totalImageCount;
     this.currentLightImage = this.advertisement?.product.imagePaths[this.currentIndex] || '';
   }
+  Refuse(){
+    this.orderService.declineOrder(this.order.orderId.toString()).subscribe({
+      next: (value: any) => {
+        this.SuccsessMessage = " Opération réussie !";
+        //console.log(`response`, value);
+
+      },error: (err: any) => {
+        console.log('eroor', err);
+        this.message = err.error && err.error.message ? err.error.message : 'error!';
+      }
+    })
+  }
 
   protected readonly OrderStatusEnum = OrderStatusEnum;
+  //------------------------------------   Refuse  ---------------------------------------------------------
+  showRefuseConfirmation() {
+
+    this.message="";
+    this.SuccsessMessage = "";
+    this.acceptConfirmationDialogue=false
+    this.refuseConfirmationDialogue=true;
+    this.conterConfirmationDialogue=false;
+  }
+  closeRefuseConfirmation() {
+
+    this.message="";
+    this.SuccsessMessage = "";
+    this.acceptConfirmationDialogue=false
+    this.refuseConfirmationDialogue=false;
+    this.conterConfirmationDialogue=false;
+  }
 }

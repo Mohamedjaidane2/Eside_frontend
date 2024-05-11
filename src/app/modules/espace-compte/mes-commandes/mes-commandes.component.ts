@@ -34,6 +34,7 @@ export class MesCommandesComponent implements OnInit{
     this.orderService.getMyOrder(this.id.toString()).subscribe(value => {
       this.orderList=value
       this.filtredOrders=value
+      console.log(this.orderList)
     })
     //this.isChecked = Array(this.colorsData.length).fill(false);
   }
@@ -51,15 +52,29 @@ export class MesCommandesComponent implements OnInit{
     console.log(`Selected status: ${selectedStatus}`);
 
     // Filter orderList based on selected status
-    if (selectedStatus === OrderStatusEnum.AWAITING_CONFIRMATION) {
-      this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.AWAITING_CONFIRMATION);
-    } else if (selectedStatus === OrderStatusEnum.AWAITING_PROCESSING) {
-      this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.AWAITING_PROCESSING);
-    } else if (selectedStatus === OrderStatusEnum.IN_TRANSIT) {
-      this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.IN_TRANSIT);
-    } else if (selectedStatus === OrderStatusEnum.DELIVERED || OrderStatusEnum.PAYMENT_RECEIVED) {
-      this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.DELIVERED || OrderStatusEnum.PAYMENT_RECEIVED);
-    }
+    this.filtredOrders = this.orderList.filter(order => {
+      switch (selectedStatus) {
+        case OrderStatusEnum.AWAITING_CONFIRMATION:
+          return order.orderStatus === OrderStatusEnum.AWAITING_CONFIRMATION;
+        case OrderStatusEnum.AWAITING_PROCESSING:
+          return order.orderStatus === OrderStatusEnum.AWAITING_PROCESSING;
+        case OrderStatusEnum.IN_TRANSIT:
+          return order.orderStatus === OrderStatusEnum.IN_TRANSIT;
+        case OrderStatusEnum.DELIVERED:
+        case OrderStatusEnum.PAYMENT_RECEIVED:
+          return order.orderStatus === OrderStatusEnum.DELIVERED || order.orderStatus === OrderStatusEnum.PAYMENT_RECEIVED;
+        case OrderStatusEnum.CONFIRMED:
+          return order.orderStatus === OrderStatusEnum.CONFIRMED;
+        case OrderStatusEnum.LISTED_FOR_WAITING:
+          return order.orderStatus === OrderStatusEnum.LISTED_FOR_WAITING;
+        case OrderStatusEnum.CANCELLED:
+          return order.orderStatus === OrderStatusEnum.CANCELLED;
+        // Add conditions for other statuses if needed
+        default:
+          return false;
+      }
+    });
+    console.log(this.filtredOrders);
     // Add conditions for other statuses if needed
   }
 

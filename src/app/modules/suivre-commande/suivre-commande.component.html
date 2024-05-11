@@ -49,8 +49,8 @@
         <p class="font-light">{{advertisement?.creationDate! | date: 'dd/MM/yyyy' }}</p>
       </div>
       <div class=" bottom-0 w-full">
-        <div class="space-y-3" *ngIf="order.orderStatus===OrderStatusEnum.AWAITING_CONFIRMATION">
-          <button type="button" class="text-center w-full font-bold text-eside-white text-lg md:text-xl bg-eside-Accent-1 hover:bg-eside-Accent-2 rounded-md px-4 md:px-8 py-2 dark:bg-eside-Accent-1 dark:hover:bg-eside-Accent-2 lg:py-4" >Annuler La commande</button>
+        <div class="space-y-3" *ngIf="order.orderStatus===OrderStatusEnum.AWAITING_CONFIRMATION || order.orderStatus===OrderStatusEnum.CONFIRMED">
+          <button type="button" class="text-center w-full font-bold text-eside-white text-lg md:text-xl bg-eside-Accent-1 hover:bg-eside-Accent-2 rounded-md px-4 md:px-8 py-2 dark:bg-eside-Accent-1 dark:hover:bg-eside-Accent-2 lg:py-4" (click)="showRefuseConfirmation()" >Annuler La commande</button>
           </div>
       </div>
     </div>
@@ -84,4 +84,46 @@
   </div>
 </div>
 
+
+<!-- Refuse Actions -->
+
+<div *ngIf="refuseConfirmationDialogue" class="fixed left-0 top-0 bg-eside-black bg-opacity-50
+      w-screen h-screen justify-center items-center
+      flex transition-opacity duration-500" >
+  <div class="bg-eside-white rounded shadow-md
+        w-[40%] flex gap-5 flex-col overflow-hidden ">
+    <!-- Dialog Header -->
+    <div class="flex p-8 pb-0 gap-5">
+      <div class="bg-eside-Accent-2-opacity-30 min-w-[50px] h-[50px] flex items-center justify-center rounded-full text-eside-Accent-1 ">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+        </svg>
+      </div>
+      <div class="flex-grow">
+        <h1 class="font-bold text-lg mb-2 text-eside-Neutral-1">Refusez cette proposition !</h1>
+        <p class="text-eside-Neutral-3">En confirmant cette action, vous rejetez cette offre de remise</p>
+      </div>
+    </div>
+    <div class="" *ngIf="SuccsessMessage">
+      <div class="bg-eside-Semantic-green bg-opacity-10 border-l-4 border-l-eside-Semantic-green text-eside-Semantic-green p-4 py-4" role="alert">
+        <p>{{ SuccsessMessage }}</p>
+      </div>
+    </div>
+    <div class="" *ngIf="message">
+      <div class="bg-eside-Semantic-red bg-opacity-10 border-l-4 border-l-eside-Semantic-red text-eside-Semantic-red p-4 py-4" role="alert">
+        <p>{{ message }}</p>
+      </div>
+    </div>
+    <!-- Dialog Actions -->
+    <div class="p-3 px-6 flex gap-4 justify-end">
+      <button (click)="closeRefuseConfirmation()" class="bg-eside-white border-[1px]
+              border-eside-Primary-1 rounded px-4 py-3 font-semibold
+              text-eside-Neutral-1 cursor-pointer hover:bg-eside-white-hover"
+      >Fermer</button>
+      <button (click)="Refuse()" class="bg-eside-Semantic-red rounded px-4 py-3 font-semibold
+              text-eside-white cursor-pointer hover:bg-eside-Semantic-red bg-opacity-90"
+      >Refuser</button>
+    </div>
+  </div>
+</div>
 

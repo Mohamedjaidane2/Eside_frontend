@@ -9,6 +9,22 @@
         <img src="../../../../assets/order-status/AWAITING_CONFIRMATION.svg" class="w-full">
       </div>
     </li>
+
+    <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="CONFIRMED" type="radio" value="CONFIRMED" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="assets/order-status/CONFIRMED.svg" class="w-full">
+      </div>
+    </li>
+
+    <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="LISTED_FOR_WAITING" type="radio" value="LISTED_FOR_WAITING" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="assets/order-status/LISTED_FOR_WAITING.svg" class="w-full">
+      </div>
+    </li>
     <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
       <div class="flex gap-2 items-center">
         <input id="En_attente_traitement" type="radio" value="AWAITING_PROCESSING" name="list-radio"
@@ -36,6 +52,13 @@
         <input id="Paiement_recu" type="radio" value="PAYMENT_RECEIVED" name="list-radio"
                class="w-4 h-4" (change)="changeState($event)">
         <img src="../../../../assets/order-status/PAYMENT_RECEIVED.svg" class="w-full">
+      </div>
+    </li>
+    <li class="w-[200px]  px-2 rounded-sm border-eside-Neutral-1">
+      <div class="flex gap-2 items-center">
+        <input id="CANCELLED" type="radio" value="CANCELLED" name="list-radio"
+               class="w-4 h-4" (change)="changeState($event)">
+        <img src="assets/order-status/CANCELLED.svg" class="w-full">
       </div>
     </li>
     <li class="flex justify-start w-full items-end mx-8 py-4 text-gray-900 dark:text-white font-light">

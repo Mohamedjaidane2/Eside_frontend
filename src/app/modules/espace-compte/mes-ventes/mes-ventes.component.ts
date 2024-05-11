@@ -60,6 +60,12 @@ export class MesVentesComponent implements OnInit {
       this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.DELIVERED);
     } else if (selectedStatus === OrderStatusEnum.PAYMENT_RECEIVED) {
       this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.PAYMENT_RECEIVED);
+    }else if (selectedStatus === OrderStatusEnum.CANCELLED) {
+      this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.CANCELLED);
+    }else if (selectedStatus === OrderStatusEnum.CONFIRMED) {
+      this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.CONFIRMED);
+    }else if (selectedStatus === OrderStatusEnum.LISTED_FOR_WAITING) {
+      this.filtredOrders = this.orderList.filter(order => order.orderStatus === OrderStatusEnum.LISTED_FOR_WAITING);
     }
     // Add conditions for other statuses if needed
   }
