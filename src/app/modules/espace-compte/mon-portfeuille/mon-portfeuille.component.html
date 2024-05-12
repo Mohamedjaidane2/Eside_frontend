@@ -1,14 +1,14 @@
-<div *ngIf="toggle==1" class="w-full gap-3 px-8 mx-8 items-center text-eside-Neutral-1 bg-eside-light py-7">
-  <div class=" flex justify-between">
-    <h1 class=" text-eside-Neutral-1 font-light text-lg">
-      Compte bancaire
-    </h1>
-    <div class=" cursor-pointer flex gap-3 font-semibold text-lg" (click)="changetoggle(2)">
-      Ajouter
-      <img class="h-6" src="assets/svg's/rounded-plus.svg">
-    </div>
-  </div>
-</div>
+<!--<div *ngIf="toggle==1" class="w-full gap-3 px-8 mx-8 items-center text-eside-Neutral-1 bg-eside-light py-7">-->
+<!--  <div class=" flex justify-between">-->
+<!--    <h1 class=" text-eside-Neutral-1 font-light text-lg">-->
+<!--      Compte bancaire-->
+<!--    </h1>-->
+<!--    <div class=" cursor-pointer flex gap-3 font-semibold text-lg" (click)="changetoggle(2)">-->
+<!--      Ajouter-->
+<!--      <img class="h-6" src="assets/svg's/rounded-plus.svg">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 <div *ngIf="toggle==2"
      class="w-full gap-3 flex  mx-8 items-center text-eside-Neutral-1 justify-center bg-eside-light py-7">
   <div (click)="changetoggle(1)" class="text-eside-Neutral-1 font-bold uppercase cursor-pointer ">Retours</div>
@@ -19,8 +19,8 @@
   <div class="flex w-full items-center justify-center bg-eside-bleu-light py-6">
     <div class="flex-col items-center justify-center text-center space-y-6">
       <h1 class="text-xl font-bold text-eside-Accent-1">Montant Disponible</h1>
-      <h1 class="text-6xl font-extrabold text-eside-Neutral-1">0,000 TND</h1>
-      <button class="py-2 w-auto px-5 bg-eside-Accent-1 rounded-md text-eside-white font-bold text-lg ">Récupérer mon argent</button>
+      <h1 class="text-6xl font-extrabold text-eside-Neutral-1">{{ wallet?.balance! | number:'1.3-3' }} TND</h1>
+      <button class="py-2 w-auto px-5 bg-eside-Accent-1 rounded-md text-eside-white font-bold text-lg " (click)="showAcceptConfirmation()">Récupérer mon argent</button>
     </div>
   </div>
 
@@ -74,4 +74,49 @@
     </button>
   </div>
 
+</div>
+
+<!-- Accept Actions -->
+
+<div *ngIf="acceptConfirmationDialogue" class="fixed left-0 top-0 bg-eside-black bg-opacity-50
+      w-screen h-screen justify-center items-center
+      flex transition-opacity duration-500" >
+  <div class="bg-eside-white rounded shadow-md
+        w-[40%] flex gap-5 flex-col overflow-hidden ">
+    <!-- Dialog Header -->
+    <div class="flex p-8 pb-0 gap-5">
+      <div class="bg-eside-Accent-2-opacity-30 min-w-[50px] h-[50px] flex items-center justify-center rounded-full text-eside-Accent-1 ">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+        </svg>
+      </div>
+      <div class="flex-grow">
+        <h1 class="font-bold text-lg mb-2 text-eside-Neutral-1">Acceptez cette offre !</h1>
+        <p class="text-eside-Neutral-3"> En acceptant cette proposition, vous validez un nouvel achat avec un tarif réduit !</p>
+      </div>
+    </div>
+    <div class="" *ngIf="SuccsessMessage">
+      <div class="bg-eside-Semantic-green bg-opacity-10 border-l-4 border-l-eside-Semantic-green text-eside-Semantic-green p-4 py-4" role="alert">
+        <p>{{ SuccsessMessage }}</p>
+      </div>
+    </div>
+    <div class="" *ngIf="message">
+      <div class="bg-eside-Semantic-red bg-opacity-10 border-l-4 border-l-eside-Semantic-red text-eside-Semantic-red p-4 py-4" role="alert">
+        <p>{{ message }}</p>
+      </div>
+    </div>
+    <!-- Dialog Actions -->
+    <div class="p-3 px-6 flex gap-4 justify-end">
+      <button (click)="closeAcceptConfirmation()" class="bg-eside-white border-[1px]
+              border-eside-Primary-1 rounded px-4 py-3 font-semibold
+              text-eside-Neutral-1 cursor-pointer hover:bg-eside-white-hover"
+      >Fermer</button>
+      <button *ngIf="accepted" (click)="Accept()" class="bg-eside-Semantic-green rounded px-4 py-3 font-semibold
+              text-eside-white cursor-pointer hover:bg-eside-Semantic-green hover:bg-opacity-90"
+      >Valider</button>
+      <button *ngIf="checkPayment" (click)="checkpayment()" class="bg-eside-Semantic-green rounded px-4 py-3 font-semibold
+              text-eside-white cursor-pointer hover:bg-eside-Semantic-green hover:bg-opacity-90"
+      >Verifier la transaction</button>
+    </div>
+  </div>
 </div>
