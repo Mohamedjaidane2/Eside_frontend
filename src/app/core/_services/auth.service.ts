@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   checkAuth(): Observable<boolean> {
-    return this.http.get<boolean>(environment.BASE_URL + '/auth/check-auth', {
+    return this.http.get<boolean>(environment.BASE_URL + '/auth/check-auth/'+localStorage.getItem("token"), {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem("token")}`
       })

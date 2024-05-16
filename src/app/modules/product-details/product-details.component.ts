@@ -23,6 +23,7 @@ import {AuthStateInterface} from "../../core/store/statesInterfaces/Auth/authSta
 import {OrderService} from "../../core/_services/order.service";
 import {ImageResponseDto} from "../../core/models/image";
 import {HttpResponse} from "@angular/common/http";
+import {AuthService} from "../../core/_services/auth.service";
 
 @Component({
   selector: 'app-product-details',
@@ -63,6 +64,7 @@ export class ProductDetailsComponent implements OnInit {
     private router: Router,
     private adsService: AdsService,
     private accountService: AccountService,
+    private authService: AuthService,
     private orderService: OrderService,
     private store: Store<{ store: AuthStateInterface }>,
     private storageService:StorageService,
@@ -126,11 +128,24 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   showOrderConfirmation() {
+    this.authService.checkAuth().subscribe({
+      next: (value: any) => {
+        if(value){
+          let token = localStorage.getItem("token");
+          if(token!==null){
+            this.store.dispatch(AuthActions.getUserInfo({token:token}))
+          }
+        }else {
+          this.router.navigate(["/connexion"])
+        }
+      },
+      error: (err: any) => {
+        this.router.navigate(["/connexion"])
+      }
+    })
+
     //this.store.dispatch(AuthActions.checkAuth())
-    let token = localStorage.getItem("token");
-    if(token!==null){
-      this.store.dispatch(AuthActions.getUserInfo({token:token}))
-    }
+
     this.message="";
     this.SuccsessMessage = "";
 
