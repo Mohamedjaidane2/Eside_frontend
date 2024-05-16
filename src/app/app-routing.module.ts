@@ -20,7 +20,7 @@ import {UserGalleryComponent} from "./modules/user-gallery/user-gallery.componen
 import {DiscountFormComponent} from "./modules/discount-form/discount-form.component";
 import {SuivreCommandeComponent} from "./modules/suivre-commande/suivre-commande.component";
 import {ActivateAccountComponent} from "./shared/activate-account/activate-account.component";
-//import {authGuard} from "./core/guard/auth.guard";
+import {authGuard} from "./core/guard/auth.guard";
 
 const routes: Routes = [
   {
@@ -42,7 +42,7 @@ const routes: Routes = [
   {
    path:"publier-annonce",
     component:PublierUneAnnonceComponent,
-    //canActivate:[authGuard]
+    canActivate:[authGuard]
   },
   {
     path:"details-produit/:id",
@@ -55,16 +55,17 @@ const routes: Routes = [
   {
     path:"offre-reduction/:id",
     component:DiscountFormComponent,
-    //canActivate:[authGuard]
+    canActivate:[authGuard]
   },
   {
     path:"suivre-commande/:id",
     component:SuivreCommandeComponent,
+    canActivate:[authGuard],
   },
   {
     path:"mon-compte",
     component:EspaceCompteComponent,
-    //canActivate:[authGuard],
+    canActivate:[authGuard],
     children:[
       {
         path:"mes-infos",
