@@ -1,4 +1,4 @@
-import {isDevMode, NgModule} from '@angular/core';
+import {APP_INITIALIZER, isDevMode, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,7 +15,7 @@ import {PublierUneAnnonceComponent} from "./modules/publier-une-annonce/publier-
 import {SuivreCommandeComponent} from "./modules/suivre-commande/suivre-commande.component";
 import {EspaceCompteComponent} from "./modules/espace-compte/espace-compte.component";
 import {httpInterceptorProviders} from "./core/_helper/http.interceptor";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {provideState, provideStore, StoreModule} from "@ngrx/store";
 import {provideStoreDevtools, StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {authFeatureKey, authReducer} from "./core/store/reducers/Auth/auth.reducer";
@@ -33,11 +33,17 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {NgxImageCompressService} from 'ngx-image-compress';
 import { ImagesViewModalComponent } from './shared/images-view-modal/images-view-modal.component';
 import { VenteCardComponent } from './modules/espace-compte/mes-ventes/vente-card/vente-card.component';
+import { ActivateAccountComponent } from './shared/activate-account/activate-account.component';
+//import {HttpTokenInterceptor} from "./core/interceptor/http-token.interceptor";
+import { RatingComponent } from './shared/rating/rating.component';
+
 @NgModule({
     declarations: [
         AppComponent,
     ],
     imports: [
+        RatingComponent,
+        ActivateAccountComponent,
         VenteCardComponent,
         RouterOutlet,
         NavbarComponent,
@@ -51,7 +57,7 @@ import { VenteCardComponent } from './modules/espace-compte/mes-ventes/vente-car
         DiscountFormComponent,
         PublierUneAnnonceComponent,
         SuivreCommandeComponent,
-      ImagesViewModalComponent,
+        ImagesViewModalComponent,
         BackendErrorsMessagesComponent,
         InscriptionComponent,
         EspaceCompteComponent,
@@ -78,10 +84,15 @@ import { VenteCardComponent } from './modules/espace-compte/mes-ventes/vente-car
         traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
         connectInZone: true // If set to true, the connection is established within the Angular zone
     }),
+      // {
+      //   provide:HTTP_INTERCEPTORS,
+      //   useClass:HttpTokenInterceptor,
+      //   multi:true
+      // },
         provideState(authFeatureKey, authReducer),
         provideState(adsFeatureKey, adsReducer),
         provideState(categoryFeatureKey, categoryReducer),
-        provideEffects(authEffects, adsEffects, categoryEffects)
+        provideEffects(authEffects, adsEffects, categoryEffects),
     ],
     exports: [
     ],

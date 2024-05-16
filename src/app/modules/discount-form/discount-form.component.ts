@@ -87,7 +87,6 @@ export class DiscountFormComponent implements OnInit{
     this.confirmation=!this.confirmation
   }
   showOrderConfirmation() {
-    this.store.dispatch(AuthActions.checkAuth())
     let token = localStorage.getItem("token");
     if(token!==null){
       this.store.dispatch(AuthActions.getUserInfo({token:token}))

@@ -9,6 +9,7 @@ import {
   User_Response
 } from "../models/user";
 import {environment} from "../../../environments/environment.development";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 const AUTH_API = 'http://localhost:8222/api/v1';
 
@@ -35,8 +36,8 @@ export class AuthService {
     return this.http.post<User_Login_Response>(environment.BASE_URL + '/auth/login', user_Login_Request, httpOptions).pipe(map(response=>response.token));
   }
 
-  register(user_Register_Request:User_Register_Request): Observable<string> {
-    return this.http.post<User_Register_Response>(environment.BASE_URL + '/auth/register', user_Register_Request).pipe(map(response=>response.token));
+  register(user_Register_Request:User_Register_Request): Observable<void> {
+    return this.http.post<void>(environment.BASE_URL + '/auth/register', user_Register_Request);
   }
 
   checkAuth(): Observable<boolean> {
@@ -54,5 +55,27 @@ export class AuthService {
       })
     });
   }
+  confirm(param: { token: string }): Observable<void> {
+    return this.http.get<void>(`${environment.BASE_URL}/auth/activate-account`, { params: param });
+  }
 
+  isTokenNotValid() {
+    return !this.isTokenValid();
+  }
+
+  private isTokenValid() {
+    const token = localStorage.getItem("token")
+    if(!token){
+      return false
+    }
+    //decode the token
+    const jwtHelper = new JwtHelperService();
+    //check expiry date
+    const isTokenExpired = jwtHelper.isTokenExpired(token)
+    if(isTokenExpired){
+      localStorage.clear();
+      return false
+    }
+    return true;
+  }
 }

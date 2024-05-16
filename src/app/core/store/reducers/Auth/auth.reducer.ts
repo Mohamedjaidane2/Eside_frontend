@@ -20,7 +20,6 @@ const authFeature = createFeature({
     })),
     on(AuthActions.registerSuccess,(state,action)=>({
       ...state,
-      userToken: action.token,
     })),
     on(AuthActions.registerFailure,(state,action)=>({
       ...state,

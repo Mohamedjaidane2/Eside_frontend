@@ -19,11 +19,17 @@ import {ProductDetailsComponent} from "./modules/product-details/product-details
 import {UserGalleryComponent} from "./modules/user-gallery/user-gallery.component";
 import {DiscountFormComponent} from "./modules/discount-form/discount-form.component";
 import {SuivreCommandeComponent} from "./modules/suivre-commande/suivre-commande.component";
+import {ActivateAccountComponent} from "./shared/activate-account/activate-account.component";
+//import {authGuard} from "./core/guard/auth.guard";
 
 const routes: Routes = [
   {
     path:"connexion",
     component:ConnexionComponent
+  },
+  {
+    path:"activate-account",
+    component:ActivateAccountComponent
   },
   {
    path:"",
@@ -35,59 +41,70 @@ const routes: Routes = [
   },
   {
    path:"publier-annonce",
-    component:PublierUneAnnonceComponent
+    component:PublierUneAnnonceComponent,
+    //canActivate:[authGuard]
   },
   {
     path:"details-produit/:id",
-    component:ProductDetailsComponent
+    component:ProductDetailsComponent,
   },
   {
     path:"profile/:id",
-    component:UserGalleryComponent
+    component:UserGalleryComponent,
   },
   {
     path:"offre-reduction/:id",
-    component:DiscountFormComponent
+    component:DiscountFormComponent,
+    //canActivate:[authGuard]
   },
   {
     path:"suivre-commande/:id",
-    component:SuivreCommandeComponent
+    component:SuivreCommandeComponent,
   },
   {
     path:"mon-compte",
     component:EspaceCompteComponent,
+    //canActivate:[authGuard],
     children:[
       {
         path:"mes-infos",
         component:MesInformationComponent,
+        //canActivate:[authGuard]
       },
       {
         path:"mes-favoris",
-        component:MesFavorisComponent
+        component:MesFavorisComponent,
+        //canActivate:[authGuard]
       },
       {
         path:"mes-commandes",
-        component:MesCommandesComponent
+        component:MesCommandesComponent,
+        //canActivate:[authGuard]
       },
       {
         path:"mes-annonces",
-        component:MesAnnoncesComponent
+        component:MesAnnoncesComponent,
+       // canActivate:[authGuard]
       },
       {
         path:"mes-ventes",
-        component:MesVentesComponent
+        component:MesVentesComponent,
+       // canActivate:[authGuard]
       },
       {
         path:"mon-portfeuille",
-        component:MonPortfeuilleComponent
+        component:MonPortfeuilleComponent,
+        //canActivate:[authGuard]
       },
       {
         path:"mes-notification",
-        component:MesNotificationsComponent
+        component:MesNotificationsComponent,
+        //canActivate:[authGuard]
       },
       {
         path:"mes-offres",
-        component:MesOffreDeReductionsComponent
+        component:MesOffreDeReductionsComponent,
+        //canActivate:[authGuard]
       }
     ]
   },

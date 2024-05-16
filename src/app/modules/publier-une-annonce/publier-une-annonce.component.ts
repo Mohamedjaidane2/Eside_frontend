@@ -87,8 +87,6 @@ export class PublierUneAnnonceComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo({ top: 0});
-
-    this.store.dispatch(AuthActions.checkAuth())
     let token = localStorage.getItem("token");
     if(token!==null){
     this.store.dispatch(AuthActions.getUserInfo({token:token}))

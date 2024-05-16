@@ -5,7 +5,7 @@ import {AdsService} from "../../../core/_services/ads.service";
 import {Store} from "@ngrx/store";
 import {AdsStateInterface} from "../../../core/store/statesInterfaces/Advertisment/adsState.interface";
 import {selectFeedAds} from "../../../core/store/reducers/Advertisment/ads.reducer";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {AdsActions} from "../../../core/store/actions/Advertisment/ads.actions";
 import {StorageService} from "../../../core/_services/storage.service";
 import {FormsModule} from "@angular/forms";
@@ -22,7 +22,8 @@ import {FilterInterface} from "../../../shared/types/filter.interface";
     NgForOf,
     FormsModule,
     NgxPaginationModule,
-    NgIf
+    NgIf,
+    NgClass
   ],
   templateUrl: './display-section.component.html',
   styleUrl: './display-section.component.css'
@@ -33,12 +34,11 @@ export class DisplaySectionComponent implements OnInit {
   filteredAds: AdvertisementDto[] = [];
   filterValue: string = '';
   page = 1;
-  count = 0;
-  pageSize = 8;
+  count = 1;
+  pageSize = 1;
   sortAsc = false;
   sortDesc = false;
-  pageSizes = [ 8 , 12];
-  currentIndex = -1;
+  totalPages !: number
 
   constructor(
     private adsService: AdsService,
@@ -65,6 +65,7 @@ export class DisplaySectionComponent implements OnInit {
         console.log("API response:", response);
         this.feedAds = response?.advertisments || [];
         this.count = response?.totalItems || 0;
+        this.totalPages = response?.totalPages
         this.filteredAds = this.feedAds || [];
       }, error => {
         console.error("Error retrieving ads:", error);
@@ -120,10 +121,10 @@ export class DisplaySectionComponent implements OnInit {
   getRequestParams(page: number, pageSize: number): any {
     let params: any = {};
     if (page) {
-      params[`page`] = page - 1;
+      params[`page`] = page - 1 ;
     }
     if (pageSize) {
-      params[`size`] = pageSize;
+      params[`size`] = pageSize ;
     }
     return params;
   }
@@ -146,4 +147,36 @@ export class DisplaySectionComponent implements OnInit {
     return filterValuesArray;
   }
 
+  goToFirstPage() {
+
+  }
+
+  goToPreviousPage() {
+    this.page--
+    if (this.page>=1){
+      this.retrieveAds()
+    }
+    else{
+      this.page=1
+    }
+  }
+
+  goToPage(number: number) {
+    this.page=number;
+    this.retrieveAds();
+  }
+
+  goToNextPage() {
+    this.page=this.page+1;
+    if (this.page<=this.totalPages){
+      this.retrieveAds()
+    }
+    else{
+      this.page=this.totalPages
+    }
+  }
+
+  get  isLastPage():boolean{
+    return this.page == this.totalPages as number
+  }
 }

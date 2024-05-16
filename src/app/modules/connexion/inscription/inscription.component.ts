@@ -11,6 +11,8 @@ import {AuthActions} from "../../../core/store/actions/Auth/auth.actions";
 import {
   BackendErrorsMessagesComponent
 } from "../../../shared/backend-errors-messages/backend-errors-messages.component";
+import {Router} from "@angular/router";
+import {BackendErrorInterface} from "../../../shared/types/backendError.interface";
 
 @Component({
   selector: 'app-inscription',
@@ -25,41 +27,28 @@ import {
   templateUrl: './inscription.component.html',
   styleUrl: './inscription.component.css'
 })
-export class InscriptionComponent {
+export class InscriptionComponent{
 
    userRegisterData = new User_Register_Request()
-  //isSuccessful = false;
-  //isSignUpFailed = false;
-  //errorMessage = '';
-  //isLoading=false;
-  data$ = combineLatest({
-    backendErrors : this.store.select(selectValidationErrors),
-    })
+  errorMsg!:BackendErrorInterface;
 
   constructor(
-    private authService: AuthService,
-    private store: Store ){
+    private router: Router,
+    private authService: AuthService
+  ) {
   }
 
 
-  onSubmit(): void {
-    //this.isLoading=true;
-    //console.log(this.userRegisterData)
-    this.store.dispatch(AuthActions.register(this.userRegisterData))
-    //this.authService.register(this.userRegisterData).subscribe({
-      //next: data => {
-        //console.log("our data = "+data);
-        //this.isSuccessful = true;
-        //this.isSignUpFailed = false;
-        //this.isLoading=false;
-      //},
-      //error: err => {
-      //  this.errorMessage = err.error.message;
-      //  this.isSignUpFailed = true;
-      //  this.isLoading=false;
-      //}
-    //});
+  async onSubmit() {
+    await this.authService.register(this.userRegisterData)
+      .subscribe({
+        next: () => {
+          this.router.navigate(['activate-account']);
+        },
+        error: (err) => {
+          this.errorMsg = err.error
+        }
+      });
   }
-
 
 }

@@ -8,33 +8,12 @@ import {StorageService} from "../../../_services/storage.service";
 import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from "@angular/router";
 import {User_Response} from "../../../models/user";
 import {Location} from '@angular/common';
+import {error} from "@angular/compiler-cli/src/transformers/util";
+import {PreviousUrlService} from "./PreviousUrlService";
 
 
 //REGISTER EFFECTS ----------------------------------------------------------------------------------------------------------------
 
-export const registerEffect= createEffect((
-  actions$ = inject(Actions),
-  authService = inject(AuthService),
-  storgeService = inject(StorageService),
-) => {
-  return actions$.pipe(
-    ofType(AuthActions.register),
-    switchMap((userRegisterRequest)=>{
-      return authService.register(userRegisterRequest).pipe(
-        map((token:string)=>{
-          storgeService.saveToken(token);
-          return AuthActions.registerSuccess({token})
-        }),
-        catchError((errorResponse:HttpErrorResponse)=>{
-          return of(
-            AuthActions.registerFailure({
-              errors:errorResponse.error
-            }))
-        })
-      )
-    })
-  )
-}, {functional:true})
 export const redirectAfterRegisterEffects= createEffect((
   actions$ = inject(Actions),
   location=inject(Location) ,
@@ -43,7 +22,7 @@ export const redirectAfterRegisterEffects= createEffect((
   return actions$.pipe(
     ofType(AuthActions.registerSuccess),
     tap(()=>{
-      location.back();
+      //location.back();
       //router.navigate(['/mon-compte/mes-infos']);
     })
   )
@@ -82,22 +61,39 @@ export const redirectAfterLoginEffect = createEffect(
   () => {
 
     const router = inject(Router);
-    const location=inject(Location) ;
+    const location = inject(Location);
+    const previousUrlService = inject(PreviousUrlService);
     const route = inject(ActivatedRoute);
     const actions$ = inject(Actions);
-    let returnUrl: string ; // Default fallback to home
+    let returnUrl: string; // Default fallback to home
     returnUrl = route.snapshot.queryParams['returnUrl'] || '/';
-    console.log("return url "+ returnUrl)
+    console.log("return url " + returnUrl);
 
     return actions$.pipe(
       ofType(AuthActions.loginSuccess),
       tap(() => {
-        location.back();
+        const previousUrlBeforePrevious = previousUrlService.getPreviousUrlBeforePrevious();
+        const previousUrl = previousUrlService.getPreviousUrl();
+        console.log("previous url = "+previousUrl)
+        console.log("previous prvious url = "+previousUrlBeforePrevious)
+        if (previousUrl) {
+          console.log("Previous URL before navigation back:", previousUrlBeforePrevious);
+          if (previousUrlBeforePrevious === '/activate-account') {
+              router.navigate(["/"]).then(() => {
+              // Success navigation to home
+            });
+          } else {
+            router.navigate([previousUrl]).then(() => {
+              // Success navigation to home
+            });
+            location.back();
+          }
+        }
         // router.navigateByUrl(returnUrl); // Navigate to the previous URL after login success
       })
     );
   },
-  {functional:true, dispatch: false }
+  { functional: true, dispatch: false }
 );
 //CHECK AUTH EFFECTS ----------------------------------------------------------------------------------------------------------------
 

@@ -41,6 +41,7 @@ export class SeConnecterComponent implements OnInit {
   }
 
   async onSubmit() {
+    console.log("clicked")
     await this.store.dispatch(AuthActions.login(this.userLoginData));
   }
 }

@@ -1,7 +1,6 @@
-<ng-container *ngIf="data$ | async as data">
 
   <form #form="ngForm" (ngSubmit)="form.valid && onSubmit()" novalidate >
-    <mc-backend-errors-messages [backendErrors]="data.backendErrors!" *ngIf="data.backendErrors"></mc-backend-errors-messages>
+    <mc-backend-errors-messages [backendErrors]="errorMsg!" *ngIf="errorMsg"></mc-backend-errors-messages>
     <div class="grid gap-6 mb-6 md:grid-cols-2">
       <div>
         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prénom</label>
@@ -90,7 +89,7 @@
       <div *ngIf="form.submitted && password.errors" class="text-eside-Semantic-red">
         <div *ngIf=" password.errors?.['required']">Le mot de passe est obligatoire.</div>
         <div *ngIf="password.errors?.['minlength']">
-          Le mot de passe doit comporter au moins 6 caractères.
+          Le mot de passe doit comporter au moins 8 caractères.
         </div>
       </div>
     </div>
@@ -103,7 +102,7 @@
              name="confirmedPassword"
              [(ngModel)]="userRegisterData.confirmedPassword"
              required
-             minlength="6"
+             minlength="8"
              [ngClass]="{ 'bg-eside-Semantic-red bg-opacity-10': form.submitted && confirmedPassword.errors }"
              #confirmedPassword="ngModel"
       />
@@ -116,4 +115,3 @@
     </div>
     <button  type="submit" class="text-eside-white font-bold py-4 bg-eside-Accent-1 w-full rounded-b-md">S'INSCRIRE</button>
   </form>
-</ng-container>

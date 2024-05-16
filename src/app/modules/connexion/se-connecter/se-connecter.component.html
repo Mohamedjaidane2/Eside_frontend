@@ -29,7 +29,6 @@
              required
              name="password"
              [(ngModel)]="userLoginData.password"
-             minlength="6"
              [ngClass]="{ 'bg-eside-Semantic-red bg-opacity-10': form.submitted && password.errors }"
              #password="ngModel"
       />

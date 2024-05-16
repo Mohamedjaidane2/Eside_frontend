@@ -1,0 +1,18 @@
+<div class="flex">
+  <ng-container *ngFor="let _ of [].constructor(fullStars); let i = index">
+    <i>
+      <img src="assets/svg's/full-star.svg">
+    </i>
+  </ng-container>
+  <ng-container *ngIf="hasHalfStar">
+    <i class="fas fa-rating">
+     <img src="assets/svg's/half-star.svg">
+    </i>
+  </ng-container>
+  <ng-container *ngFor="let _ of [].constructor(emptyStars); let i = index">
+    <i>
+      <img src="assets/svg's/empty-star.svg">
+    </i>
+  </ng-container>
+</div>
+
