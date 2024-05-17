@@ -36,12 +36,14 @@ import { VenteCardComponent } from './modules/espace-compte/mes-ventes/vente-car
 import { ActivateAccountComponent } from './shared/activate-account/activate-account.component';
 //import {HttpTokenInterceptor} from "./core/interceptor/http-token.interceptor";
 import { RatingComponent } from './shared/rating/rating.component';
+import { NotificationsComponent } from './shared/notification-component/notification-component.component';
 
 @NgModule({
     declarations: [
         AppComponent,
     ],
     imports: [
+        NotificationsComponent,
         RatingComponent,
         ActivateAccountComponent,
         VenteCardComponent,

@@ -21,11 +21,16 @@ import {DiscountFormComponent} from "./modules/discount-form/discount-form.compo
 import {SuivreCommandeComponent} from "./modules/suivre-commande/suivre-commande.component";
 import {ActivateAccountComponent} from "./shared/activate-account/activate-account.component";
 import {authGuard} from "./core/guard/auth.guard";
+import {NotificationsComponent} from "./shared/notification-component/notification-component.component";
 
 const routes: Routes = [
   {
     path:"connexion",
     component:ConnexionComponent
+  },
+  {
+    path:"notification/:id",
+    component:NotificationsComponent
   },
   {
     path:"activate-account",
