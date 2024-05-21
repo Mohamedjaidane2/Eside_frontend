@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {RouterLink, RouterModule, RouterOutlet} from "@angular/router";
 import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {DiscountFormComponent} from "./modules/discount-form/discount-form.component";
 import {HomeComponent} from "./modules/home/home.component";
@@ -37,6 +37,7 @@ import { ActivateAccountComponent } from './shared/activate-account/activate-acc
 //import {HttpTokenInterceptor} from "./core/interceptor/http-token.interceptor";
 import { RatingComponent } from './shared/rating/rating.component';
 import { NotificationsComponent } from './shared/notification-component/notification-component.component';
+import {HashLocationStrategy , LocationStrategy} from "@angular/common";
 
 @NgModule({
     declarations: [
@@ -95,8 +96,10 @@ import { NotificationsComponent } from './shared/notification-component/notifica
         provideState(adsFeatureKey, adsReducer),
         provideState(categoryFeatureKey, categoryReducer),
         provideEffects(authEffects, adsEffects, categoryEffects),
+      { provide: LocationStrategy ,useClass:HashLocationStrategy }
     ],
     exports: [
+
     ],
     bootstrap: [AppComponent]
 })
