@@ -78,7 +78,7 @@ export const redirectAfterLoginEffect = createEffect(
         console.log("previous prvious url = "+previousUrlBeforePrevious)
         if (previousUrl) {
           console.log("Previous URL before navigation back:", previousUrlBeforePrevious);
-          if (previousUrlBeforePrevious === '/activate-account') {
+          if (previousUrlBeforePrevious === '#/activate-account') {
               router.navigate(["/"]).then(() => {
               // Success navigation to home
             });
