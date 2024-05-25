@@ -8,6 +8,8 @@ import {AuthActions} from "../../core/store/actions/Auth/auth.actions";
 import {FavoritesService} from "../../core/_services/favorites.service";
 import {StorageService} from "../../core/_services/storage.service";
 import {NewFavoriteDto} from "../../core/models/favorites";
+import {AccountService} from "../../core/_services/account.service";
+import {AccountDto} from "../../core/models/account";
 
 @Component({
   selector: 'app-product-card',
@@ -25,11 +27,13 @@ export class ProductCardComponent implements OnInit{
   favoriteSelected =false
   id:string=this.storageService.getUser().accountId;
   favoriteNewDto =new NewFavoriteDto;
+  owner!:AccountDto
 
   constructor(
     private router: Router,
     private favoritesService: FavoritesService,
     private storageService:StorageService,
+    private accountService:AccountService,
     private store: Store<{ store: CategoryStateInterface }>,
   ) {
   }
@@ -38,6 +42,9 @@ export class ProductCardComponent implements OnInit{
     this.favoriteNewDto.advertismentId=this.ad?.id!
     this.favoritesService.isSelected(this.favoriteNewDto).subscribe(isSelected => {
     this.favoriteSelected=isSelected;
+    this.accountService.getAccountId( this.ad.userAccountId).subscribe(value => {
+      this.owner=value;
+    })
     })
   }
 

@@ -161,22 +161,29 @@ export class PublierUneAnnonceComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (event: any) => {
         const image = event.target.result;
-        let compressedImage = image;
-        const compressIteration = (count: number) => {
-          this.imageCompress.compressFile(compressedImage, 0, 50, 50) // Compress with 50% ratio and quality
-            .then(newCompressedImage => {
-              compressedImage = newCompressedImage;
-              if (count < iterations) {
-                compressIteration(count + 1);
-              } else {
-                resolve(compressedImage);
-              }
-            })
-            .catch(error => {
-              reject(error);
-            });
-        };
-        compressIteration(1);
+        const fileSizeInMB = file.size / 1024 / 1024;
+        const maxFileSizeInMB = 1; // 1 MB threshold
+
+        if (fileSizeInMB <= maxFileSizeInMB) {
+          resolve(image); // Resolve with original image if size is within threshold
+        } else {
+          let compressedImage = image;
+          const compressIteration = (count: number) => {
+            this.imageCompress.compressFile(compressedImage, 0, 50, 50) // Compress with 50% ratio and quality
+              .then(newCompressedImage => {
+                compressedImage = newCompressedImage;
+                if (count < iterations) {
+                  compressIteration(count + 1);
+                } else {
+                  resolve(compressedImage);
+                }
+              })
+              .catch(error => {
+                reject(error);
+              });
+          };
+          compressIteration(1);
+        }
       };
       reader.readAsDataURL(file);
     });

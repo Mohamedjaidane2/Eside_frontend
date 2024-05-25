@@ -4,7 +4,7 @@
   <img class="object-cover w-full h-[300px] cursor-pointer" (click)="scrolltop()" [routerLink]="['/details-produit',ad?.id]" [src]="ad?.product!.imagePaths[0]" />
   <div [routerLink]="['/profile',ad?.userAccountId!]" class="tag h-2/4 relative bg-gradient-to-t from-eside-black via-eside-black-opacity-35 to-eside-Neutral-1-opacity-0">
       <div class="profile px-3 flex gap-3 justify-center items-center text-eside-white font-semibold">
-        <img  class="w-10 cursor-pointer" src="assets/svg's/profile-pic.svg"/>
+        <img alt="prodile-pic" class="w-10 h-10 rounded-full preview object-cover" [src]="owner?.informationDto!.profilePicture!">
         <h1 class="cursor-pointer">{{ad?.ownerProfileName!}}</h1>
       </div>
   </div>
