@@ -59,6 +59,7 @@ export class UserGalleryComponent implements OnInit{
       })
     ).subscribe(owner => {
       this.owner = owner;
+      console.log(this.owner)
     });
   }
 

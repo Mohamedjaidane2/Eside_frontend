@@ -1,3 +1,4 @@
+import {InformationDto} from "./information";
 
 export class AccountDto {
   id!:number;
@@ -7,6 +8,8 @@ export class AccountDto {
   isActive!:boolean;
   firstName!:string;
   lastName!:string;
+  stars!:number ;
+  informationDto!:InformationDto;
 
 }
 export class UpdateAccountDto {
